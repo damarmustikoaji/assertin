@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assertin Forge — API testing yang cepat dipelajari, serius dipakai.</title>
+  <meta name="description" content="Assertin Forge — API testing berbasis browser. Buat request, kelola collection, jalankan runner dan performance test. Tanpa install, gratis untuk mulai." />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-400: #60a5fa;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --cyan-400: #22d3ee;
+      --cyan-500: #06b6d4;
+      --green-400: #4ade80;
+      --yellow-400: #fbbf24;
+      --red-400:  #f87171;
+      --violet-400: #a78bfa;
+      --orange-400: #fb923c;
+      --pink-400: #f472b6;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-850: #172033;
+      --slate-900: #0f172a;
+      --slate-950: #080e1a;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--slate-950);
+      color: var(--slate-400);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── CONTAINERS ── */
+    .wrap     { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .wrap-md  { max-width:  800px; margin: 0 auto; padding: 0 28px; }
+    .wrap-sm  { max-width:  640px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 99;
+      padding: 15px 0;
+      background: rgba(8,14,26,0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 9px;
+      text-decoration: none;
+    }
+    .logo img { width: 28px; height: 28px; object-fit: contain; }
+    .logo-name {
+      font-size: 16.5px; font-weight: 700;
+      color: white; letter-spacing: -0.4px;
+    }
+    .logo-name span { color: var(--blue-400); }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px;
+      background: var(--blue-600); color: white;
+      text-decoration: none; border-radius: 7px;
+      font-size: 13px; font-weight: 500;
+      transition: background .18s, transform .15s;
+    }
+    .nav-btn:hover { background: var(--blue-500); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 152px 0 80px;
+      text-align: center;
+      position: relative;
+    }
+    /* single radial glow — ONLY here, nowhere else */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 480px;
+      background: radial-gradient(ellipse at 50% 0%,
+        rgba(59,130,246,0.14) 0%,
+        rgba(6,182,212,0.05) 45%,
+        transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 13px;
+      background: rgba(59,130,246,0.09);
+      border: 1px solid rgba(59,130,246,0.22);
+      border-radius: 100px;
+      font-size: 12px; font-weight: 500;
+      color: var(--blue-400); letter-spacing: .1px;
+      margin-bottom: 26px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--cyan-400); border-radius: 50%;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    .hero h1 {
+      font-size: clamp(36px, 5.2vw, 64px);
+      font-weight: 800; line-height: 1.07;
+      letter-spacing: -2.5px; color: white;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, var(--blue-400), var(--cyan-400));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: clamp(15px, 1.7vw, 17.5px);
+      color: var(--slate-500);
+      max-width: 460px; margin: 0 auto 38px;
+      line-height: 1.75;
+    }
+    .hero-desc strong { color: var(--slate-300); font-weight: 500; }
+    .hero-btns {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 12px 24px;
+      background: var(--blue-600); color: white;
+      text-decoration: none; border-radius: 8px;
+      font-size: 14px; font-weight: 600; letter-spacing: -.1px;
+      box-shadow: 0 0 0 1px rgba(59,130,246,.35), 0 4px 18px rgba(37,99,235,.35);
+      transition: all .18s;
+    }
+    .btn-primary:hover {
+      background: var(--blue-500);
+      box-shadow: 0 0 0 1px rgba(59,130,246,.5), 0 6px 26px rgba(37,99,235,.5);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 12px 20px;
+      border: 1px solid rgba(255,255,255,.09);
+      color: var(--slate-400); text-decoration: none; border-radius: 8px;
+      font-size: 14px; font-weight: 500;
+      transition: all .18s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,.18);
+      color: white; background: rgba(255,255,255,.04);
+    }
+    .hero-fine { font-size: 12px; color: var(--slate-600); }
+
+    /* ── MOCKUP ── */
+    .mockup-outer {
+      margin: 52px auto 0;
+      max-width: 840px;
+      position: relative;
+    }
+    /* bottom fade to make mockup feel grounded, not floating */
+    .mockup-outer::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(to top, var(--slate-950), transparent);
+      border-radius: 0 0 13px 13px;
+      pointer-events: none;
+    }
+    .mockup {
+      background: var(--slate-850);
+      border: 1px solid rgba(255,255,255,.065);
+      border-radius: 13px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.03),
+        0 24px 60px rgba(0,0,0,.75);
+    }
+    .m-bar {
+      background: rgba(0,0,0,.3);
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 6px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dr{background:#ff5f57} .dy{background:#febc2e} .dg{background:#28c840}
+    .m-url {
+      flex: 1; margin-left: 8px;
+      background: rgba(255,255,255,.04); border-radius: 4px;
+      padding: 4px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--slate-600);
+    }
+    .m-body { display: grid; grid-template-columns: 195px 1fr; height: 330px; }
+    .m-side {
+      background: rgba(0,0,0,.15);
+      border-right: 1px solid rgba(255,255,255,.04);
+      padding: 12px 10px;
+    }
+    .ms-label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--slate-700); font-weight: 600;
+      padding: 0 4px; margin-bottom: 5px;
+    }
+    .ms-row {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 7px; border-radius: 5px;
+      font-size: 11px; color: var(--slate-600); margin-bottom: 1px;
+    }
+    .ms-row.on { background: rgba(59,130,246,.12); color: var(--blue-400); }
+    .mp {
+      width: 30px; height: 14px; border-radius: 3px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 7.5px; font-weight: 700;
+    }
+    .mp-get  {background:rgba(74,222,128,.13); color:var(--green-400)}
+    .mp-post {background:rgba(96,165,250,.13); color:var(--blue-400)}
+    .mp-put  {background:rgba(251,191,36,.13);  color:var(--yellow-400)}
+    .mp-del  {background:rgba(248,113,113,.13); color:var(--red-400)}
+    .ms-sep { height: 1px; background: rgba(255,255,255,.04); margin: 10px 0; }
+
+    .m-main { display: flex; flex-direction: column; }
+    .m-req {
+      display: flex; align-items: center; gap: 7px;
+      padding: 10px 13px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .m-method {
+      padding: 3px 8px; border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+      background: rgba(96,165,250,.13); color: var(--blue-400); flex-shrink: 0;
+    }
+    .m-url-input {
+      flex: 1;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 4px; padding: 5px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; color: var(--slate-400);
+    }
+    .m-send {
+      padding: 5px 12px; background: var(--blue-600);
+      color: white; border-radius: 4px; font-size: 10.5px; font-weight: 600;
+      white-space: nowrap;
+    }
+    .m-res { flex: 1; padding: 12px 14px; overflow: hidden; }
+    .m-status { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+    .s-ok {
+      padding: 2px 7px;
+      background: rgba(74,222,128,.1); color: var(--green-400);
+      border-radius: 3px; font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; font-weight: 600;
+    }
+    .s-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; color: var(--slate-600);
+    }
+    .m-json {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; line-height: 1.8; color: var(--slate-500);
+    }
+    .jk{color:var(--blue-400)} .js{color:var(--green-400)}
+    .jb{color:var(--violet-400)} .jn{color:var(--cyan-400)}
+
+    @media (max-width: 600px) {
+      .m-side { display: none; }
+      .m-body { grid-template-columns: 1fr; }
+    }
+
+    /* ── STATS — NO BORDER, pure typographic ── */
+    .stats {
+      padding: 52px 0 64px;
+      border-top: 1px solid rgba(255,255,255,.04);
+    }
+    .stats-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; flex-wrap: wrap;
+    }
+    .stat {
+      padding: 0 40px;
+      text-align: center;
+    }
+    .stat + .stat {
+      border-left: 1px solid rgba(255,255,255,.06);
+    }
+    .stat-num {
+      font-size: 34px; font-weight: 800;
+      color: white; letter-spacing: -1.5px; line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-num em { font-style: normal; color: var(--blue-400); }
+    .stat-lbl { font-size: 13px; color: var(--slate-600); }
+    @media (max-width: 500px) {
+      .stat { padding: 16px 0; width: 100%; }
+      .stat + .stat { border-left: none; border-top: 1px solid rgba(255,255,255,.06); }
+    }
+
+    /* ── SECTION ATOMS ── */
+    section { padding: 80px 0; }
+    .eyebrow {
+      display: block;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.4px;
+      text-transform: uppercase; color: var(--blue-400);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3.2vw, 34px);
+      font-weight: 800; color: white;
+      letter-spacing: -1px; line-height: 1.18;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 15px; color: var(--slate-500);
+      max-width: 400px; line-height: 1.7;
+    }
+
+    /* ── FEATURES — asymmetric list layout ── */
+    .features-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px 72px;
+      align-items: start;
+    }
+    .features-intro { align-self: start; }
+    .features-intro .section-sub { max-width: 320px; }
+
+    .feat-list { display: flex; flex-direction: column; gap: 32px; }
+    .feat-item { display: flex; gap: 16px; align-items: flex-start; }
+    .feat-ic {
+      width: 38px; height: 38px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .feat-ic i { font-size: 16px; line-height: 1; }
+    .fi-b { background: rgba(59,130,246,.1);  color: var(--blue-400); }
+    .fi-c { background: rgba(6,182,212,.1);   color: var(--cyan-400); }
+    .fi-v { background: rgba(139,92,246,.1);  color: var(--violet-400); }
+    .fi-g { background: rgba(34,197,94,.1);   color: var(--green-400); }
+    .fi-o { background: rgba(251,146,60,.1);  color: var(--orange-400); }
+    .fi-p { background: rgba(236,72,153,.1);  color: var(--pink-400); }
+    .feat-text h3 {
+      font-size: 14.5px; font-weight: 700; color: white;
+      margin-bottom: 5px; letter-spacing: -.15px;
+    }
+    .feat-text p {
+      font-size: 13.5px; color: var(--slate-500); line-height: 1.65;
+    }
+    .feat-text p code {
+      font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+      color: var(--cyan-400); background: rgba(6,182,212,.08);
+      padding: 1px 5px; border-radius: 3px;
+    }
+    @media (max-width: 720px) {
+      .features-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ── HOW IT WORKS — horizontal numbered list ── */
+    .how-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+      max-width: 680px; margin: 0 auto;
+    }
+    /* thin horizontal line connecting steps */
+    .how-steps::before {
+      content: '';
+      position: absolute;
+      top: 21px;
+      left: calc(100%/6 + 8px);
+      right: calc(100%/6 + 8px);
+      height: 1px;
+      background: linear-gradient(90deg,
+        rgba(59,130,246,.45),
+        rgba(59,130,246,.15));
+    }
+    .hstep { text-align: center; padding: 0 16px; }
+    .hstep-num {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1.5px solid rgba(59,130,246,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 600; color: var(--blue-400);
+      margin: 0 auto 18px;
+      background: var(--slate-950);
+      position: relative; z-index: 1;
+    }
+    .hstep h3 {
+      font-size: 14.5px; font-weight: 700; color: white;
+      margin-bottom: 7px; letter-spacing: -.15px;
+    }
+    .hstep p { font-size: 13px; color: var(--slate-500); line-height: 1.6; }
+    @media (max-width: 540px) {
+      .how-steps { grid-template-columns: 1fr; gap: 28px; }
+      .how-steps::before { display: none; }
+    }
+
+    /* ── PRICING — side-by-side, NO inner boxes on free ── */
+    .pricing-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      max-width: 720px; margin: 0 auto;
+      align-items: start;
+    }
+    .plan-free     { width: 300px; flex-shrink: 0; }
+    .plan-premium  { width: 300px; flex-shrink: 0; }
+
+    /* Free: no box, just text-based list */
+    .plan-free .plan-tier {
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--slate-600);
+      margin-bottom: 10px;
+    }
+    .plan-free .plan-price-txt {
+      font-size: 40px; font-weight: 800; color: white;
+      letter-spacing: -2px; line-height: 1;
+      margin-bottom: 6px;
+    }
+    .plan-free .plan-pitch {
+      font-size: 13px; color: var(--slate-500); margin-bottom: 24px; line-height: 1.5;
+    }
+    .plan-free-list { list-style: none; margin-bottom: 28px; }
+    .plan-free-list li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13.5px; color: var(--slate-400);
+      margin-bottom: 9px; line-height: 1.45;
+    }
+    .plan-free-list li i { color: var(--slate-600); flex-shrink: 0; margin-top: 2px; font-size: 13px; }
+    .plan-free-list li.has i { color: var(--blue-400); }
+    .plan-free-list li.has { color: var(--slate-300); }
+
+    /* Premium: one highlighted card */
+    .plan-premium {
+      background: rgba(37,99,235,.08);
+      border: 1px solid rgba(59,130,246,.25);
+      border-radius: 16px;
+      padding: 26px;
+      position: relative;
+    }
+    .plan-premium-label {
+      position: absolute; top: -10px; left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--blue-600), var(--cyan-500));
+      color: white; font-size: 10px; font-weight: 700;
+      padding: 3px 12px; border-radius: 100px;
+      letter-spacing: .3px; white-space: nowrap;
+    }
+    .plan-premium .plan-tier {
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--slate-500);
+      margin-bottom: 10px;
+    }
+    .plan-premium .plan-price-txt {
+      display: flex; align-items: baseline; gap: 3px;
+      margin-bottom: 6px;
+    }
+    .price-rp { font-size: 15px; font-weight: 600; color: var(--slate-400); }
+    .price-val { font-size: 40px; font-weight: 800; color: white; letter-spacing: -2px; line-height: 1; }
+    .price-per { font-size: 12px; color: var(--slate-500); }
+    .plan-premium .plan-pitch {
+      font-size: 13px; color: var(--slate-500); margin-bottom: 20px; line-height: 1.5;
+    }
+    .plan-premium hr {
+      border: none; border-top: 1px solid rgba(255,255,255,.06); margin-bottom: 18px;
+    }
+    .prem-list { list-style: none; margin-bottom: 24px; }
+    .prem-list li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13.5px; color: var(--slate-300);
+      margin-bottom: 9px; line-height: 1.45;
+    }
+    .prem-list li i { color: var(--blue-400); flex-shrink: 0; margin-top: 2px; font-size: 13px; }
+    .btn-plan {
+      display: block; text-align: center;
+      padding: 11px; border-radius: 8px;
+      font-size: 13.5px; font-weight: 600;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-plan-fill {
+      background: var(--blue-600); color: white;
+      box-shadow: 0 3px 12px rgba(37,99,235,.3);
+    }
+    .btn-plan-fill:hover { background: var(--blue-500); transform: translateY(-1px); }
+    .btn-plan-line {
+      border: 1px solid rgba(255,255,255,.1); color: var(--slate-400);
+    }
+    .btn-plan-line:hover { border-color: rgba(255,255,255,.2); color: white; }
+
+    /* ── FINAL CTA — no box, just vivid gradient section ── */
+    .cta-section {
+      padding: 0 0 96px;
+      text-align: center;
+    }
+    .cta-inner {
+      padding: 72px 32px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* horizontal gradient rule top */
+    .cta-inner::before {
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 480px; height: 1px;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(59,130,246,.6),
+        rgba(34,211,238,.5),
+        transparent);
+    }
+    /* ambient glow */
+    .cta-inner::after {
+      content: '';
+      position: absolute; top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 640px; height: 320px;
+      background: radial-gradient(ellipse at 50% 0%,
+        rgba(59,130,246,.1) 0%,
+        transparent 65%);
+      pointer-events: none;
+    }
+    .cta-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 2.5px;
+      color: var(--blue-400); opacity: .55;
+      margin-bottom: 20px;
+    }
+    .cta-inner h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 800; color: white;
+      letter-spacing: -1.8px; line-height: 1.1;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .cta-inner p {
+      font-size: 15.5px; color: var(--slate-500);
+      max-width: 360px; margin: 0 auto 36px;
+      line-height: 1.7; position: relative; z-index: 1;
+    }
+    .cta-btns {
+      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 14px; position: relative; z-index: 1;
+    }
+    .cta-fine { font-size: 12px; color: var(--slate-700); position: relative; z-index: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,.05);
+      padding: 28px 0;
+    }
+    .foot-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+    .foot-l { display: flex; align-items: center; gap: 12px; }
+    .foot-tag { font-size: 12px; color: var(--slate-700); }
+    .foot-r { font-size: 12px; color: var(--slate-600); }
+    .foot-r a { color: var(--slate-500); text-decoration: none; transition: color .15s; }
+    .foot-r a:hover { color: var(--blue-400); }
+    .foot-sep { margin: 0 7px; color: rgba(255,255,255,.08); }
+
+    /* ── DIVIDER ── */
+    .div-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.045), transparent);
+      max-width: 500px; margin: 0 auto;
+    }
+
+    /* ── HERO ANIMATION ── */
+    @keyframes up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero > * { animation: up .52s cubic-bezier(.22,.61,.36,1) both; }
+    .badge          { animation-delay: .05s; }
+    .hero h1        { animation-delay: .11s; }
+    .hero-desc      { animation-delay: .17s; }
+    .hero-btns      { animation-delay: .22s; }
+    .hero-fine      { animation-delay: .26s; }
+    .mockup-outer   { animation: up .6s cubic-bezier(.22,.61,.36,1) .3s both; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">
+      <img src="forge.png" alt="Assertin" />
+      <span class="logo-name">Assertin<span>.</span></span>
+    </a>
+    <a href="https://forge.assertin.com/login" class="nav-btn">
+      Daftar / Masuk
+    </a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="wrap-sm">
+
+    <h1>
+      API testing yang<br />
+      <em>cepat dipelajari,</em><br />
+      serius dipakai.
+    </h1>
+
+    <p class="hero-desc">
+      Buka browser, langsung test. Tidak perlu install apapun.<br />
+    </p>
+
+    <div class="hero-btns">
+      <a href="https://forge.assertin.com" class="btn-primary">
+        Mulai Gratis <i class="bi bi-arrow-right"></i>
+      </a>
+      <a href="https://forge.assertin.com" class="btn-ghost">
+        <i class="bi bi-play-circle"></i> Lihat Demo
+      </a>
+    </div>
+    <p class="hero-fine">Gratis untuk mulai &nbsp;·&nbsp; Tanpa kartu kredit</p>
+  </div>
+
+  <!-- mockup -->
+  <div class="mockup-outer wrap">
+    <div class="mockup">
+      <div class="m-bar">
+        <div class="dot dr"></div>
+        <div class="dot dy"></div>
+        <div class="dot dg"></div>
+        <div class="m-url">forge.assertin.com</div>
+      </div>
+      <div class="m-body">
+        <div class="m-side">
+          <div class="ms-label" style="margin-top:4px">Auth API</div>
+          <div class="ms-row on"><div class="mp mp-post">POST</div> Login</div>
+          <div class="ms-row"><div class="mp mp-get">GET</div> Get Profile</div>
+          <div class="ms-row"><div class="mp mp-put">PUT</div> Update User</div>
+          <div class="ms-row"><div class="mp mp-del">DEL</div> Logout</div>
+          <div class="ms-sep"></div>
+          <div class="ms-label">Riwayat</div>
+          <div class="ms-row"><div class="mp mp-get">GET</div> /api/products</div>
+          <div class="ms-row"><div class="mp mp-post">POST</div> /api/orders</div>
+        </div>
+        <div class="m-main">
+          <div class="m-req">
+            <div class="m-method">POST</div>
+            <div class="m-url-input">https://api.example.com/auth/login</div>
+            <div class="m-send">Kirim →</div>
+          </div>
+          <div class="m-res">
+            <div class="m-status">
+              <span class="s-ok">200 OK</span>
+              <span class="s-time">142ms &middot; 1.2 KB</span>
+            </div>
+            <pre class="m-json">{
+  <span class="jk">"token"</span>: <span class="js">"eyJhbGciOiJIUzI1NiIsInR5..."</span>,
+  <span class="jk">"user"</span>: {
+    <span class="jk">"id"</span>:         <span class="js">"b3d2f1a0-9c8e-4b..."</span>,
+    <span class="jk">"email"</span>:      <span class="js">"budi@example.com"</span>,
+    <span class="jk">"name"</span>:       <span class="js">"Budi Santoso"</span>,
+    <span class="jk">"is_premium"</span>: <span class="jb">true</span>
+  }
+}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS — pure typographic, no border boxes ── -->
+<div class="stats">
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num"><em>0</em> setup</div>
+      <div class="stat-lbl">buka browser, langsung test</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><em>Gratis</em></div>
+      <div class="stat-lbl">untuk mulai, tanpa kartu kredit</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">hingga <em>50</em> VU</div>
+      <div class="stat-lbl">untuk performance testing</div>
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ── FEATURES — asymmetric, list bukan grid box ── -->
+<section>
+  <div class="wrap">
+    <div class="features-layout">
+
+      <!-- kiri: judul section -->
+      <div class="features-intro">
+        <span class="eyebrow">Fitur</span>
+        <h2 class="section-title">Satu tempat untuk semua kebutuhan testing kamu.</h2>
+        <p class="section-sub">Dari request pertama sampai performance test — tidak perlu pindah tool.</p>
+      </div>
+
+      <!-- kanan: list fitur -->
+      <div class="feat-list">
+        <div class="feat-item">
+          <div class="feat-ic fi-b"><i class="bi bi-send-fill"></i></div>
+          <div class="feat-text">
+            <h3>Buat request lebih cepat</h3>
+            <p>Tulis URL, pilih method, set headers dan body. Kirim langsung tanpa konfigurasi tambahan.</p>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-ic fi-c"><i class="bi bi-braces"></i></div>
+          <div class="feat-text">
+            <h3>Pindah environment tanpa edit manual</h3>
+            <p>Simpan variable seperti <code>{{base_url}}</code> atau <code>{{token}}</code> per environment. Switch dev ↔ prod dalam satu klik.</p>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-ic fi-v"><i class="bi bi-folder2-open"></i></div>
+          <div class="feat-text">
+            <h3>Testing tetap terorganisir</h3>
+            <p>Kelompokkan request ke collection dan workspace. Tidak ada tab berantakan atau nama "final_v3".</p>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-ic fi-g"><i class="bi bi-play-circle-fill"></i></div>
+          <div class="feat-text">
+            <h3>Jalankan semua request sekaligus</h3>
+            <p>Collection Runner menjalankan request secara urut. Lihat passed dan failed dalam satu laporan.</p>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-ic fi-o"><i class="bi bi-speedometer2"></i></div>
+          <div class="feat-text">
+            <h3>Uji performa sebelum launch</h3>
+            <p>Performance testing berbasis k6 sudah built-in. Set VU dan durasi, lihat RPS, P95, error rate.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"></div>
+
+<!-- ── HOW IT WORKS ── -->
+<section>
+  <div class="wrap-md">
+    <div class="section-head" style="text-align:center;margin-bottom:48px">
+      <span class="eyebrow">Cara Kerja</span>
+      <h2 class="section-title">Tiga langkah, langsung jalan.</h2>
+      <p class="section-sub" style="margin:0 auto">Tidak ada wizard setup. Tidak ada file konfigurasi. Buka dan mulai.</p>
+    </div>
+    <div class="how-steps">
+      <div class="hstep">
+        <div class="hstep-num">01</div>
+        <h3>Buat workspace</h3>
+        <p>Daftar dengan email, buat workspace, tambahkan environment variable kalau perlu.</p>
+      </div>
+      <div class="hstep">
+        <div class="hstep-num">02</div>
+        <h3>Tambah request</h3>
+        <p>Buat collection, isi method dan URL. Susun dan beri nama sesuai alur testing kamu.</p>
+      </div>
+      <div class="hstep">
+        <div class="hstep-num">03</div>
+        <h3>Jalankan &amp; analisa</h3>
+        <p>Kirim satu per satu, jalankan Runner, atau uji performa dari satu dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"></div>
+
+<!-- ── PRICING — free as plain text, premium as card ── -->
+<section>
+  <div class="wrap-md">
+    <div style="text-align:center;margin-bottom:52px">
+      <span class="eyebrow">Harga</span>
+      <h2 class="section-title">Mulai gratis.<br />Upgrade saat memang perlu.</h2>
+      <p class="section-sub" style="margin:0 auto">Tidak ada tagihan mengejutkan. Bayar hanya saat butuh kapasitas lebih.</p>
+    </div>
+
+    <div class="pricing-wrap">
+
+      <!-- Free: no box -->
+      <!-- <div class="plan-free">
+        <div class="plan-tier">Free</div>
+        <div class="plan-price-txt">Rp 0</div>
+        <div class="plan-pitch">Untuk belajar dan eksplorasi API testing pertamamu.</div>
+        <ul class="plan-free-list">
+          <li class="has"><i class="bi bi-check2"></i> 1 Workspace</li>
+          <li class="has"><i class="bi bi-check2"></i> 1 Collection per workspace</li>
+          <li class="has"><i class="bi bi-check2"></i> 2 Request per collection</li>
+          <li class="has"><i class="bi bi-check2"></i> Kirim request bebas</li>
+          <li class="has"><i class="bi bi-check2"></i> Riwayat request</li>
+          <li><i class="bi bi-dash"></i> Performance test (maks. 5 VU)</li>
+          <li><i class="bi bi-dash"></i> Collection &amp; request unlimited</li>
+        </ul>
+        <a href="https://forge.assertin.com" class="btn-plan btn-plan-line">Mulai Gratis</a>
+      </div> -->
+
+      <!-- Premium: card -->
+      <div class="plan-premium">
+        <div class="plan-premium-label">Free</div>
+        <!-- <div class="plan-tier">Premium</div> -->
+        <div class="plan-price-txt">
+          <span class="price-rp">Rp</span>
+          <span class="price-val">0</span>
+          <span class="price-per">/ 30 hari</span>
+        </div>
+        <div class="plan-pitch">Untuk belajar dan eksplorasi API testing pertamamu.</div>
+        <hr />
+        <ul class="prem-list">
+          <li><i class="bi bi-check2"></i> Workspace</li>
+          <li><i class="bi bi-check2"></i> Collection &amp; request</li>
+          <li><i class="bi bi-check2"></i> Hit API</li>
+          <li><i class="bi bi-check2"></i> Environment & Scenarios test</li>
+          <li><i class="bi bi-check2"></i> Performance test hingga 50 VU</li>
+          <li><i class="bi bi-check2"></i> Durasi test hingga 10 menit</li>
+        </ul>
+        <!-- <a href="https://forge.assertin.com" class="btn-plan btn-plan-fill">Upgrade Premium</a> -->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA — no box, gradient-lit open section ── -->
+<section class="cta-section">
+  <div class="wrap-sm cta-inner">
+    <p class="cta-mono">// Assert. Run. Prove.</p>
+    <h2>Mulai kirim request pertamamu.</h2>
+    <p>Daftar, buat workspace, dan mulai test — kurang dari satu menit.</p>
+    <div class="cta-btns">
+      <a href="https://forge.assertin.com" class="btn-primary">
+        Daftar Gratis <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+    <p class="cta-fine">Tanpa kartu kredit &nbsp;·&nbsp; Setup &lt; 1 menit</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-l">
+      <a href="#" class="logo">
+        <img src="forge.png" alt="Assertin" />
+        <span class="logo-name">Assertin<span>.</span></span>
+      </a>
+      <span class="foot-tag">Test with confidence. Ship with proof.</span>
+    </div>
+    <div class="foot-r">
+      <a href="https://forge.assertin.com">Forge</a>
+      <span class="foot-sep">·</span>
+      <span>&copy; 2026 Assertin.com</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
