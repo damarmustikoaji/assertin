@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assertin Forge — API testing yang cepat dipelajari, serius dipakai.</title>
+  <title>Assertin.</title>
   <meta name="description" content="Assertin Forge — API testing berbasis browser. Buat request, kelola collection, jalankan runner dan performance test. Tanpa install, gratis untuk mulai." />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -586,6 +586,142 @@
       max-width: 500px; margin: 0 auto;
     }
 
+    /* ── ANIMATED REQUEST DEMO ── */
+    .req-demo {
+      margin-top: 28px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 11px;
+      overflow: hidden;
+      background: var(--slate-900);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+    }
+    .rd-bar {
+      background: rgba(0,0,0,.3);
+      padding: 8px 12px;
+      display: flex; align-items: center; gap: 5px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .rd-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .rd-r{background:#ff5f57} .rd-y{background:#febc2e} .rd-g{background:#28c840}
+    .rd-title {
+      margin-left: 6px; font-size: 10px;
+      color: var(--slate-600); font-family: 'Inter', sans-serif;
+    }
+    .rd-body { padding: 14px 14px 0; }
+
+    /* ── request row ── */
+    .rd-req {
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 10px; flex-wrap: nowrap; overflow: hidden;
+    }
+    .rd-method {
+      padding: 3px 7px; border-radius: 4px; flex-shrink: 0;
+      background: rgba(96,165,250,.14); color: var(--blue-400);
+      font-size: 10px; font-weight: 700;
+    }
+    .rd-url {
+      font-size: 10.5px; color: var(--slate-600);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1;
+    }
+    .rd-path { color: var(--slate-400); }
+    .rd-send {
+      flex-shrink: 0; padding: 3px 10px;
+      background: var(--blue-600); color: white;
+      border-radius: 4px; font-size: 10px; font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      /* animate button flash on send */
+      animation: rd-btn-flash 4s ease-in-out infinite;
+    }
+    @keyframes rd-btn-flash {
+      0%,100%  { background: var(--blue-600); }
+      10%,15%  { background: var(--blue-500); box-shadow: 0 0 8px rgba(59,130,246,.6); }
+      16%      { background: var(--blue-600); }
+    }
+
+    /* ── loading bar ── */
+    .rd-loading {
+      height: 2px; background: rgba(255,255,255,.05);
+      border-radius: 2px; margin-bottom: 12px; overflow: hidden;
+    }
+    .rd-loading-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue-500), var(--cyan-400));
+      border-radius: 2px;
+      animation: rd-load 4s ease-in-out infinite;
+      transform-origin: left;
+    }
+    @keyframes rd-load {
+      0%       { width: 0%; opacity: 1; }
+      12%      { width: 100%; opacity: 1; }
+      14%      { width: 100%; opacity: 0; }
+      15%,100% { width: 0%; opacity: 0; }
+    }
+
+    /* ── response block ── */
+    .rd-res {
+      animation: rd-res-in 4s ease-in-out infinite;
+    }
+    @keyframes rd-res-in {
+      0%,12%   { opacity: 0; transform: translateY(4px); }
+      18%,70%  { opacity: 1; transform: translateY(0); }
+      78%,100% { opacity: 0; transform: translateY(0); }
+    }
+    .rd-res-meta {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+    }
+    .rd-status {
+      padding: 2px 7px; border-radius: 3px;
+      background: rgba(74,222,128,.1); color: var(--green-400);
+      font-size: 10.5px; font-weight: 700;
+    }
+    .rd-time { font-size: 10.5px; color: var(--slate-600); }
+    .rd-json { color: var(--slate-500); line-height: 1.85; }
+    .rd-line { display: flex; gap: 0; }
+    .rd-indent { padding-left: 14px; }
+    .rdp { color: var(--blue-400); }
+    .rds { color: var(--slate-600); }
+    .rdv { color: var(--green-400); }
+
+    /* ── runner strip (appears after response fades) ── */
+    .rd-runner {
+      border-top: 1px solid rgba(255,255,255,.05);
+      padding: 12px 0 14px;
+      animation: rd-runner-in 4s ease-in-out infinite;
+    }
+    @keyframes rd-runner-in {
+      0%,68%   { opacity: 0; }
+      75%,95%  { opacity: 1; }
+      100%     { opacity: 0; }
+    }
+    .rd-runner-label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--slate-700); font-family: 'Inter', sans-serif;
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .rd-runner-rows { display: flex; flex-direction: column; gap: 5px; }
+    .rd-rr {
+      display: flex; align-items: center; gap: 8px;
+      padding: 5px 8px; border-radius: 5px;
+      background: rgba(255,255,255,.02);
+      animation: rd-row-in 4s ease-in-out infinite;
+    }
+    .rd-rr-d1 { animation-delay: .12s; }
+    .rd-rr-d2 { animation-delay: .24s; }
+    @keyframes rd-row-in {
+      0%,68%   { opacity: 0; transform: translateX(-6px); }
+      76%,95%  { opacity: 1; transform: translateX(0); }
+      100%     { opacity: 0; }
+    }
+    .rd-badge {
+      font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
+      flex-shrink: 0; font-family: 'Inter', sans-serif; letter-spacing: .3px;
+    }
+    .rd-pass { background: rgba(74,222,128,.12); color: var(--green-400); }
+    .rd-fail { background: rgba(248,113,113,.12); color: var(--red-400); }
+    .rd-rname { flex: 1; font-size: 10.5px; color: var(--slate-400); }
+    .rd-rtime { font-size: 10px; color: var(--slate-600); flex-shrink: 0; }
+
     /* ── HERO ANIMATION ── */
     @keyframes up {
       from { opacity: 0; transform: translateY(18px); }
@@ -610,7 +746,7 @@
       <span class="logo-name">Assertin<span>.</span></span>
     </a>
     <a href="https://forge.assertin.com/login" class="nav-btn">
-      Daftar / Masuk
+      Masuk
     </a>
   </div>
 </nav>
@@ -620,9 +756,8 @@
   <div class="wrap-sm">
 
     <h1>
-      API testing yang<br />
-      <em>cepat dipelajari,</em><br />
-      serius dipakai.
+      Mulai test API<br />
+      <em>tanpa setup.</em><br />
     </h1>
 
     <p class="hero-desc">
@@ -631,59 +766,8 @@
 
     <div class="hero-btns">
       <a href="https://forge.assertin.com" class="btn-primary">
-        Mulai Gratis <i class="bi bi-arrow-right"></i>
+        Mulai <i class="bi bi-play-circle"></i>
       </a>
-      <a href="https://forge.assertin.com" class="btn-ghost">
-        <i class="bi bi-play-circle"></i> Lihat Demo
-      </a>
-    </div>
-    <p class="hero-fine">Gratis untuk mulai &nbsp;·&nbsp; Tanpa kartu kredit</p>
-  </div>
-
-  <!-- mockup -->
-  <div class="mockup-outer wrap">
-    <div class="mockup">
-      <div class="m-bar">
-        <div class="dot dr"></div>
-        <div class="dot dy"></div>
-        <div class="dot dg"></div>
-        <div class="m-url">forge.assertin.com</div>
-      </div>
-      <div class="m-body">
-        <div class="m-side">
-          <div class="ms-label" style="margin-top:4px">Auth API</div>
-          <div class="ms-row on"><div class="mp mp-post">POST</div> Login</div>
-          <div class="ms-row"><div class="mp mp-get">GET</div> Get Profile</div>
-          <div class="ms-row"><div class="mp mp-put">PUT</div> Update User</div>
-          <div class="ms-row"><div class="mp mp-del">DEL</div> Logout</div>
-          <div class="ms-sep"></div>
-          <div class="ms-label">Riwayat</div>
-          <div class="ms-row"><div class="mp mp-get">GET</div> /api/products</div>
-          <div class="ms-row"><div class="mp mp-post">POST</div> /api/orders</div>
-        </div>
-        <div class="m-main">
-          <div class="m-req">
-            <div class="m-method">POST</div>
-            <div class="m-url-input">https://api.example.com/auth/login</div>
-            <div class="m-send">Kirim →</div>
-          </div>
-          <div class="m-res">
-            <div class="m-status">
-              <span class="s-ok">200 OK</span>
-              <span class="s-time">142ms &middot; 1.2 KB</span>
-            </div>
-            <pre class="m-json">{
-  <span class="jk">"token"</span>: <span class="js">"eyJhbGciOiJIUzI1NiIsInR5..."</span>,
-  <span class="jk">"user"</span>: {
-    <span class="jk">"id"</span>:         <span class="js">"b3d2f1a0-9c8e-4b..."</span>,
-    <span class="jk">"email"</span>:      <span class="js">"budi@example.com"</span>,
-    <span class="jk">"name"</span>:       <span class="js">"Budi Santoso"</span>,
-    <span class="jk">"is_premium"</span>: <span class="jb">true</span>
-  }
-}</pre>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -713,11 +797,68 @@
   <div class="wrap">
     <div class="features-layout">
 
-      <!-- kiri: judul section -->
+      <!-- kiri: judul section + animated demo -->
       <div class="features-intro">
         <span class="eyebrow">Fitur</span>
         <h2 class="section-title">Satu tempat untuk semua kebutuhan testing kamu.</h2>
         <p class="section-sub">Dari request pertama sampai performance test — tidak perlu pindah tool.</p>
+
+        <!-- ANIMATED REQUEST DEMO -->
+        <div class="req-demo" aria-hidden="true">
+          <div class="rd-bar">
+            <span class="rd-dot rd-r"></span>
+            <span class="rd-dot rd-y"></span>
+            <span class="rd-dot rd-g"></span>
+            <span class="rd-title">forge.assertin.com</span>
+          </div>
+          <div class="rd-body">
+            <!-- request line -->
+            <div class="rd-row rd-req">
+              <span class="rd-method">POST</span>
+              <span class="rd-url">https://api.example.com<span class="rd-path">/auth/login</span></span>
+              <span class="rd-send">Kirim</span>
+            </div>
+            <!-- loading bar -->
+            <div class="rd-loading">
+              <div class="rd-loading-bar"></div>
+            </div>
+            <!-- response block -->
+            <div class="rd-res">
+              <div class="rd-res-meta">
+                <span class="rd-status">200 OK</span>
+                <span class="rd-time">142ms</span>
+              </div>
+              <div class="rd-json">
+                <div class="rd-line"><span class="rdp">"token"</span><span class="rds">: </span><span class="rdv">"eyJhbGci..."</span><span class="rds">,</span></div>
+                <div class="rd-line"><span class="rdp">"user"</span><span class="rds">: {</span></div>
+                <div class="rd-line rd-indent"><span class="rdp">"id"</span><span class="rds">: </span><span class="rdv">"b3d2f1a0..."</span><span class="rds">,</span></div>
+                <div class="rd-line rd-indent"><span class="rdp">"email"</span><span class="rds">: </span><span class="rdv">"budi@example.com"</span></div>
+                <div class="rd-line"><span class="rds">}</span></div>
+              </div>
+            </div>
+            <!-- runner strip -->
+            <div class="rd-runner">
+              <div class="rd-runner-label">Collection Runner</div>
+              <div class="rd-runner-rows">
+                <div class="rd-rr rd-rr-pass">
+                  <span class="rd-badge rd-pass">PASS</span>
+                  <span class="rd-rname">POST /auth/login</span>
+                  <span class="rd-rtime">142ms</span>
+                </div>
+                <div class="rd-rr rd-rr-pass rd-rr-d1">
+                  <span class="rd-badge rd-pass">PASS</span>
+                  <span class="rd-rname">GET /users/me</span>
+                  <span class="rd-rtime">89ms</span>
+                </div>
+                <div class="rd-rr rd-rr-fail rd-rr-d2">
+                  <span class="rd-badge rd-fail">FAIL</span>
+                  <span class="rd-rname">DELETE /session</span>
+                  <span class="rd-rtime">401</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- kanan: list fitur -->
@@ -798,7 +939,7 @@
 <section>
   <div class="wrap-md">
     <div style="text-align:center;margin-bottom:52px">
-      <span class="eyebrow">Harga</span>
+      <span class="eyebrow">Paket</span>
       <h2 class="section-title">Mulai gratis.<br />Upgrade saat memang perlu.</h2>
       <p class="section-sub" style="margin:0 auto">Tidak ada tagihan mengejutkan. Bayar hanya saat butuh kapasitas lebih.</p>
     </div>
@@ -859,7 +1000,6 @@
         Daftar Gratis <i class="bi bi-arrow-right"></i>
       </a>
     </div>
-    <p class="cta-fine">Tanpa kartu kredit &nbsp;·&nbsp; Setup &lt; 1 menit</p>
   </div>
 </section>
 
