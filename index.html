@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Assertin.</title>
-  <meta name="description" content="Assertin Forge — API testing berbasis browser. Buat request, kelola collection, jalankan runner dan performance test. Tanpa install, gratis untuk mulai." />
+  <meta name="description"
+    content="Test API, jalankan skenario E2E, dan ukur performa dalam satu dashboard. Tanpa install. Gratis untuk mulai." />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --blue-400: #60a5fa;
@@ -23,7 +33,7 @@
       --cyan-500: #06b6d4;
       --green-400: #4ade80;
       --yellow-400: #fbbf24;
-      --red-400:  #f87171;
+      --red-400: #f87171;
       --violet-400: #a78bfa;
       --orange-400: #fb923c;
       --pink-400: #f472b6;
@@ -38,7 +48,10 @@
       --slate-950: #080e1a;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: var(--slate-950);
@@ -48,41 +61,85 @@
     }
 
     /* ── CONTAINERS ── */
-    .wrap     { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
-    .wrap-md  { max-width:  800px; margin: 0 auto; padding: 0 28px; }
-    .wrap-sm  { max-width:  640px; margin: 0 auto; padding: 0 28px; }
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .wrap-md {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .wrap-sm {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
 
     /* ── NAVBAR ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 99;
       padding: 15px 0;
-      background: rgba(8,14,26,0.82);
+      background: rgba(8, 14, 26, 0.82);
       backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,0.045);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.045);
     }
+
     .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+
     .logo {
-      display: flex; align-items: center; gap: 9px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
       text-decoration: none;
     }
-    .logo img { width: 28px; height: 28px; object-fit: contain; }
-    .logo-name {
-      font-size: 16.5px; font-weight: 700;
-      color: white; letter-spacing: -0.4px;
+
+    .logo img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
     }
-    .logo-name span { color: var(--blue-400); }
+
+    .logo-name {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.4px;
+    }
+
+    .logo-name span {
+      color: var(--blue-400);
+    }
+
     .nav-btn {
-      display: inline-flex; align-items: center; gap: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       padding: 7px 16px;
-      background: var(--blue-600); color: white;
-      text-decoration: none; border-radius: 7px;
-      font-size: 13px; font-weight: 500;
+      background: var(--blue-600);
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
       transition: background .18s, transform .15s;
     }
-    .nav-btn:hover { background: var(--blue-500); transform: translateY(-1px); }
+
+    .nav-btn:hover {
+      background: var(--blue-500);
+      transform: translateY(-1px);
+    }
 
     /* ── HERO ── */
     .hero {
@@ -90,86 +147,143 @@
       text-align: center;
       position: relative;
     }
+
     /* single radial glow — ONLY here, nowhere else */
     .hero::before {
       content: '';
       position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 900px; height: 480px;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 480px;
       background: radial-gradient(ellipse at 50% 0%,
-        rgba(59,130,246,0.14) 0%,
-        rgba(6,182,212,0.05) 45%,
-        transparent 70%);
+          rgba(59, 130, 246, 0.14) 0%,
+          rgba(6, 182, 212, 0.05) 45%,
+          transparent 70%);
       pointer-events: none;
     }
+
     .badge {
-      display: inline-flex; align-items: center; gap: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       padding: 5px 13px;
-      background: rgba(59,130,246,0.09);
-      border: 1px solid rgba(59,130,246,0.22);
+      background: rgba(59, 130, 246, 0.09);
+      border: 1px solid rgba(59, 130, 246, 0.22);
       border-radius: 100px;
-      font-size: 12px; font-weight: 500;
-      color: var(--blue-400); letter-spacing: .1px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--blue-400);
+      letter-spacing: .1px;
       margin-bottom: 26px;
     }
+
     .badge-dot {
-      width: 6px; height: 6px;
-      background: var(--cyan-400); border-radius: 50%;
+      width: 6px;
+      height: 6px;
+      background: var(--cyan-400);
+      border-radius: 50%;
       animation: pulse 2.4s ease-in-out infinite;
     }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
 
     .hero h1 {
       font-size: clamp(36px, 5.2vw, 64px);
-      font-weight: 800; line-height: 1.07;
-      letter-spacing: -2.5px; color: white;
+      font-weight: 800;
+      line-height: 1.07;
+      letter-spacing: -2.5px;
+      color: white;
       margin-bottom: 20px;
     }
+
     .hero h1 em {
       font-style: normal;
       background: linear-gradient(120deg, var(--blue-400), var(--cyan-400));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
     .hero-desc {
       font-size: clamp(15px, 1.7vw, 17.5px);
       color: var(--slate-500);
-      max-width: 460px; margin: 0 auto 38px;
+      max-width: 460px;
+      margin: 0 auto 38px;
       line-height: 1.75;
     }
-    .hero-desc strong { color: var(--slate-300); font-weight: 500; }
+
+    .hero-desc strong {
+      color: var(--slate-300);
+      font-weight: 500;
+    }
+
     .hero-btns {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
       margin-bottom: 14px;
     }
+
     .btn-primary {
-      display: inline-flex; align-items: center; gap: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       padding: 12px 24px;
-      background: var(--blue-600); color: white;
-      text-decoration: none; border-radius: 8px;
-      font-size: 14px; font-weight: 600; letter-spacing: -.1px;
-      box-shadow: 0 0 0 1px rgba(59,130,246,.35), 0 4px 18px rgba(37,99,235,.35);
+      background: var(--blue-600);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.1px;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, .35), 0 4px 18px rgba(37, 99, 235, .35);
       transition: all .18s;
     }
+
     .btn-primary:hover {
       background: var(--blue-500);
-      box-shadow: 0 0 0 1px rgba(59,130,246,.5), 0 6px 26px rgba(37,99,235,.5);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, .5), 0 6px 26px rgba(37, 99, 235, .5);
       transform: translateY(-1px);
     }
+
     .btn-ghost {
-      display: inline-flex; align-items: center; gap: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       padding: 12px 20px;
-      border: 1px solid rgba(255,255,255,.09);
-      color: var(--slate-400); text-decoration: none; border-radius: 8px;
-      font-size: 14px; font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, .09);
+      color: var(--slate-400);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
       transition: all .18s;
     }
+
     .btn-ghost:hover {
-      border-color: rgba(255,255,255,.18);
-      color: white; background: rgba(255,255,255,.04);
+      border-color: rgba(255, 255, 255, .18);
+      color: white;
+      background: rgba(255, 255, 255, .04);
     }
-    .hero-fine { font-size: 12px; color: var(--slate-600); }
+
+    .hero-fine {
+      font-size: 12px;
+      color: var(--slate-600);
+    }
 
     /* ── MOCKUP ── */
     .mockup-outer {
@@ -177,160 +291,335 @@
       max-width: 840px;
       position: relative;
     }
+
     /* bottom fade to make mockup feel grounded, not floating */
     .mockup-outer::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0; height: 80px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
       background: linear-gradient(to top, var(--slate-950), transparent);
       border-radius: 0 0 13px 13px;
       pointer-events: none;
     }
+
     .mockup {
       background: var(--slate-850);
-      border: 1px solid rgba(255,255,255,.065);
+      border: 1px solid rgba(255, 255, 255, .065);
       border-radius: 13px;
       overflow: hidden;
       box-shadow:
-        0 0 0 1px rgba(255,255,255,.03),
-        0 24px 60px rgba(0,0,0,.75);
+        0 0 0 1px rgba(255, 255, 255, .03),
+        0 24px 60px rgba(0, 0, 0, .75);
     }
+
     .m-bar {
-      background: rgba(0,0,0,.3);
+      background: rgba(0, 0, 0, .3);
       padding: 10px 14px;
-      display: flex; align-items: center; gap: 6px;
-      border-bottom: 1px solid rgba(255,255,255,.04);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
     }
-    .dot { width: 9px; height: 9px; border-radius: 50%; }
-    .dr{background:#ff5f57} .dy{background:#febc2e} .dg{background:#28c840}
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .dr {
+      background: #ff5f57
+    }
+
+    .dy {
+      background: #febc2e
+    }
+
+    .dg {
+      background: #28c840
+    }
+
     .m-url {
-      flex: 1; margin-left: 8px;
-      background: rgba(255,255,255,.04); border-radius: 4px;
+      flex: 1;
+      margin-left: 8px;
+      background: rgba(255, 255, 255, .04);
+      border-radius: 4px;
       padding: 4px 10px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; color: var(--slate-600);
+      font-size: 11px;
+      color: var(--slate-600);
     }
-    .m-body { display: grid; grid-template-columns: 195px 1fr; height: 330px; }
+
+    .m-body {
+      display: grid;
+      grid-template-columns: 195px 1fr;
+      height: 330px;
+    }
+
     .m-side {
-      background: rgba(0,0,0,.15);
-      border-right: 1px solid rgba(255,255,255,.04);
+      background: rgba(0, 0, 0, .15);
+      border-right: 1px solid rgba(255, 255, 255, .04);
       padding: 12px 10px;
     }
-    .ms-label {
-      font-size: 9px; text-transform: uppercase; letter-spacing: 1.2px;
-      color: var(--slate-700); font-weight: 600;
-      padding: 0 4px; margin-bottom: 5px;
-    }
-    .ms-row {
-      display: flex; align-items: center; gap: 6px;
-      padding: 5px 7px; border-radius: 5px;
-      font-size: 11px; color: var(--slate-600); margin-bottom: 1px;
-    }
-    .ms-row.on { background: rgba(59,130,246,.12); color: var(--blue-400); }
-    .mp {
-      width: 30px; height: 14px; border-radius: 3px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace; font-size: 7.5px; font-weight: 700;
-    }
-    .mp-get  {background:rgba(74,222,128,.13); color:var(--green-400)}
-    .mp-post {background:rgba(96,165,250,.13); color:var(--blue-400)}
-    .mp-put  {background:rgba(251,191,36,.13);  color:var(--yellow-400)}
-    .mp-del  {background:rgba(248,113,113,.13); color:var(--red-400)}
-    .ms-sep { height: 1px; background: rgba(255,255,255,.04); margin: 10px 0; }
 
-    .m-main { display: flex; flex-direction: column; }
+    .ms-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--slate-700);
+      font-weight: 600;
+      padding: 0 4px;
+      margin-bottom: 5px;
+    }
+
+    .ms-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 7px;
+      border-radius: 5px;
+      font-size: 11px;
+      color: var(--slate-600);
+      margin-bottom: 1px;
+    }
+
+    .ms-row.on {
+      background: rgba(59, 130, 246, .12);
+      color: var(--blue-400);
+    }
+
+    .mp {
+      width: 30px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5px;
+      font-weight: 700;
+    }
+
+    .mp-get {
+      background: rgba(74, 222, 128, .13);
+      color: var(--green-400)
+    }
+
+    .mp-post {
+      background: rgba(96, 165, 250, .13);
+      color: var(--blue-400)
+    }
+
+    .mp-put {
+      background: rgba(251, 191, 36, .13);
+      color: var(--yellow-400)
+    }
+
+    .mp-del {
+      background: rgba(248, 113, 113, .13);
+      color: var(--red-400)
+    }
+
+    .ms-sep {
+      height: 1px;
+      background: rgba(255, 255, 255, .04);
+      margin: 10px 0;
+    }
+
+    .m-main {
+      display: flex;
+      flex-direction: column;
+    }
+
     .m-req {
-      display: flex; align-items: center; gap: 7px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
       padding: 10px 13px;
-      border-bottom: 1px solid rgba(255,255,255,.04);
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
     }
+
     .m-method {
-      padding: 3px 8px; border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
-      background: rgba(96,165,250,.13); color: var(--blue-400); flex-shrink: 0;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(96, 165, 250, .13);
+      color: var(--blue-400);
+      flex-shrink: 0;
     }
+
     .m-url-input {
       flex: 1;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: 4px; padding: 5px 10px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 4px;
+      padding: 5px 10px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; color: var(--slate-400);
+      font-size: 10.5px;
+      color: var(--slate-400);
     }
+
     .m-send {
-      padding: 5px 12px; background: var(--blue-600);
-      color: white; border-radius: 4px; font-size: 10.5px; font-weight: 600;
+      padding: 5px 12px;
+      background: var(--blue-600);
+      color: white;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 600;
       white-space: nowrap;
     }
-    .m-res { flex: 1; padding: 12px 14px; overflow: hidden; }
-    .m-status { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+
+    .m-res {
+      flex: 1;
+      padding: 12px 14px;
+      overflow: hidden;
+    }
+
+    .m-status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 9px;
+    }
+
     .s-ok {
       padding: 2px 7px;
-      background: rgba(74,222,128,.1); color: var(--green-400);
-      border-radius: 3px; font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; font-weight: 600;
+      background: rgba(74, 222, 128, .1);
+      color: var(--green-400);
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
     }
+
     .s-time {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; color: var(--slate-600);
+      font-size: 10.5px;
+      color: var(--slate-600);
     }
+
     .m-json {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px; line-height: 1.8; color: var(--slate-500);
+      font-size: 10.5px;
+      line-height: 1.8;
+      color: var(--slate-500);
     }
-    .jk{color:var(--blue-400)} .js{color:var(--green-400)}
-    .jb{color:var(--violet-400)} .jn{color:var(--cyan-400)}
+
+    .jk {
+      color: var(--blue-400)
+    }
+
+    .js {
+      color: var(--green-400)
+    }
+
+    .jb {
+      color: var(--violet-400)
+    }
+
+    .jn {
+      color: var(--cyan-400)
+    }
 
     @media (max-width: 600px) {
-      .m-side { display: none; }
-      .m-body { grid-template-columns: 1fr; }
+      .m-side {
+        display: none;
+      }
+
+      .m-body {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ── STATS — NO BORDER, pure typographic ── */
     .stats {
       padding: 52px 0 64px;
-      border-top: 1px solid rgba(255,255,255,.04);
+      border-top: 1px solid rgba(255, 255, 255, .04);
     }
+
     .stats-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 0; flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
     }
+
     .stat {
       padding: 0 40px;
       text-align: center;
     }
-    .stat + .stat {
-      border-left: 1px solid rgba(255,255,255,.06);
+
+    .stat+.stat {
+      border-left: 1px solid rgba(255, 255, 255, .06);
     }
+
     .stat-num {
-      font-size: 34px; font-weight: 800;
-      color: white; letter-spacing: -1.5px; line-height: 1;
+      font-size: 34px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1.5px;
+      line-height: 1;
       margin-bottom: 5px;
     }
-    .stat-num em { font-style: normal; color: var(--blue-400); }
-    .stat-lbl { font-size: 13px; color: var(--slate-600); }
+
+    .stat-num em {
+      font-style: normal;
+      color: var(--blue-400);
+    }
+
+    .stat-lbl {
+      font-size: 13px;
+      color: var(--slate-600);
+    }
+
     @media (max-width: 500px) {
-      .stat { padding: 16px 0; width: 100%; }
-      .stat + .stat { border-left: none; border-top: 1px solid rgba(255,255,255,.06); }
+      .stat {
+        padding: 16px 0;
+        width: 100%;
+      }
+
+      .stat+.stat {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, .06);
+      }
     }
 
     /* ── SECTION ATOMS ── */
-    section { padding: 80px 0; }
+    section {
+      padding: 80px 0;
+    }
+
     .eyebrow {
       display: block;
-      font-size: 11px; font-weight: 600; letter-spacing: 1.4px;
-      text-transform: uppercase; color: var(--blue-400);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--blue-400);
       margin-bottom: 12px;
     }
+
     .section-title {
       font-size: clamp(24px, 3.2vw, 34px);
-      font-weight: 800; color: white;
-      letter-spacing: -1px; line-height: 1.18;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      line-height: 1.18;
       margin-bottom: 12px;
     }
+
     .section-sub {
-      font-size: 15px; color: var(--slate-500);
-      max-width: 400px; line-height: 1.7;
+      font-size: 15px;
+      color: var(--slate-500);
+      max-width: 400px;
+      line-height: 1.7;
     }
 
     /* ── FEATURES — asymmetric list layout ── */
@@ -340,47 +629,113 @@
       gap: 56px 72px;
       align-items: start;
     }
-    .features-intro { align-self: start; }
-    .features-intro .section-sub { max-width: 320px; }
 
-    .feat-list { display: flex; flex-direction: column; gap: 32px; }
-    .feat-item { display: flex; gap: 16px; align-items: flex-start; }
+    .features-intro {
+      align-self: start;
+    }
+
+    .features-intro .section-sub {
+      max-width: 320px;
+    }
+
+    .feat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .feat-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
     .feat-ic {
-      width: 38px; height: 38px; border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
       font-size: 16px;
     }
-    .feat-ic i { font-size: 16px; line-height: 1; }
-    .fi-b { background: rgba(59,130,246,.1);  color: var(--blue-400); }
-    .fi-c { background: rgba(6,182,212,.1);   color: var(--cyan-400); }
-    .fi-v { background: rgba(139,92,246,.1);  color: var(--violet-400); }
-    .fi-g { background: rgba(34,197,94,.1);   color: var(--green-400); }
-    .fi-o { background: rgba(251,146,60,.1);  color: var(--orange-400); }
-    .fi-p { background: rgba(236,72,153,.1);  color: var(--pink-400); }
+
+    .feat-ic i {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .fi-b {
+      background: rgba(59, 130, 246, .1);
+      color: var(--blue-400);
+    }
+
+    .fi-c {
+      background: rgba(6, 182, 212, .1);
+      color: var(--cyan-400);
+    }
+
+    .fi-v {
+      background: rgba(139, 92, 246, .1);
+      color: var(--violet-400);
+    }
+
+    .fi-g {
+      background: rgba(34, 197, 94, .1);
+      color: var(--green-400);
+    }
+
+    .fi-o {
+      background: rgba(251, 146, 60, .1);
+      color: var(--orange-400);
+    }
+
+    .fi-p {
+      background: rgba(236, 72, 153, .1);
+      color: var(--pink-400);
+    }
+
     .feat-text h3 {
-      font-size: 14.5px; font-weight: 700; color: white;
-      margin-bottom: 5px; letter-spacing: -.15px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 5px;
+      letter-spacing: -.15px;
     }
+
     .feat-text p {
-      font-size: 13.5px; color: var(--slate-500); line-height: 1.65;
+      font-size: 13.5px;
+      color: var(--slate-500);
+      line-height: 1.65;
     }
+
     .feat-text p code {
-      font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
-      color: var(--cyan-400); background: rgba(6,182,212,.08);
-      padding: 1px 5px; border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--cyan-400);
+      background: rgba(6, 182, 212, .08);
+      padding: 1px 5px;
+      border-radius: 3px;
     }
+
     @media (max-width: 720px) {
-      .features-layout { grid-template-columns: 1fr; gap: 40px; }
+      .features-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
     }
 
     /* ── HOW IT WORKS — horizontal numbered list ── */
     .how-steps {
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 0;
       position: relative;
-      max-width: 680px; margin: 0 auto;
+      max-width: 680px;
+      margin: 0 auto;
     }
+
     /* thin horizontal line connecting steps */
     .how-steps::before {
       content: '';
@@ -390,28 +745,56 @@
       right: calc(100%/6 + 8px);
       height: 1px;
       background: linear-gradient(90deg,
-        rgba(59,130,246,.45),
-        rgba(59,130,246,.15));
+          rgba(59, 130, 246, .45),
+          rgba(59, 130, 246, .15));
     }
-    .hstep { text-align: center; padding: 0 16px; }
+
+    .hstep {
+      text-align: center;
+      padding: 0 16px;
+    }
+
     .hstep-num {
-      width: 42px; height: 42px; border-radius: 50%;
-      border: 1.5px solid rgba(59,130,246,.3);
-      display: flex; align-items: center; justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(59, 130, 246, .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px; font-weight: 600; color: var(--blue-400);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue-400);
       margin: 0 auto 18px;
       background: var(--slate-950);
-      position: relative; z-index: 1;
+      position: relative;
+      z-index: 1;
     }
+
     .hstep h3 {
-      font-size: 14.5px; font-weight: 700; color: white;
-      margin-bottom: 7px; letter-spacing: -.15px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 7px;
+      letter-spacing: -.15px;
     }
-    .hstep p { font-size: 13px; color: var(--slate-500); line-height: 1.6; }
+
+    .hstep p {
+      font-size: 13px;
+      color: var(--slate-500);
+      line-height: 1.6;
+    }
+
     @media (max-width: 540px) {
-      .how-steps { grid-template-columns: 1fr; gap: 28px; }
-      .how-steps::before { display: none; }
+      .how-steps {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .how-steps::before {
+        display: none;
+      }
     }
 
     /* ── PRICING — side-by-side, NO inner boxes on free ── */
@@ -420,535 +803,1099 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 24px;
-      max-width: 720px; margin: 0 auto;
+      max-width: 720px;
+      margin: 0 auto;
       align-items: start;
     }
-    .plan-free     { width: 300px; flex-shrink: 0; }
-    .plan-premium  { width: 300px; flex-shrink: 0; }
+
+    .plan-free {
+      width: 300px;
+      flex-shrink: 0;
+    }
+
+    .plan-premium {
+      width: 300px;
+      flex-shrink: 0;
+    }
 
     /* Free: no box, just text-based list */
     .plan-free .plan-tier {
-      font-size: 11px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--slate-600);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--slate-600);
       margin-bottom: 10px;
     }
+
     .plan-free .plan-price-txt {
-      font-size: 40px; font-weight: 800; color: white;
-      letter-spacing: -2px; line-height: 1;
+      font-size: 40px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -2px;
+      line-height: 1;
       margin-bottom: 6px;
     }
+
     .plan-free .plan-pitch {
-      font-size: 13px; color: var(--slate-500); margin-bottom: 24px; line-height: 1.5;
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
-    .plan-free-list { list-style: none; margin-bottom: 28px; }
+
+    .plan-free-list {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
     .plan-free-list li {
-      display: flex; align-items: flex-start; gap: 9px;
-      font-size: 13.5px; color: var(--slate-400);
-      margin-bottom: 9px; line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13.5px;
+      color: var(--slate-400);
+      margin-bottom: 9px;
+      line-height: 1.45;
     }
-    .plan-free-list li i { color: var(--slate-600); flex-shrink: 0; margin-top: 2px; font-size: 13px; }
-    .plan-free-list li.has i { color: var(--blue-400); }
-    .plan-free-list li.has { color: var(--slate-300); }
+
+    .plan-free-list li i {
+      color: var(--slate-600);
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 13px;
+    }
+
+    .plan-free-list li.has i {
+      color: var(--blue-400);
+    }
+
+    .plan-free-list li.has {
+      color: var(--slate-300);
+    }
 
     /* Premium: one highlighted card */
     .plan-premium {
-      background: rgba(37,99,235,.08);
-      border: 1px solid rgba(59,130,246,.25);
+      background: rgba(37, 99, 235, .08);
+      border: 1px solid rgba(59, 130, 246, .25);
       border-radius: 16px;
       padding: 26px;
       position: relative;
     }
+
     .plan-premium-label {
-      position: absolute; top: -10px; left: 50%;
+      position: absolute;
+      top: -10px;
+      left: 50%;
       transform: translateX(-50%);
       background: linear-gradient(90deg, var(--blue-600), var(--cyan-500));
-      color: white; font-size: 10px; font-weight: 700;
-      padding: 3px 12px; border-radius: 100px;
-      letter-spacing: .3px; white-space: nowrap;
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 100px;
+      letter-spacing: .3px;
+      white-space: nowrap;
     }
+
     .plan-premium .plan-tier {
-      font-size: 11px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--slate-500);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--slate-500);
       margin-bottom: 10px;
     }
+
     .plan-premium .plan-price-txt {
-      display: flex; align-items: baseline; gap: 3px;
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
       margin-bottom: 6px;
     }
-    .price-rp { font-size: 15px; font-weight: 600; color: var(--slate-400); }
-    .price-val { font-size: 40px; font-weight: 800; color: white; letter-spacing: -2px; line-height: 1; }
-    .price-per { font-size: 12px; color: var(--slate-500); }
+
+    .price-rp {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--slate-400);
+    }
+
+    .price-val {
+      font-size: 40px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .price-per {
+      font-size: 12px;
+      color: var(--slate-500);
+    }
+
     .plan-premium .plan-pitch {
-      font-size: 13px; color: var(--slate-500); margin-bottom: 20px; line-height: 1.5;
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-bottom: 20px;
+      line-height: 1.5;
     }
+
     .plan-premium hr {
-      border: none; border-top: 1px solid rgba(255,255,255,.06); margin-bottom: 18px;
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      margin-bottom: 18px;
     }
-    .prem-list { list-style: none; margin-bottom: 24px; }
+
+    .prem-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
     .prem-list li {
-      display: flex; align-items: flex-start; gap: 9px;
-      font-size: 13.5px; color: var(--slate-300);
-      margin-bottom: 9px; line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13.5px;
+      color: var(--slate-300);
+      margin-bottom: 9px;
+      line-height: 1.45;
     }
-    .prem-list li i { color: var(--blue-400); flex-shrink: 0; margin-top: 2px; font-size: 13px; }
+
+    .prem-list li i {
+      color: var(--blue-400);
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 13px;
+    }
+
     .btn-plan {
-      display: block; text-align: center;
-      padding: 11px; border-radius: 8px;
-      font-size: 13.5px; font-weight: 600;
-      text-decoration: none; transition: all .2s;
+      display: block;
+      text-align: center;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s;
     }
+
     .btn-plan-fill {
-      background: var(--blue-600); color: white;
-      box-shadow: 0 3px 12px rgba(37,99,235,.3);
+      background: var(--blue-600);
+      color: white;
+      box-shadow: 0 3px 12px rgba(37, 99, 235, .3);
     }
-    .btn-plan-fill:hover { background: var(--blue-500); transform: translateY(-1px); }
+
+    .btn-plan-fill:hover {
+      background: var(--blue-500);
+      transform: translateY(-1px);
+    }
+
     .btn-plan-line {
-      border: 1px solid rgba(255,255,255,.1); color: var(--slate-400);
+      border: 1px solid rgba(255, 255, 255, .1);
+      color: var(--slate-400);
     }
-    .btn-plan-line:hover { border-color: rgba(255,255,255,.2); color: white; }
+
+    .btn-plan-line:hover {
+      border-color: rgba(255, 255, 255, .2);
+      color: white;
+    }
 
     /* ── FINAL CTA — no box, just vivid gradient section ── */
     .cta-section {
       padding: 0 0 96px;
       text-align: center;
     }
+
     .cta-inner {
       padding: 72px 32px 64px;
       position: relative;
       overflow: hidden;
     }
+
     /* horizontal gradient rule top */
     .cta-inner::before {
       content: '';
-      position: absolute; top: 0; left: 50%;
+      position: absolute;
+      top: 0;
+      left: 50%;
       transform: translateX(-50%);
-      width: 480px; height: 1px;
+      width: 480px;
+      height: 1px;
       background: linear-gradient(90deg,
-        transparent,
-        rgba(59,130,246,.6),
-        rgba(34,211,238,.5),
-        transparent);
+          transparent,
+          rgba(59, 130, 246, .6),
+          rgba(34, 211, 238, .5),
+          transparent);
     }
+
     /* ambient glow */
     .cta-inner::after {
       content: '';
-      position: absolute; top: -80px; left: 50%;
+      position: absolute;
+      top: -80px;
+      left: 50%;
       transform: translateX(-50%);
-      width: 640px; height: 320px;
+      width: 640px;
+      height: 320px;
       background: radial-gradient(ellipse at 50% 0%,
-        rgba(59,130,246,.1) 0%,
-        transparent 65%);
+          rgba(59, 130, 246, .1) 0%,
+          transparent 65%);
       pointer-events: none;
     }
+
     .cta-mono {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; letter-spacing: 2.5px;
-      color: var(--blue-400); opacity: .55;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: var(--blue-400);
+      opacity: .55;
       margin-bottom: 20px;
     }
+
     .cta-inner h2 {
       font-size: clamp(28px, 4vw, 46px);
-      font-weight: 800; color: white;
-      letter-spacing: -1.8px; line-height: 1.1;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1.8px;
+      line-height: 1.1;
       margin-bottom: 14px;
-      position: relative; z-index: 1;
+      position: relative;
+      z-index: 1;
     }
+
     .cta-inner p {
-      font-size: 15.5px; color: var(--slate-500);
-      max-width: 360px; margin: 0 auto 36px;
-      line-height: 1.7; position: relative; z-index: 1;
+      font-size: 15.5px;
+      color: var(--slate-500);
+      max-width: 360px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
+
     .cta-btns {
-      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 14px; position: relative; z-index: 1;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
     }
-    .cta-fine { font-size: 12px; color: var(--slate-700); position: relative; z-index: 1; }
+
+    .cta-fine {
+      font-size: 12px;
+      color: var(--slate-700);
+      position: relative;
+      z-index: 1;
+    }
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid rgba(255,255,255,.05);
+      border-top: 1px solid rgba(255, 255, 255, .05);
       padding: 28px 0;
     }
+
     .foot-inner {
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap; gap: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .foot-l { display: flex; align-items: center; gap: 12px; }
-    .foot-tag { font-size: 12px; color: var(--slate-700); }
-    .foot-r { font-size: 12px; color: var(--slate-600); }
-    .foot-r a { color: var(--slate-500); text-decoration: none; transition: color .15s; }
-    .foot-r a:hover { color: var(--blue-400); }
-    .foot-sep { margin: 0 7px; color: rgba(255,255,255,.08); }
+
+    .foot-l {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .foot-tag {
+      font-size: 12px;
+      color: var(--slate-700);
+    }
+
+    .foot-r {
+      font-size: 12px;
+      color: var(--slate-600);
+    }
+
+    .foot-r a {
+      color: var(--slate-500);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    .foot-r a:hover {
+      color: var(--blue-400);
+    }
+
+    .foot-sep {
+      margin: 0 7px;
+      color: rgba(255, 255, 255, .08);
+    }
 
     /* ── DIVIDER ── */
     .div-line {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.045), transparent);
-      max-width: 500px; margin: 0 auto;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .045), transparent);
+      max-width: 500px;
+      margin: 0 auto;
     }
 
-    /* ── ANIMATED REQUEST DEMO ── */
-    .req-demo {
+    /* ── ANIMATED PERFORMANCE TEST DEMO ── */
+    .perf-demo {
       margin-top: 28px;
-      border: 1px solid rgba(255,255,255,.07);
+      border: 1px solid rgba(255, 255, 255, .07);
       border-radius: 11px;
       overflow: hidden;
       background: var(--slate-900);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
+      font-size: 11px;
     }
-    .rd-bar {
-      background: rgba(0,0,0,.3);
+
+    .pd-bar {
+      background: rgba(0, 0, 0, .3);
       padding: 8px 12px;
-      display: flex; align-items: center; gap: 5px;
-      border-bottom: 1px solid rgba(255,255,255,.04);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
     }
-    .rd-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .rd-r{background:#ff5f57} .rd-y{background:#febc2e} .rd-g{background:#28c840}
-    .rd-title {
-      margin-left: 6px; font-size: 10px;
-      color: var(--slate-600); font-family: 'Inter', sans-serif;
-    }
-    .rd-body { padding: 14px 14px 0; }
 
-    /* ── request row ── */
-    .rd-req {
-      display: flex; align-items: center; gap: 7px;
-      margin-bottom: 10px; flex-wrap: nowrap; overflow: hidden;
-    }
-    .rd-method {
-      padding: 3px 7px; border-radius: 4px; flex-shrink: 0;
-      background: rgba(96,165,250,.14); color: var(--blue-400);
-      font-size: 10px; font-weight: 700;
-    }
-    .rd-url {
-      font-size: 10.5px; color: var(--slate-600);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1;
-    }
-    .rd-path { color: var(--slate-400); }
-    .rd-send {
-      flex-shrink: 0; padding: 3px 10px;
-      background: var(--blue-600); color: white;
-      border-radius: 4px; font-size: 10px; font-weight: 600;
+    .pd-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .pd-r { background: #ff5f57 }
+    .pd-y { background: #febc2e }
+    .pd-g { background: #28c840 }
+
+    .pd-title {
+      margin-left: 6px;
+      font-size: 10px;
+      color: var(--slate-600);
       font-family: 'Inter', sans-serif;
-      /* animate button flash on send */
-      animation: rd-btn-flash 4s ease-in-out infinite;
-    }
-    @keyframes rd-btn-flash {
-      0%,100%  { background: var(--blue-600); }
-      10%,15%  { background: var(--blue-500); box-shadow: 0 0 8px rgba(59,130,246,.6); }
-      16%      { background: var(--blue-600); }
     }
 
-    /* ── loading bar ── */
-    .rd-loading {
-      height: 2px; background: rgba(255,255,255,.05);
-      border-radius: 2px; margin-bottom: 12px; overflow: hidden;
+    .pd-body { padding: 14px 14px 14px; }
+
+    /* ── Phase A: config (0–20%) ── */
+    .pd-config {
+      animation: pd-config-show 8s ease-in-out infinite;
     }
-    .rd-loading-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue-500), var(--cyan-400));
-      border-radius: 2px;
-      animation: rd-load 4s ease-in-out infinite;
-      transform-origin: left;
-    }
-    @keyframes rd-load {
-      0%       { width: 0%; opacity: 1; }
-      12%      { width: 100%; opacity: 1; }
-      14%      { width: 100%; opacity: 0; }
-      15%,100% { width: 0%; opacity: 0; }
+    @keyframes pd-config-show {
+      0%      { opacity: 1; }
+      18%     { opacity: 1; }
+      22%,100%{ opacity: 0; }
     }
 
-    /* ── response block ── */
-    .rd-res {
-      animation: rd-res-in 4s ease-in-out infinite;
+    .pd-config-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
-    @keyframes rd-res-in {
-      0%,12%   { opacity: 0; transform: translateY(4px); }
-      18%,70%  { opacity: 1; transform: translateY(0); }
-      78%,100% { opacity: 0; transform: translateY(0); }
-    }
-    .rd-res-meta {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-    }
-    .rd-status {
-      padding: 2px 7px; border-radius: 3px;
-      background: rgba(74,222,128,.1); color: var(--green-400);
-      font-size: 10.5px; font-weight: 700;
-    }
-    .rd-time { font-size: 10.5px; color: var(--slate-600); }
-    .rd-json { color: var(--slate-500); line-height: 1.85; }
-    .rd-line { display: flex; gap: 0; }
-    .rd-indent { padding-left: 14px; }
-    .rdp { color: var(--blue-400); }
-    .rds { color: var(--slate-600); }
-    .rdv { color: var(--green-400); }
 
-    /* ── runner strip (appears after response fades) ── */
-    .rd-runner {
-      border-top: 1px solid rgba(255,255,255,.05);
-      padding: 12px 0 14px;
-      animation: rd-runner-in 4s ease-in-out infinite;
+    .pd-config-title {
+      font-size: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--slate-600);
     }
-    @keyframes rd-runner-in {
-      0%,68%   { opacity: 0; }
-      75%,95%  { opacity: 1; }
-      100%     { opacity: 0; }
+
+    .pd-run-btn {
+      padding: 3px 10px;
+      background: var(--orange-400);
+      color: #0f172a;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      animation: pd-btn-pulse 8s ease-in-out infinite;
     }
-    .rd-runner-label {
-      font-size: 9px; text-transform: uppercase; letter-spacing: 1.2px;
-      color: var(--slate-700); font-family: 'Inter', sans-serif;
-      font-weight: 600; margin-bottom: 8px;
+    @keyframes pd-btn-pulse {
+      0%,10% { box-shadow: none; }
+      15%    { box-shadow: 0 0 10px rgba(251,146,60,.8); }
+      20%    { box-shadow: none; }
+      100%   { box-shadow: none; }
     }
-    .rd-runner-rows { display: flex; flex-direction: column; gap: 5px; }
-    .rd-rr {
-      display: flex; align-items: center; gap: 8px;
-      padding: 5px 8px; border-radius: 5px;
+
+    .pd-params {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pd-param {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 5px;
+      padding: 6px 8px;
+    }
+
+    .pd-param-label {
+      font-size: 9px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 2px;
+    }
+
+    .pd-param-val {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange-400);
+    }
+
+    .pd-target {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 5px;
       background: rgba(255,255,255,.02);
-      animation: rd-row-in 4s ease-in-out infinite;
+      border: 1px solid rgba(255,255,255,.04);
     }
-    .rd-rr-d1 { animation-delay: .12s; }
-    .rd-rr-d2 { animation-delay: .24s; }
-    @keyframes rd-row-in {
-      0%,68%   { opacity: 0; transform: translateX(-6px); }
-      76%,95%  { opacity: 1; transform: translateX(0); }
-      100%     { opacity: 0; }
+
+    .pd-target-method {
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: rgba(74,222,128,.12);
+      color: var(--green-400);
+      font-size: 9px;
+      font-weight: 700;
     }
-    .rd-badge {
-      font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
-      flex-shrink: 0; font-family: 'Inter', sans-serif; letter-spacing: .3px;
+
+    .pd-target-url {
+      font-size: 10px;
+      color: var(--slate-500);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .rd-pass { background: rgba(74,222,128,.12); color: var(--green-400); }
-    .rd-fail { background: rgba(248,113,113,.12); color: var(--red-400); }
-    .rd-rname { flex: 1; font-size: 10.5px; color: var(--slate-400); }
-    .rd-rtime { font-size: 10px; color: var(--slate-600); flex-shrink: 0; }
+
+    /* ── Phase B: running (20–65%) ── */
+    .pd-running {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      animation: pd-running-show 8s ease-in-out infinite;
+    }
+    @keyframes pd-running-show {
+      0%,20%  { opacity: 0; transform: translateY(4px); }
+      25%     { opacity: 1; transform: translateY(0); }
+      60%     { opacity: 1; transform: translateY(0); }
+      66%,100%{ opacity: 0; transform: translateY(0); }
+    }
+
+    .pd-running-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .pd-running-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--orange-400);
+    }
+
+    .pd-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange-400);
+      animation: pd-dot-blink 1s ease-in-out infinite;
+    }
+    @keyframes pd-dot-blink {
+      0%,100% { opacity: 1; }
+      50%     { opacity: .2; }
+    }
+
+    .pd-timer {
+      font-size: 10px;
+      color: var(--slate-500);
+      animation: pd-timer-count 8s linear infinite;
+    }
+    @keyframes pd-timer-count {
+      0%,20% { opacity: 0; }
+      22%    { opacity: 1; }
+      60%    { opacity: 1; }
+      66%    { opacity: 0; }
+      100%   { opacity: 0; }
+    }
+
+    /* VU ramp bar */
+    .pd-vu-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .pd-vu-label {
+      font-size: 9px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      width: 22px;
+      flex-shrink: 0;
+    }
+
+    .pd-vu-track {
+      flex: 1;
+      height: 5px;
+      background: rgba(255,255,255,.05);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .pd-vu-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--orange-400), var(--yellow-400));
+      animation: pd-vu-ramp 8s ease-in-out infinite;
+    }
+    @keyframes pd-vu-ramp {
+      0%,20% { width: 0%; }
+      35%    { width: 60%; }
+      55%    { width: 100%; }
+      65%    { width: 100%; }
+      66%,100%{ width: 0%; }
+    }
+
+    .pd-vu-val {
+      font-size: 10px;
+      color: var(--yellow-400);
+      width: 28px;
+      text-align: right;
+      animation: pd-vu-num 8s ease-in-out infinite;
+    }
+    /* fake counter: just show different values at keyframes */
+    @keyframes pd-vu-num {
+      0%,20%  { opacity: 0; }
+      22%     { opacity: 1; }
+      60%,65% { opacity: 1; }
+      66%     { opacity: 0; }
+      100%    { opacity: 0; }
+    }
+
+    /* live metrics row */
+    .pd-live-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin-bottom: 9px;
+    }
+
+    .pd-live-m {
+      background: rgba(255,255,255,.025);
+      border-radius: 5px;
+      padding: 5px 7px;
+    }
+
+    .pd-live-key {
+      font-size: 8.5px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 2px;
+    }
+
+    .pd-live-val {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .pd-rps-val  { color: var(--cyan-400); animation: pd-rps 8s linear infinite; }
+    .pd-p95-val  { color: var(--blue-400); }
+    .pd-err-val  { color: var(--green-400); }
+
+    @keyframes pd-rps {
+      0%,20%  { opacity:0; }
+      25%     { opacity:1; }
+      40%     { opacity:1; }
+      100%    { opacity:1; }
+    }
+
+    /* mini chart bars */
+    .pd-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 26px;
+    }
+
+    .pd-bar-item {
+      flex: 1;
+      border-radius: 2px 2px 0 0;
+      background: rgba(6,182,212,.35);
+      animation: pd-bar-grow 8s ease-in-out infinite;
+    }
+
+    .pd-bar-item:nth-child(1) { animation-delay: .0s; }
+    .pd-bar-item:nth-child(2) { animation-delay: .1s; }
+    .pd-bar-item:nth-child(3) { animation-delay: .2s; }
+    .pd-bar-item:nth-child(4) { animation-delay: .3s; }
+    .pd-bar-item:nth-child(5) { animation-delay: .4s; }
+    .pd-bar-item:nth-child(6) { animation-delay: .5s; }
+    .pd-bar-item:nth-child(7) { animation-delay: .6s; }
+    .pd-bar-item:nth-child(8) { animation-delay: .7s; }
+
+    @keyframes pd-bar-grow {
+      0%,22% { height: 4px; opacity: .3; }
+      35%    { height: 14px; opacity: .7; }
+      50%    { height: 22px; opacity: 1; }
+      60%    { height: 18px; opacity: .9; }
+      65%    { height: 18px; opacity: .9; }
+      66%,100%{ height: 4px; opacity: .3; }
+    }
+
+    /* ── Phase C: results (65–100%) ── */
+    .pd-results {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      animation: pd-results-show 8s ease-in-out infinite;
+    }
+    @keyframes pd-results-show {
+      0%,64%  { opacity: 0; transform: translateY(4px); }
+      70%     { opacity: 1; transform: translateY(0); }
+      94%     { opacity: 1; transform: translateY(0); }
+      100%    { opacity: 0; }
+    }
+
+    .pd-results-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pd-results-label {
+      font-size: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green-400);
+    }
+
+    .pd-done-badge {
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: rgba(74,222,128,.12);
+      color: var(--green-400);
+      font-size: 9px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .pd-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .pd-metric {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.055);
+      border-radius: 6px;
+      padding: 7px 9px;
+    }
+
+    .pd-metric-key {
+      font-size: 8.5px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 3px;
+    }
+
+    .pd-metric-num {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .pd-metric-unit {
+      font-size: 9px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-left: 2px;
+    }
+
+    .pdc-rps   { color: var(--cyan-400); }
+    .pdc-p95   { color: var(--blue-400); }
+    .pdc-err   { color: var(--green-400); }
+    .pdc-total { color: var(--yellow-400); }
+
+    .pd-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 8px;
+      border-radius: 5px;
+      background: rgba(74,222,128,.04);
+      border: 1px solid rgba(74,222,128,.1);
+    }
+
+    .pd-summary-txt {
+      font-size: 10px;
+      color: var(--slate-500);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .pd-summary-pass {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--green-400);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* wrapper needs relative for phase layering */
+    .pd-phases {
+      position: relative;
+      min-height: 155px;
+    }
 
     /* ── HERO ANIMATION ── */
     @keyframes up {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .hero > * { animation: up .52s cubic-bezier(.22,.61,.36,1) both; }
-    .badge          { animation-delay: .05s; }
-    .hero h1        { animation-delay: .11s; }
-    .hero-desc      { animation-delay: .17s; }
-    .hero-btns      { animation-delay: .22s; }
-    .hero-fine      { animation-delay: .26s; }
-    .mockup-outer   { animation: up .6s cubic-bezier(.22,.61,.36,1) .3s both; }
+
+    .hero>* {
+      animation: up .52s cubic-bezier(.22, .61, .36, 1) both;
+    }
+
+    .badge {
+      animation-delay: .05s;
+    }
+
+    .hero h1 {
+      animation-delay: .11s;
+    }
+
+    .hero-desc {
+      animation-delay: .17s;
+    }
+
+    .hero-btns {
+      animation-delay: .22s;
+    }
+
+    .hero-fine {
+      animation-delay: .26s;
+    }
+
+    .mockup-outer {
+      animation: up .6s cubic-bezier(.22, .61, .36, 1) .3s both;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- ── NAVBAR ── -->
-<nav>
-  <div class="wrap nav-inner">
-    <a href="#" class="logo">
-      <img src="forge.png" alt="Assertin" />
-      <span class="logo-name">Assertin<span>.</span></span>
-    </a>
-    <a href="https://forge.assertin.com/login" class="nav-btn">
-      Masuk
-    </a>
-  </div>
-</nav>
-
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="wrap-sm">
-
-    <h1>
-      Mulai test API<br />
-      <em>tanpa setup.</em><br />
-    </h1>
-
-    <p class="hero-desc">
-      Buka browser, langsung test. Tidak perlu install apapun.<br />
-    </p>
-
-    <div class="hero-btns">
-      <a href="https://forge.assertin.com" class="btn-primary">
-        Mulai <i class="bi bi-play-circle"></i>
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <div class="wrap nav-inner">
+      <a href="#" class="logo">
+        <img src="forge.png" alt="Assertin" />
+        <span class="logo-name">Assertin<span>.</span></span>
+      </a>
+      <a href="https://forge.assertin.com/login" class="nav-btn">
+        Masuk
       </a>
     </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="wrap-sm">
+
+      <h1>
+        Test API. Build scenario. Measure performance.<br />
+        <em>Semua dalam satu workspace.</em><br />
+      </h1>
+
+      <p class="hero-desc">
+        Kirim request, susun flow E2E, jalankan performance test, lalu lihat hasilnya sebagai bukti — tanpa pindah tools.<br />
+      </p>
+
+      <div class="hero-btns">
+        <a href="https://forge.assertin.com/login" class="btn-primary">
+          Mulai Gratis
+        </a>
+
+        <a href="https://forge.assertin.com/demo" class="btn-ghost">
+          Lihat Demo
+        </a>
+      </div>
+
+      <p class="hero-fine">
+        Tidak perlu akun untuk mencoba.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── STATS — pure typographic, no border boxes ── -->
+  <div class="stats">
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num"><em>0</em> setup</div>
+        <div class="stat-lbl">langsung dari browser, tanpa install</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>Scenario Runner</em></div>
+        <div class="stat-lbl">susun flow API jadi skenario E2E</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>Performance Test</em></div>
+        <div class="stat-lbl">gratis hingga 20 virtual users</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>Result &amp; Proof</em></div>
+        <div class="stat-lbl">latency, error, success rate — siap dibagikan</div>
+      </div>
+    </div>
   </div>
-</section>
 
-<!-- ── STATS — pure typographic, no border boxes ── -->
-<div class="stats">
-  <div class="stats-row">
-    <div class="stat">
-      <div class="stat-num"><em>0</em> setup</div>
-      <div class="stat-lbl">buka browser, langsung test</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num"><em>Gratis</em></div>
-      <div class="stat-lbl">untuk mulai, tanpa kartu kredit</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">hingga <em>50</em> VU</div>
-      <div class="stat-lbl">untuk performance testing</div>
-    </div>
-  </div>
-</div>
+  <div class="div-line"></div>
 
-<div class="div-line"></div>
+  <!-- ── FEATURES — asymmetric, list bukan grid box ── -->
+  <section>
+    <div class="wrap">
+      <div class="features-layout">
 
-<!-- ── FEATURES — asymmetric, list bukan grid box ── -->
-<section>
-  <div class="wrap">
-    <div class="features-layout">
+        <!-- kiri: judul section + animated demo -->
+        <div class="features-intro">
+          <span class="eyebrow">Fitur</span>
+          <h2 class="section-title">Semua kebutuhan testing kamu.</h2>
 
-      <!-- kiri: judul section + animated demo -->
-      <div class="features-intro">
-        <span class="eyebrow">Fitur</span>
-        <h2 class="section-title">Semua kebutuhan testing kamu.</h2>
-
-        <!-- ANIMATED REQUEST DEMO -->
-        <div class="req-demo" aria-hidden="true">
-          <div class="rd-bar">
-            <span class="rd-dot rd-r"></span>
-            <span class="rd-dot rd-y"></span>
-            <span class="rd-dot rd-g"></span>
-            <span class="rd-title">forge assertin</span>
-          </div>
-          <div class="rd-body">
-            <!-- request line -->
-            <div class="rd-row rd-req">
-              <span class="rd-method">POST</span>
-              <span class="rd-url">https://api.example.com<span class="rd-path">/auth/login</span></span>
-              <span class="rd-send">Kirim</span>
+          <!-- ANIMATED PERFORMANCE TEST DEMO -->
+          <div class="perf-demo" aria-hidden="true">
+            <div class="pd-bar">
+              <span class="pd-dot pd-r"></span>
+              <span class="pd-dot pd-y"></span>
+              <span class="pd-dot pd-g"></span>
+              <span class="pd-title">forge assertin · performance</span>
             </div>
-            <!-- loading bar -->
-            <div class="rd-loading">
-              <div class="rd-loading-bar"></div>
-            </div>
-            <!-- response block -->
-            <div class="rd-res">
-              <div class="rd-res-meta">
-                <span class="rd-status">200 OK</span>
-                <span class="rd-time">142ms</span>
-              </div>
-              <div class="rd-json">
-                <div class="rd-line"><span class="rdp">"token"</span><span class="rds">: </span><span class="rdv">"eyJhbGci..."</span><span class="rds">,</span></div>
-                <div class="rd-line"><span class="rdp">"user"</span><span class="rds">: {</span></div>
-                <div class="rd-line rd-indent"><span class="rdp">"id"</span><span class="rds">: </span><span class="rdv">"b3d2f1a0..."</span><span class="rds">,</span></div>
-                <div class="rd-line rd-indent"><span class="rdp">"email"</span><span class="rds">: </span><span class="rdv">"damar@example.com"</span></div>
-                <div class="rd-line"><span class="rds">}</span></div>
-              </div>
-            </div>
-            <!-- runner strip -->
-            <div class="rd-runner">
-              <div class="rd-runner-label">Collection Runner</div>
-              <div class="rd-runner-rows">
-                <div class="rd-rr rd-rr-pass">
-                  <span class="rd-badge rd-pass">PASS</span>
-                  <span class="rd-rname">POST /auth/login</span>
-                  <span class="rd-rtime">142ms</span>
+            <div class="pd-body">
+              <div class="pd-phases">
+
+                <!-- Phase A: Config -->
+                <div class="pd-config">
+                  <div class="pd-config-header">
+                    <span class="pd-config-title">Performance Test</span>
+                    <span class="pd-run-btn">&#9654; Jalankan</span>
+                  </div>
+                  <div class="pd-params">
+                    <div class="pd-param">
+                      <div class="pd-param-label">Virtual Users</div>
+                      <div class="pd-param-val">50 VU</div>
+                    </div>
+                    <div class="pd-param">
+                      <div class="pd-param-label">Durasi</div>
+                      <div class="pd-param-val">30s</div>
+                    </div>
+                    <div class="pd-param">
+                      <div class="pd-param-label">Ramp Up</div>
+                      <div class="pd-param-val">10s</div>
+                    </div>
+                    <div class="pd-param">
+                      <div class="pd-param-label">Collection</div>
+                      <div class="pd-param-val" style="font-size:10px;color:var(--slate-400)">User API</div>
+                    </div>
+                  </div>
+                  <div class="pd-target">
+                    <span class="pd-target-method">GET</span>
+                    <span class="pd-target-url">https://api.example.com/users/profile</span>
+                  </div>
                 </div>
-                <div class="rd-rr rd-rr-pass rd-rr-d1">
-                  <span class="rd-badge rd-pass">PASS</span>
-                  <span class="rd-rname">GET /users/me</span>
-                  <span class="rd-rtime">89ms</span>
+
+                <!-- Phase B: Running -->
+                <div class="pd-running">
+                  <div class="pd-running-header">
+                    <span class="pd-running-label">
+                      <span class="pd-pulse-dot"></span>
+                      Running
+                    </span>
+                    <span class="pd-timer">00:18 / 00:30</span>
+                  </div>
+                  <div class="pd-vu-row">
+                    <span class="pd-vu-label">VU</span>
+                    <div class="pd-vu-track">
+                      <div class="pd-vu-fill"></div>
+                    </div>
+                    <span class="pd-vu-val">50</span>
+                  </div>
+                  <div class="pd-live-metrics">
+                    <div class="pd-live-m">
+                      <div class="pd-live-key">RPS</div>
+                      <div class="pd-live-val pd-rps-val">312</div>
+                    </div>
+                    <div class="pd-live-m">
+                      <div class="pd-live-key">p95</div>
+                      <div class="pd-live-val pd-p95-val">118ms</div>
+                    </div>
+                    <div class="pd-live-m">
+                      <div class="pd-live-key">Error</div>
+                      <div class="pd-live-val pd-err-val">0.1%</div>
+                    </div>
+                  </div>
+                  <div class="pd-chart">
+                    <div class="pd-bar-item"></div>
+                    <div class="pd-bar-item"></div>
+                    <div class="pd-bar-item"></div>
+                    <div class="pd-bar-item"></div>
+                    <div class="pd-bar-item"></div>
+                    <div class="pd-bar-item"></div>
+                    <div class="pd-bar-item"></div>
+                    <div class="pd-bar-item"></div>
+                  </div>
                 </div>
-                <div class="rd-rr rd-rr-fail rd-rr-d2">
-                  <span class="rd-badge rd-fail">FAIL</span>
-                  <span class="rd-rname">DELETE /session</span>
-                  <span class="rd-rtime">401</span>
+
+                <!-- Phase C: Results -->
+                <div class="pd-results">
+                  <div class="pd-results-header">
+                    <span class="pd-results-label">Hasil</span>
+                    <span class="pd-done-badge">SELESAI</span>
+                  </div>
+                  <div class="pd-metric-grid">
+                    <div class="pd-metric">
+                      <div class="pd-metric-key">Requests/sec</div>
+                      <div class="pd-metric-num pdc-rps">298<span class="pd-metric-unit">rps</span></div>
+                    </div>
+                    <div class="pd-metric">
+                      <div class="pd-metric-key">Latency p95</div>
+                      <div class="pd-metric-num pdc-p95">124<span class="pd-metric-unit">ms</span></div>
+                    </div>
+                    <div class="pd-metric">
+                      <div class="pd-metric-key">Error Rate</div>
+                      <div class="pd-metric-num pdc-err">0.3<span class="pd-metric-unit">%</span></div>
+                    </div>
+                    <div class="pd-metric">
+                      <div class="pd-metric-key">Total Request</div>
+                      <div class="pd-metric-num pdc-total">8.9<span class="pd-metric-unit">k</span></div>
+                    </div>
+                  </div>
+                  <div class="pd-summary-row">
+                    <span class="pd-summary-txt">50 VU · 30s · User API</span>
+                    <span class="pd-summary-pass">&#10003; Passed</span>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- kanan: list fitur -->
-      <div class="feat-list">
-        <div class="feat-item">
-          <div class="feat-ic fi-b"><i class="bi bi-send-fill"></i></div>
-          <div class="feat-text">
-            <h3>Buat request lebih cepat</h3>
-            <p>Tulis URL, pilih method, set headers dan body. Kirim langsung tanpa konfigurasi tambahan.</p>
+        <!-- kanan: list fitur -->
+        <div class="feat-list">
+          <div class="feat-item">
+            <div class="feat-ic fi-b"><i class="bi bi-send-fill"></i></div>
+            <div class="feat-text">
+              <h3>Buat request lebih cepat</h3>
+              <p>Tulis URL, pilih method, set headers dan body. Kirim langsung tanpa konfigurasi tambahan.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-ic fi-c"><i class="bi bi-braces"></i></div>
+            <div class="feat-text">
+              <h3>Test & Manajemen Environment</h3>
+              <p>Simpan variable seperti <code>{{base_url}}</code> dan berikan test <code>forge.test</code>.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-ic fi-v"><i class="bi bi-folder2-open"></i></div>
+            <div class="feat-text">
+              <h3>Testing tetap terorganisir</h3>
+              <p>Kelompokkan request ke collection dan workspace.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-ic fi-p">
+              <i class="bi bi-diagram-3"></i>
+            </div>
+
+            <div class="feat-text">
+              <h3>Bangun flow E2E tanpa scripting berat</h3>
+
+              <p>
+                Hubungkan request menjadi skenario,
+                gunakan response sebelumnya sebagai input berikutnya.
+              </p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-ic fi-o"><i class="bi bi-speedometer2"></i></div>
+            <div class="feat-text">
+              <h3>Atur virtual users dan durasi pengujian.</h3>
+              <p>Lihat latency, throughput, error rate, dan percentile.</p>
+            </div>
           </div>
         </div>
-        <div class="feat-item">
-          <div class="feat-ic fi-c"><i class="bi bi-braces"></i></div>
-          <div class="feat-text">
-            <h3>Test & Manajemen Environment</h3>
-            <p>Simpan variable seperti <code>{{base_url}}</code> dan berikan test <code>forge.test</code>.</p>
-          </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="div-line"></div>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section>
+    <div class="wrap-md">
+      <div class="section-head" style="text-align:center;margin-bottom:48px">
+        <span class="eyebrow">Cara Kerja</span>
+        <h2 class="section-title">Tiga langkah, langsung jalan.</h2>
+        <p class="section-sub" style="margin:0 auto">Tidak ada wizard setup. Tidak ada file konfigurasi. Buka dan mulai.
+        </p>
+      </div>
+      <div class="how-steps">
+        <div class="hstep">
+          <div class="hstep-num">01</div>
+          <h3>Buat workspace</h3>
+          <p>Masuk dan buat workspace pertama.</p>
         </div>
-        <div class="feat-item">
-          <div class="feat-ic fi-v"><i class="bi bi-folder2-open"></i></div>
-          <div class="feat-text">
-            <h3>Testing tetap terorganisir</h3>
-            <p>Kelompokkan request ke collection dan workspace.</p>
-          </div>
+        <div class="hstep">
+          <div class="hstep-num">02</div>
+          <h3>Tambah request</h3>
+          <p>Kelola endpoint dan susun flow.</p>
         </div>
-        <div class="feat-item">
-          <div class="feat-ic fi-g"><i class="bi bi-play-circle-fill"></i></div>
-          <div class="feat-text">
-            <h3>Jalankan semua request sekaligus</h3>
-            <p>Collection Runner menjalankan request secara urut. Lihat passed dan failed dalam laporan.</p>
-          </div>
-        </div>
-        <div class="feat-item">
-          <div class="feat-ic fi-o"><i class="bi bi-speedometer2"></i></div>
-          <div class="feat-text">
-            <h3>Uji performa sebelum launch</h3>
-            <p>Performance testing berbasis k6 sudah built-in. Set VU dan durasi, lihat RPS-TPS, P95, error rate.</p>
-          </div>
+        <div class="hstep">
+          <div class="hstep-num">03</div>
+          <h3>Jalankan &amp; analisa</h3>
+          <p>Eksekusi request, runner, atau performance test.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="div-line"></div>
+  <div class="div-line"></div>
 
-<!-- ── HOW IT WORKS ── -->
-<section>
-  <div class="wrap-md">
-    <div class="section-head" style="text-align:center;margin-bottom:48px">
-      <span class="eyebrow">Cara Kerja</span>
-      <h2 class="section-title">Tiga langkah, langsung jalan.</h2>
-      <p class="section-sub" style="margin:0 auto">Tidak ada wizard setup. Tidak ada file konfigurasi. Buka dan mulai.</p>
-    </div>
-    <div class="how-steps">
-      <div class="hstep">
-        <div class="hstep-num">01</div>
-        <h3>Buat workspace</h3>
-        <p>Daftar dengan email, buat workspace, tambahkan environment variable kalau perlu.</p>
+  <!-- ── PRICING — free as plain text, premium as card ── -->
+  <section>
+    <div class="wrap-md">
+      <div style="text-align:center;margin-bottom:52px">
+        <span class="eyebrow">Paket</span>
+        <h2 class="section-title">Mulai gratis.<br />Upgrade saat memang perlu.</h2>
+        <p class="section-sub" style="margin:0 auto">Tidak ada tagihan mengejutkan. Bayar hanya saat butuh kapasitas
+          lebih.</p>
       </div>
-      <div class="hstep">
-        <div class="hstep-num">02</div>
-        <h3>Tambah request</h3>
-        <p>Buat collection, isi method dan URL. Susun dan beri nama sesuai alur testing kamu.</p>
-      </div>
-      <div class="hstep">
-        <div class="hstep-num">03</div>
-        <h3>Jalankan &amp; analisa</h3>
-        <p>Kirim satu per satu, jalankan Runner, atau uji performa dari satu dashboard.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<div class="div-line"></div>
+      <div class="pricing-wrap">
 
-<!-- ── PRICING — free as plain text, premium as card ── -->
-<section>
-  <div class="wrap-md">
-    <div style="text-align:center;margin-bottom:52px">
-      <span class="eyebrow">Paket</span>
-      <h2 class="section-title">Mulai gratis.<br />Upgrade saat memang perlu.</h2>
-      <p class="section-sub" style="margin:0 auto">Tidak ada tagihan mengejutkan. Bayar hanya saat butuh kapasitas lebih.</p>
-    </div>
-
-    <div class="pricing-wrap">
-
-      <!-- Free: no box -->
-      <!-- <div class="plan-free">
+        <!-- Free: no box -->
+        <!-- <div class="plan-free">
         <div class="plan-tier">Free</div>
         <div class="plan-price-txt">Rp 0</div>
         <div class="plan-pitch">Untuk belajar dan eksplorasi API testing pertamamu.</div>
@@ -964,61 +1911,63 @@
         <a href="https://forge.assertin.com" class="btn-plan btn-plan-line">Mulai Gratis</a>
       </div> -->
 
-      <!-- Premium: card -->
-      <div class="plan-premium">
-        <div class="plan-premium-label">Free</div>
-        <!-- <div class="plan-tier">Premium</div> -->
-        <div class="plan-price-txt">
-          <span class="price-rp">Rp</span>
-          <span class="price-val">0</span>
-          <span class="price-per">/ 30 hari</span>
+        <!-- Premium: card -->
+        <div class="plan-premium">
+          <div class="plan-premium-label">Free</div>
+          <!-- <div class="plan-tier">Premium</div> -->
+          <div class="plan-price-txt">
+            <span class="price-rp">Rp</span>
+            <span class="price-val">0</span>
+            <span class="price-per">/ 30 hari</span>
+          </div>
+          <div class="plan-pitch">Untuk eksplorasi dan personal project</div>
+          <hr />
+          <ul class="prem-list">
+            <li><i class="bi bi-check2"></i> API Request</li>
+            <li><i class="bi bi-check2"></i> Scenario Runner</li>
+            <li><i class="bi bi-check2"></i> Performance test hingga 20 virtual users per run</li>
+            <li><i class="bi bi-check2"></i> Durasi hingga 3 menit per run</li>
+            <li><i class="bi bi-check2"></i> Result analysis</li>
+          </ul>
+          <div class="plan-pitch">Fair usage berlaku</div>
+          <!-- <a href="https://forge.assertin.com" class="btn-plan btn-plan-fill">Upgrade Premium</a> -->
         </div>
-        <div class="plan-pitch">Untuk belajar dan eksplorasi API testing pertamamu.</div>
-        <hr />
-        <ul class="prem-list">
-          <li><i class="bi bi-check2"></i> Workspace</li>
-          <li><i class="bi bi-check2"></i> Collection &amp; request</li>
-          <li><i class="bi bi-check2"></i> Hit API</li>
-          <li><i class="bi bi-check2"></i> Environment & Scenarios test</li>
-          <li><i class="bi bi-check2"></i> Performance test hingga 50 VU</li>
-          <li><i class="bi bi-check2"></i> Durasi test hingga 10 menit</li>
-        </ul>
-        <!-- <a href="https://forge.assertin.com" class="btn-plan btn-plan-fill">Upgrade Premium</a> -->
+
       </div>
+    </div>
+  </section>
 
+  <!-- ── FINAL CTA — no box, gradient-lit open section ── -->
+  <section class="cta-section">
+    <div class="wrap-sm cta-inner">
+      <p class="cta-mono">// Assert. Run. Prove.</p>
+      <h2>Mulai test pertama,<br>
+        kurang dari satu menit.</h2>
+      <p>Tidak perlu install. Tidak perlu setup.</p>
+      <div class="cta-btns">
+        <a href="https://forge.assertin.com/register" class="btn-primary">
+          Daftar Gratis <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── FINAL CTA — no box, gradient-lit open section ── -->
-<section class="cta-section">
-  <div class="wrap-sm cta-inner">
-    <p class="cta-mono">// Assert. Run. Prove.</p>
-    <h2>Mulai kirim request pertamamu.</h2>
-    <p>Daftar, buat workspace, dan mulai test — kurang dari satu menit.</p>
-    <div class="cta-btns">
-      <a href="https://forge.assertin.com" class="btn-primary">
-        Daftar Gratis <i class="bi bi-arrow-right"></i>
-      </a>
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="wrap foot-inner">
+      <div class="foot-l">
+        <a href="#" class="logo">
+          <img src="forge.png" alt="Assertin" />
+          <span class="logo-name">Assertin<span>.</span></span>
+        </a>
+        <span class="foot-tag">Test with confidence. Ship with proof.</span>
+      </div>
+      <div class="foot-r">
+        <span>&copy; 2026 Assertin.com</span>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="wrap foot-inner">
-    <div class="foot-l">
-      <a href="#" class="logo">
-        <img src="forge.png" alt="Assertin" />
-        <span class="logo-name">Assertin<span>.</span></span>
-      </a>
-      <span class="foot-tag">Test with confidence. Ship with proof.</span>
-    </div>
-    <div class="foot-r">
-      <span>&copy; 2026 Assertin.com</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 
 </body>
+
 </html>
