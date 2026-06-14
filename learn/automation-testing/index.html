@@ -4,25 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apa itu API Testing? Panduan untuk Pemula — Assertin</title>
+  <title>Apa itu API Automation Testing? Scenario Runner — Assertin</title>
   <meta name="description"
-    content="Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin." />
+    content="Pelajari apa itu API automation testing, jenis-jenisnya, dan cara membuat skenario otomatis dengan Scenario Runner di Assertin." />
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://assertin.com/learn/api-testing" />
+  <link rel="canonical" href="https://assertin.com/learn/automation-testing" />
   <link rel="icon" href="../../favicon.ico">
   <link rel="icon" href="../../favicon-32.png" type="image/png" />
   <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://assertin.com/learn/api-testing" />
-  <meta property="og:title" content="Apa itu API Testing? Panduan untuk Pemula — Assertin" />
+  <meta property="og:url" content="https://assertin.com/learn/automation-testing" />
+  <meta property="og:title" content="Apa itu API Automation Testing? Scenario Runner — Assertin" />
   <meta property="og:description"
-    content="Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin." />
+    content="Pelajari apa itu API automation testing, jenis-jenisnya, dan cara membuat skenario otomatis dengan Scenario Runner di Assertin." />
   <meta property="og:image" content="https://assertin.com/forge.png" />
   <meta property="og:site_name" content="Assertin">
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Apa itu API Testing? Panduan untuk Pemula — Assertin" />
+  <meta name="twitter:title" content="Apa itu API Automation Testing? Scenario Runner — Assertin" />
   <meta name="twitter:description"
-    content="Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin." />
+    content="Pelajari apa itu API automation testing, jenis-jenisnya, dan cara membuat skenario otomatis dengan Scenario Runner di Assertin." />
   <meta name="twitter:image" content="https://assertin.com/forge.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,12 +36,12 @@
       {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Apa itu API Testing? Panduan untuk Pemula",
-        "description": "Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin.",
+        "headline": "Apa itu API Automation Testing? Scenario Runner",
+        "description": "Pelajari apa itu API automation testing, jenis-jenisnya, dan cara membuat skenario otomatis dengan Scenario Runner di Assertin.",
         "image": "https://assertin.com/forge.png",
         "author": { "@type": "Organization", "name": "Assertin" },
         "publisher": { "@type": "Organization", "name": "Assertin", "logo": { "@type": "ImageObject", "url": "https://assertin.com/forge.png" } },
-        "mainEntityOfPage": "https://assertin.com/learn/api-testing"
+        "mainEntityOfPage": "https://assertin.com/learn/automation-testing"
       }
     </script>
   <style>
@@ -59,6 +59,7 @@
       --blue-600: #2563eb;
       --cyan-400: #22d3ee;
       --green-400: #4ade80;
+      --yellow-400: #fbbf24;
       --slate-300: #cbd5e1;
       --slate-400: #94a3b8;
       --slate-500: #64748b;
@@ -321,8 +322,8 @@
       color: var(--cyan-400);
     }
 
-    /* ── ANIMATED REQUEST/RESPONSE DEMO ── */
-    .req-demo {
+    /* ── ANIMATED SCENARIO RUNNER DEMO ── */
+    .scenario-demo {
       margin: 28px auto 40px;
       width: 100%;
       max-width: 420px;
@@ -334,7 +335,7 @@
       font-size: 11px;
     }
 
-    .rd-bar {
+    .sc-bar {
       background: rgba(0, 0, 0, .3);
       padding: 8px 12px;
       display: flex;
@@ -343,62 +344,36 @@
       border-bottom: 1px solid rgba(255, 255, 255, .04);
     }
 
-    .rd-dot {
+    .sc-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
     }
 
-    .rd-r {
+    .sc-r {
       background: #ff5f57
     }
 
-    .rd-y {
+    .sc-y {
       background: #febc2e
     }
 
-    .rd-g {
+    .sc-g {
       background: #28c840
     }
 
-    .rd-title {
+    .sc-title {
       margin-left: 6px;
       font-size: 10px;
       color: var(--slate-600);
       font-family: 'Inter', sans-serif;
     }
 
-    .rd-body {
-      padding: 14px;
-      position: relative;
-      min-height: 150px;
+    .sc-body {
+      padding: 16px 14px;
     }
 
-    /* ── Phase A: request (0–45%) ── */
-    .rd-request {
-      animation: rd-request-show 6s ease-in-out infinite;
-    }
-
-    @keyframes rd-request-show {
-
-      0% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      40% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      48%,
-      100% {
-        opacity: 0;
-        transform: translateY(-4px);
-      }
-    }
-
-    .rd-label {
+    .sc-label {
       font-size: 9px;
       font-family: 'Inter', sans-serif;
       font-weight: 600;
@@ -408,140 +383,170 @@
       margin-bottom: 10px;
     }
 
-    .rd-target {
+    .sc-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sc-step {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 9px;
-      border-radius: 5px;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
       background: rgba(255, 255, 255, .02);
       border: 1px solid rgba(255, 255, 255, .04);
-      margin-bottom: 10px;
     }
 
-    .rd-method {
-      padding: 2px 6px;
-      border-radius: 3px;
-      background: rgba(74, 222, 128, .12);
-      color: var(--green-400);
+    .sc-step-ic {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
       font-size: 9px;
       font-weight: 700;
+      color: var(--slate-600);
+      animation: sc-ic-pass 8s ease-in-out infinite;
     }
 
-    .rd-url {
-      font-size: 10.5px;
+    .sc-step-ic span {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sc-num {
+      animation: sc-num-hide 8s ease-in-out infinite;
+    }
+
+    .sc-check {
+      opacity: 0;
+      color: var(--green-400);
+      font-size: 11px;
+      animation: sc-check-show 8s ease-in-out infinite;
+    }
+
+    .sc-step-label {
+      flex: 1;
+      font-size: 11px;
       color: var(--slate-400);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .rd-send-btn {
-      display: inline-block;
-      padding: 3px 10px;
-      background: var(--blue-600);
-      color: white;
-      border-radius: 4px;
-      font-size: 10px;
+    .sc-step-status {
+      font-size: 9px;
       font-weight: 700;
       font-family: 'Inter', sans-serif;
-      animation: rd-btn-pulse 6s ease-in-out infinite;
-    }
-
-    @keyframes rd-btn-pulse {
-
-      0%,
-      6% {
-        box-shadow: none;
-      }
-
-      12% {
-        box-shadow: 0 0 10px rgba(59, 130, 246, .8);
-      }
-
-      18%,
-      100% {
-        box-shadow: none;
-      }
-    }
-
-    .rd-headers {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .rd-header-row {
-      display: flex;
-      gap: 6px;
-      font-size: 10px;
+      color: var(--green-400);
       opacity: 0;
-      animation: rd-row-show 6s ease-in-out infinite;
+      animation: sc-check-show 8s ease-in-out infinite;
     }
 
-    .rd-header-row:nth-child(1) {
+    .sc-step:nth-child(1) .sc-step-ic,
+    .sc-step:nth-child(1) .sc-num,
+    .sc-step:nth-child(1) .sc-check,
+    .sc-step:nth-child(1) .sc-step-status {
       animation-delay: 0s;
     }
 
-    .rd-header-row:nth-child(2) {
-      animation-delay: .15s;
+    .sc-step:nth-child(2) .sc-step-ic,
+    .sc-step:nth-child(2) .sc-num,
+    .sc-step:nth-child(2) .sc-check,
+    .sc-step:nth-child(2) .sc-step-status {
+      animation-delay: 1.5s;
     }
 
-    @keyframes rd-row-show {
+    .sc-step:nth-child(3) .sc-step-ic,
+    .sc-step:nth-child(3) .sc-num,
+    .sc-step:nth-child(3) .sc-check,
+    .sc-step:nth-child(3) .sc-step-status {
+      animation-delay: 3s;
+    }
+
+    @keyframes sc-ic-pass {
 
       0%,
-      14% {
+      5% {
+        background: rgba(255, 255, 255, .06);
+      }
+
+      10%,
+      60% {
+        background: rgba(74, 222, 128, .15);
+      }
+
+      65%,
+      100% {
+        background: rgba(255, 255, 255, .06);
+      }
+    }
+
+    @keyframes sc-num-hide {
+
+      0%,
+      5% {
+        opacity: 1;
+      }
+
+      10%,
+      60% {
         opacity: 0;
-        transform: translateX(-4px);
       }
 
-      20% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      40% {
+      65%,
+      100% {
         opacity: 1;
       }
+    }
 
-      48%,
+    @keyframes sc-check-show {
+
+      0%,
+      5% {
+        opacity: 0;
+      }
+
+      10%,
+      60% {
+        opacity: 1;
+      }
+
+      65%,
       100% {
         opacity: 0;
       }
     }
 
-    .rd-header-key {
-      color: var(--slate-600);
+    .sc-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: rgba(74, 222, 128, .04);
+      border: 1px solid rgba(74, 222, 128, .1);
+      opacity: 0;
+      animation: sc-summary-show 8s ease-in-out infinite;
     }
 
-    .rd-header-val {
-      color: var(--cyan-400);
-    }
-
-    /* ── Phase B: response (45–100%) ── */
-    .rd-response {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      animation: rd-response-show 6s ease-in-out infinite;
-    }
-
-    @keyframes rd-response-show {
+    @keyframes sc-summary-show {
 
       0%,
-      44% {
+      68% {
         opacity: 0;
         transform: translateY(4px);
       }
 
-      52% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      94% {
+      75%,
+      92% {
         opacity: 1;
         transform: translateY(0);
       }
@@ -551,53 +556,17 @@
       }
     }
 
-    .rd-response-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .rd-status {
-      padding: 2px 7px;
-      border-radius: 3px;
-      background: rgba(74, 222, 128, .12);
-      color: var(--green-400);
+    .sc-summary-txt {
       font-size: 10px;
-      font-weight: 700;
+      color: var(--slate-500);
       font-family: 'Inter', sans-serif;
     }
 
-    .rd-time {
+    .sc-summary-pass {
       font-size: 10px;
-      color: var(--slate-600);
-      font-family: 'Inter', sans-serif;
-    }
-
-    .rd-json {
-      background: rgba(255, 255, 255, .03);
-      border: 1px solid rgba(255, 255, 255, .055);
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 10.5px;
-      line-height: 1.8;
-      color: var(--slate-400);
-    }
-
-    .rd-json .rd-key {
-      color: var(--cyan-400);
-    }
-
-    .rd-json .rd-str {
+      font-weight: 600;
       color: var(--green-400);
-    }
-
-    .rd-json .rd-num {
-      color: var(--yellow-400);
-    }
-
-    .rd-json .rd-punc {
-      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
     }
 
     /* ── FOOTER ── */
@@ -661,96 +630,96 @@
   <!-- ── ARTICLE ── -->
   <section class="article">
     <div class="wrap-md">
-      <div class="breadcrumb"><a href="../../">Assertin</a> / Learn / API Testing</div>
+      <div class="breadcrumb"><a href="../../">Assertin</a> / Learn / Automation Testing</div>
       <span class="eyebrow">Panduan</span>
-      <h1>Apa itu API Testing?</h1>
+      <h1>Apa itu API Automation Testing?</h1>
       <p class="lead">
-        API testing adalah proses memverifikasi bahwa endpoint API mengembalikan response yang sesuai —
-        status code, body, header, dan waktu respons — sesuai ekspektasi. Berikut penjelasan lengkapnya,
-        beserta cara mulai melakukannya sendiri.
+        API automation testing adalah proses menjalankan pengujian API secara otomatis dan berulang —
+        biasanya disusun sebagai skenario — agar perubahan kode tidak merusak fungsi yang sudah berjalan.
+        Berikut penjelasan lengkapnya, beserta cara membuatnya dengan Scenario Runner.
       </p>
 
-      <div class="req-demo" aria-hidden="true">
-        <div class="rd-bar">
-          <span class="rd-dot rd-r"></span>
-          <span class="rd-dot rd-y"></span>
-          <span class="rd-dot rd-g"></span>
-          <span class="rd-title">forge assertin · request</span>
+      <div class="scenario-demo" aria-hidden="true">
+        <div class="sc-bar">
+          <span class="sc-dot sc-r"></span>
+          <span class="sc-dot sc-y"></span>
+          <span class="sc-dot sc-g"></span>
+          <span class="sc-title">forge assertin · scenario runner</span>
         </div>
-        <div class="rd-body">
-          <!-- Phase A: Request -->
-          <div class="rd-request">
-            <div class="rd-label">Request</div>
-            <div class="rd-target">
-              <span class="rd-method">GET</span>
-              <span class="rd-url">https://api.example.com/users/profile</span>
-              <span class="rd-send-btn" style="margin-left:auto">Kirim</span>
+        <div class="sc-body">
+          <div class="sc-label">Scenario: User Onboarding</div>
+          <div class="sc-steps">
+            <div class="sc-step">
+              <div class="sc-step-ic">
+                <span class="sc-num">1</span>
+                <span class="sc-check"><i class="bi bi-check-lg"></i></span>
+              </div>
+              <span class="sc-step-label">Login — POST /auth/login</span>
+              <span class="sc-step-status">PASS</span>
             </div>
-            <div class="rd-headers">
-              <div class="rd-header-row">
-                <span class="rd-header-key">Authorization:</span>
-                <span class="rd-header-val">Bearer {{token}}</span>
+            <div class="sc-step">
+              <div class="sc-step-ic">
+                <span class="sc-num">2</span>
+                <span class="sc-check"><i class="bi bi-check-lg"></i></span>
               </div>
-              <div class="rd-header-row">
-                <span class="rd-header-key">Accept:</span>
-                <span class="rd-header-val">application/json</span>
+              <span class="sc-step-label">Get Profile — GET /users/me</span>
+              <span class="sc-step-status">PASS</span>
+            </div>
+            <div class="sc-step">
+              <div class="sc-step-ic">
+                <span class="sc-num">3</span>
+                <span class="sc-check"><i class="bi bi-check-lg"></i></span>
               </div>
+              <span class="sc-step-label">Update Settings — PATCH /settings</span>
+              <span class="sc-step-status">PASS</span>
             </div>
           </div>
-          <!-- Phase B: Response -->
-          <div class="rd-response">
-            <div class="rd-response-header">
-              <span class="rd-status">200 OK</span>
-              <span class="rd-time">128 ms · 412 B</span>
-            </div>
-            <div class="rd-json">
-              <span class="rd-punc">{</span><br>
-              &nbsp;&nbsp;<span class="rd-key">"id"</span><span class="rd-punc">:</span> <span class="rd-str">"usr_8421"</span><span class="rd-punc">,</span><br>
-              &nbsp;&nbsp;<span class="rd-key">"name"</span><span class="rd-punc">:</span> <span class="rd-str">"Dewi Lestari"</span><span class="rd-punc">,</span><br>
-              &nbsp;&nbsp;<span class="rd-key">"role"</span><span class="rd-punc">:</span> <span class="rd-str">"admin"</span><span class="rd-punc">,</span><br>
-              &nbsp;&nbsp;<span class="rd-key">"active"</span><span class="rd-punc">:</span> <span class="rd-num">true</span><br>
-              <span class="rd-punc">}</span>
-            </div>
+          <div class="sc-summary">
+            <span class="sc-summary-txt">3/3 step · 412ms</span>
+            <span class="sc-summary-pass">&#10003; Semua step lulus</span>
           </div>
         </div>
       </div>
 
-      <h2>Kenapa API testing penting?</h2>
+      <h2>Kenapa automation testing penting?</h2>
       <p>
-        Sebagian besar aplikasi modern — web, mobile, hingga integrasi antar sistem — berkomunikasi lewat API.
-        Kalau API mengembalikan data yang salah, error yang tidak konsisten, atau response yang terlalu lambat,
-        masalah itu akan terasa di semua aplikasi yang memakainya. API testing membantu menemukan masalah ini
-        lebih awal, sebelum sampai ke pengguna.
+        Saat aplikasi terus berkembang, perubahan kecil pada satu endpoint bisa berdampak ke flow lain yang
+        bergantung padanya — misalnya login, ambil token, lalu akses data user. Menjalankan ulang test ini
+        secara manual setiap kali ada perubahan kode tidak efisien dan rawan terlewat. Automation testing
+        memastikan flow penting ini tetap berjalan sesuai ekspektasi setiap saat, dengan hasil yang konsisten.
       </p>
 
-      <h2>Jenis-jenis API testing</h2>
+      <h2>Jenis-jenis automation testing API</h2>
       <ul>
-        <li><strong>Functional testing</strong> — memastikan endpoint mengembalikan response yang benar untuk
-          input tertentu (status code, struktur body, nilai field).</li>
-        <li><strong>Integration testing</strong> — memastikan beberapa endpoint atau service bekerja dengan
-          benar saat digabungkan dalam satu flow.</li>
-        <li><strong>Automation testing</strong> — menjalankan kumpulan test secara otomatis dan berulang,
-          biasanya disusun sebagai skenario, agar perubahan kode tidak merusak fungsi yang sudah berjalan.
-          <a href="../automation-testing" style="color:var(--blue-400)">Pelajari lebih lanjut →</a></li>
-        <li><strong>Performance testing</strong> — mengukur kecepatan dan stabilitas API saat menerima banyak
-          request sekaligus. <a href="../performance-testing" style="color:var(--blue-400)">Pelajari lebih
-            lanjut →</a></li>
+        <li><strong>Smoke test</strong> — pengecekan cepat untuk memastikan endpoint utama merespons normal
+          setelah deploy.</li>
+        <li><strong>Regression test</strong> — memastikan perubahan kode baru tidak merusak fungsi yang sudah
+          berjalan sebelumnya.</li>
+        <li><strong>End-to-end scenario</strong> — menghubungkan beberapa request menjadi satu flow nyata,
+          misalnya login → ambil token → buat data → verifikasi data. <a href="../api-testing"
+            style="color:var(--blue-400)">Pelajari API testing →</a></li>
+        <li><strong>Scheduled test</strong> — skenario yang dijalankan secara berkala untuk memantau kestabilan
+          API dari waktu ke waktu, mirip dengan monitoring pada <a href="../performance-testing"
+            style="color:var(--blue-400)">performance testing</a>.</li>
       </ul>
 
-      <h2>Cara mulai API testing dengan Assertin</h2>
+      <h2>Cara membuat automation testing dengan Scenario Runner</h2>
       <ol>
-        <li>Buat <strong>workspace</strong> dan masukkan URL endpoint yang ingin diuji.</li>
-        <li>Pilih method (<code>GET</code>, <code>POST</code>, <code>PUT</code>, dll), atur headers dan body
-          sesuai kebutuhan, lalu kirim request.</li>
-        <li>Periksa response — status code, body, dan waktu respons — langsung dari dashboard.</li>
-        <li>Simpan request ke dalam <strong>collection</strong> agar bisa dijalankan ulang kapan saja.</li>
-        <li>Hubungkan beberapa request menjadi flow dengan <strong>Scenario Runner</strong> untuk automation
-          testing yang lebih kompleks.</li>
+        <li>Buat beberapa <strong>request</strong> yang ingin dihubungkan, misalnya login, ambil profil, dan
+          update data.</li>
+        <li>Susun request tersebut menjadi satu <strong>scenario</strong> dengan urutan yang sesuai dengan flow
+          nyata aplikasi.</li>
+        <li>Gunakan response dari satu step sebagai variable untuk step berikutnya — misalnya simpan
+          <code>token</code> dari login untuk dipakai di header <code>Authorization</code> step selanjutnya.
+        </li>
+        <li>Tambahkan validasi pada setiap step (status code, isi response) agar scenario otomatis menandai
+          step sebagai pass atau fail.</li>
+        <li>Jalankan scenario kapan pun untuk memastikan seluruh flow masih bekerja sesuai ekspektasi.</li>
       </ol>
 
       <div class="cta-box">
-        <h2>Coba API testing langsung dari browser</h2>
-        <p>Tanpa install, tanpa kartu kredit. Buat request pertama kamu kurang dari satu menit.</p>
+        <h2>Coba Scenario Runner langsung dari browser</h2>
+        <p>Tanpa install, tanpa kartu kredit. Susun scenario pertama kamu kurang dari lima menit.</p>
         <a href="https://forge.assertin.com" class="btn-primary">Mulai Gratis <i class="bi bi-arrow-right"></i></a>
       </div>
 

@@ -750,6 +750,20 @@
         color: rgba(255, 255, 255, .08);
       }
 
+      @media (max-width: 560px) {
+        .foot-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+        }
+
+        .foot-l {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+
       /* ── DIVIDER ── */
       .div-line {
         height: 1px;
@@ -1491,36 +1505,99 @@
         line-height: 1.7;
       }
 
-      .faq-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 28px;
-        margin-top: 24px;
+      .faq-group + .faq-group {
+        margin-top: 36px;
+      }
+
+      .faq-group-title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--blue-400);
+        margin-bottom: 12px;
         padding: 0 4px;
       }
 
-      .faq-links a {
+      /* ── LEARN CARDS ── */
+      .learn-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      @media (max-width: 880px) {
+        .learn-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .learn-card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, .07);
+        border-radius: 12px;
+        background: var(--slate-900);
+        text-decoration: none;
+        transition: border-color .15s, transform .15s;
+      }
+
+      .learn-card:hover {
+        border-color: rgba(96, 165, 250, .3);
+        transform: translateY(-2px);
+      }
+
+      .learn-card-ic {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+
+      .learn-card h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+        letter-spacing: -.2px;
+      }
+
+      .learn-card p {
+        font-size: 13.5px;
+        color: var(--slate-500);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .learn-card-cta {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        font-size: 13.5px;
+        font-size: 13px;
         font-weight: 600;
         color: var(--blue-400);
-        text-decoration: none;
-        transition: color .15s;
+        margin-top: 4px;
+        transition: gap .15s;
       }
 
-      .faq-links a:hover {
-        color: var(--cyan-400);
+      .learn-card:hover .learn-card-cta i {
+        transform: translateX(2px);
       }
 
-      .faq-links a i {
+      .learn-card-cta i {
         font-size: 12px;
         transition: transform .15s;
       }
 
-      .faq-links a:hover i {
-        transform: translateX(2px);
+      @media (max-width: 720px) {
+        .learn-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
     <script type="application/ld+json">
@@ -1661,6 +1738,7 @@
         <a href="#fitur" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Fitur</a>
         <a href="#cara-kerja" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Cara Kerja</a>
         <a href="#faq" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">FAQ</a>
+        <a href="#belajar" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Belajar Testing</a>
       </div>
     </nav>
     <!-- ── HERO ── -->
@@ -1919,56 +1997,99 @@
           <span class="eyebrow">FAQ</span>
           <h2 class="section-title">Pertanyaan yang sering ditanyakan.</h2>
         </div>
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>Apa itu API testing?</summary>
-            <p>API testing adalah proses memverifikasi bahwa endpoint API mengembalikan response yang sesuai — status code, body, header, dan waktu respons — sesuai ekspektasi. Di Assertin, kamu bisa kirim request, lihat response, dan validasi hasilnya langsung dari browser.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apa perbedaan Assertin dengan tools API testing lain seperti Postman?</summary>
-            <p>Konsep dasarnya mirip — kirim request, lihat response. Bedanya, Assertin fokus untuk kebutuhan QA: Scenario Runner untuk menyusun flow E2E dan Performance Testing berbasis k6, semua dalam satu dashboard berbasis browser, tanpa instal aplikasi, dan gratis untuk mulai.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Bagaimana cara belajar API testing untuk pemula?</summary>
-            <p>Mulai dari memahami HTTP, request, response, status code, lalu lanjut membuat test sederhana sebelum masuk ke automation dan performance testing.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apa itu Scenario Runner?</summary>
-            <p>Scenario Runner memungkinkan kamu menghubungkan beberapa request menjadi satu flow — misalnya login, ambil token, lalu hit endpoint lain — dan menjalankannya sebagai satu skenario E2E. Response dari request sebelumnya bisa dipakai sebagai input untuk request berikutnya.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apa itu API automation testing?</summary>
-            <p>API automation testing adalah proses menjalankan pengujian API secara otomatis menggunakan skenario dan validasi agar pengujian bisa diulang dengan konsisten. Di Assertin, kamu bisa buat skenario dengan Scenario Runner, lalu jalankan kapan pun untuk memastikan API tetap bekerja sesuai ekspektasi seiring waktu.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apa itu performance testing?</summary>
-            <p>Performance testing digunakan untuk mengukur seberapa cepat dan stabil sistem ketika menerima beban pengguna. Dengan Assertin, kamu bisa menjalankan load test berbasis k6 untuk melihat metrik seperti RPS, latency, dan error rate, sehingga bisa memastikan API kamu tetap responsif dan handal di bawah beban.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Bagaimana cara melakukan performance test?</summary>
-            <p>Pilih Scenario Runner yang sudah dibuat untuk mode sequential atau parallel, atur jumlah virtual users, durasi, dan ramp up time, lalu jalankan. Assertin akan mengeksekusi load test berbasis k6 dan menampilkan hasil seperti RPS, TPS, latency p95, dan error rate.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apakah Assertin gratis digunakan?</summary>
-            <p>Ya, kamu bisa mulai menggunakan Assertin secara gratis tanpa kartu kredit. Paket gratis memiliki beberapa limitasi dasar (jumlah workspace, collection, dan kapasitas performance test), dengan opsi upgrade untuk kebutuhan yang lebih besar.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apakah data dan request saya aman?</summary>
-            <p>Setiap akun memiliki workspace sendiri yang hanya bisa diakses setelah login. Data collection, environment, dan history tersimpan di database kami. Data tidak digunakan untuk tujuan selain menjalankan layanan dan tidak dijual ke pihak lain.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Perlu install aplikasi atau plugin tambahan?</summary>
-            <p>Tidak. Assertin berjalan penuh di browser — buka halaman, login atau coba sebagai guest, dan langsung bisa mulai mengirim request tanpa instalasi apa pun.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Apakah Assertin bisa dipakai untuk kerja tim?</summary>
-            <p>Saat ini setiap akun memiliki workspace personal untuk testing individu. Untuk kebutuhan tim, kamu tetap bisa membagikan hasil performance test dan riwayat request sebagai bukti ke anggota tim lain.</p>
-          </details>
+        <div class="faq-group">
+          <div class="faq-group-title">Tentang Produk</div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Apa perbedaan Assertin dengan tools API testing lain seperti Postman?</summary>
+              <p>Konsep dasarnya mirip — kirim request, lihat response. Bedanya, Assertin fokus untuk kebutuhan QA: Scenario Runner untuk menyusun flow E2E dan Performance Testing berbasis k6, semua dalam satu dashboard berbasis browser, tanpa instal aplikasi, dan gratis untuk mulai.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Apakah Assertin gratis digunakan?</summary>
+              <p>Ya, kamu bisa mulai menggunakan Assertin secara gratis tanpa kartu kredit. Paket gratis memiliki beberapa limitasi dasar (jumlah workspace, collection, dan kapasitas performance test), dengan opsi upgrade untuk kebutuhan yang lebih besar.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Apakah data dan request saya aman?</summary>
+              <p>Setiap akun memiliki workspace sendiri yang hanya bisa diakses setelah login. Data collection, environment, dan history tersimpan di database kami. Data tidak digunakan untuk tujuan selain menjalankan layanan dan tidak dijual ke pihak lain.</p>
+            </details>
+          </div>
         </div>
-        <div class="faq-links">
-          <a href="/learn/api-testing">Pelajari API Testing <i class="bi bi-arrow-right"></i>
+        <div class="faq-group">
+          <div class="faq-group-title">Konsep Testing</div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Apa itu API testing?</summary>
+              <p>API testing adalah proses memverifikasi bahwa endpoint API mengembalikan response yang sesuai — status code, body, header, dan waktu respons — sesuai ekspektasi. Di Assertin, kamu bisa kirim request, lihat response, dan validasi hasilnya langsung dari browser. <a href="/learn/api-testing" style="color:var(--blue-400)">Pelajari lebih lanjut →</a></p>
+            </details>
+            <details class="faq-item">
+              <summary>Apa itu performance testing?</summary>
+              <p>Performance testing digunakan untuk mengukur seberapa cepat dan stabil sistem ketika menerima beban pengguna. Dengan Assertin, kamu bisa menjalankan load test berbasis k6 untuk melihat metrik seperti RPS, latency, dan error rate, sehingga bisa memastikan API kamu tetap responsif dan handal di bawah beban. <a href="/learn/performance-testing" style="color:var(--blue-400)">Pelajari lebih lanjut →</a></p>
+            </details>
+            <details class="faq-item">
+              <summary>Apa itu API automation testing?</summary>
+              <p>API automation testing adalah proses menjalankan pengujian API secara otomatis menggunakan skenario dan validasi agar pengujian bisa diulang dengan konsisten. Di Assertin, kamu bisa buat skenario dengan Scenario Runner, lalu jalankan kapan pun untuk memastikan API tetap bekerja sesuai ekspektasi seiring waktu. <a href="/learn/automation-testing" style="color:var(--blue-400)">Pelajari lebih lanjut →</a></p>
+            </details>
+            <details class="faq-item">
+              <summary>Apa itu Scenario Runner?</summary>
+              <p>Scenario Runner memungkinkan kamu menghubungkan beberapa request menjadi satu flow — misalnya login, ambil token, lalu hit endpoint lain — dan menjalankannya sebagai satu skenario E2E. Response dari request sebelumnya bisa dipakai sebagai input untuk request berikutnya.</p>
+            </details>
+          </div>
+        </div>
+        <div class="faq-group">
+          <div class="faq-group-title">Penggunaan</div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Bagaimana cara belajar API testing untuk pemula?</summary>
+              <p>Mulai dari memahami HTTP, request, response, status code, lalu lanjut membuat test sederhana sebelum masuk ke automation dan performance testing.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Bagaimana cara melakukan performance test?</summary>
+              <p>Pilih Scenario Runner yang sudah dibuat untuk mode sequential atau parallel, atur jumlah virtual users, durasi, dan ramp up time, lalu jalankan. Assertin akan mengeksekusi load test berbasis k6 dan menampilkan hasil seperti RPS, TPS, latency p95, dan error rate.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Perlu install aplikasi atau plugin tambahan?</summary>
+              <p>Tidak. Assertin berjalan penuh di browser — buka halaman, login atau coba sebagai guest, dan langsung bisa mulai mengirim request tanpa instalasi apa pun.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Apakah Assertin bisa dipakai untuk kerja tim?</summary>
+              <p>Saat ini setiap akun memiliki workspace personal untuk testing individu. Untuk kebutuhan tim, kamu tetap bisa membagikan hasil performance test dan riwayat request sebagai bukti ke anggota tim lain.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="div-line"></div>
+    <!-- ── BELAJAR TESTING — learn cards, separated from FAQ ── -->
+    <section id="belajar">
+      <div class="wrap-md">
+        <div class="section-head" style="text-align:center;margin-bottom:48px">
+          <span class="eyebrow">Belajar Testing</span>
+          <h2 class="section-title">Mulai dari dasar, sampai siap produksi.</h2>
+        </div>
+        <div class="learn-grid">
+          <a href="/learn/api-testing" class="learn-card">
+            <div class="learn-card-ic fi-b">
+              <i class="bi bi-send-fill"></i>
+            </div>
+            <h3>Belajar API Testing</h3>
+            <p>Apa itu API testing, kenapa penting, dan cara mulai testing API kamu langsung dari browser.</p>
+            <span class="learn-card-cta">Baca Artikel <i class="bi bi-arrow-right"></i></span>
           </a>
-          <a href="/learn/performance-testing">Pelajari Performance Testing <i class="bi bi-arrow-right"></i>
+          <a href="/learn/performance-testing" class="learn-card">
+            <div class="learn-card-ic fi-o">
+              <i class="bi bi-speedometer2"></i>
+            </div>
+            <h3>Belajar Performance Testing</h3>
+            <p>Pelajari metrik RPS, latency p95/p99, error rate, dan cara menjalankan load test berbasis k6.</p>
+            <span class="learn-card-cta">Baca Artikel <i class="bi bi-arrow-right"></i></span>
+          </a>
+          <a href="/learn/automation-testing" class="learn-card">
+            <div class="learn-card-ic fi-v">
+              <i class="bi bi-diagram-3"></i>
+            </div>
+            <h3>Belajar Automation Testing</h3>
+            <p>Susun flow API otomatis dengan Scenario Runner — dari login, ambil token, sampai validasi data.</p>
+            <span class="learn-card-cta">Baca Artikel <i class="bi bi-arrow-right"></i></span>
           </a>
         </div>
       </div>

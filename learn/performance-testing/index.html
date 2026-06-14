@@ -1014,6 +1014,20 @@
       gap: 12px;
     }
 
+    @media (max-width: 560px) {
+      .foot-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .foot-l {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+
     .foot-tag {
       font-size: 12px;
       color: var(--slate-700);
@@ -1210,6 +1224,8 @@
       <p>
         Belum familiar dengan dasar-dasar pengujian API? Baca dulu
         <a href="../api-testing" style="color:var(--blue-400)">apa itu API testing →</a>
+        atau pelajari cara menyusun flow otomatis dengan
+        <a href="../automation-testing" style="color:var(--blue-400)">automation testing →</a>
       </p>
 
       <div class="cta-box">
