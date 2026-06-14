@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apa itu API Testing? Panduan untuk Pemula — Assertin</title>
+  <meta name="description"
+    content="Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin." />
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://assertin.com/learn/api-testing" />
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="icon" href="../../favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://assertin.com/learn/api-testing" />
+  <meta property="og:title" content="Apa itu API Testing? Panduan untuk Pemula — Assertin" />
+  <meta property="og:description"
+    content="Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin." />
+  <meta property="og:image" content="https://assertin.com/forge.png" />
+  <meta property="og:site_name" content="Assertin">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Apa itu API Testing? Panduan untuk Pemula — Assertin" />
+  <meta name="twitter:description"
+    content="Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin." />
+  <meta name="twitter:image" content="https://assertin.com/forge.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Apa itu API Testing? Panduan untuk Pemula",
+        "description": "Pelajari apa itu API testing, kenapa penting, jenis-jenisnya, dan cara mulai testing API kamu langsung dari browser dengan Assertin.",
+        "image": "https://assertin.com/forge.png",
+        "author": { "@type": "Organization", "name": "Assertin" },
+        "publisher": { "@type": "Organization", "name": "Assertin", "logo": { "@type": "ImageObject", "url": "https://assertin.com/forge.png" } },
+        "mainEntityOfPage": "https://assertin.com/learn/api-testing"
+      }
+    </script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --blue-400: #60a5fa;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --cyan-400: #22d3ee;
+      --green-400: #4ade80;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-900: #0f172a;
+      --slate-950: #080e1a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--slate-950);
+      color: var(--slate-400);
+      line-height: 1.7;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .wrap-md {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      padding: 15px 0;
+      background: rgba(8, 14, 26, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .logo-name {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.4px;
+    }
+
+    .logo-name span {
+      color: var(--blue-400);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      background: var(--blue-600);
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background .18s, transform .15s;
+    }
+
+    .nav-btn:hover {
+      background: var(--blue-500);
+      transform: translateY(-1px);
+    }
+
+    /* ── ARTICLE ── */
+    .article {
+      padding: 56px 0 80px;
+    }
+
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--slate-600);
+      margin-bottom: 18px;
+    }
+
+    .breadcrumb a {
+      color: var(--slate-500);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--blue-400);
+    }
+
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      line-height: 1.18;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      font-size: 16px;
+      color: var(--slate-500);
+      max-width: 620px;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -.4px;
+      margin: 40px 0 14px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      margin: 24px 0 8px;
+      letter-spacing: -.2px;
+    }
+
+    p {
+      font-size: 14.5px;
+      color: var(--slate-500);
+      margin-bottom: 14px;
+    }
+
+    ul {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+
+    li {
+      font-size: 14.5px;
+      color: var(--slate-500);
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    li strong {
+      color: var(--slate-300);
+    }
+
+    p strong {
+      color: var(--slate-300);
+      font-weight: 600;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--cyan-400);
+      background: rgba(6, 182, 212, .08);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    ol {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+
+    ol li {
+      margin-bottom: 10px;
+    }
+
+    /* ── CTA ── */
+    .cta-box {
+      margin-top: 48px;
+      padding: 32px;
+      border: 1px solid rgba(59, 130, 246, .2);
+      border-radius: 14px;
+      background: rgba(59, 130, 246, .06);
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      margin-top: 0;
+    }
+
+    .cta-box p {
+      max-width: 440px;
+      margin: 0 auto 20px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 24px;
+      background: var(--blue-600);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.1px;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, .35), 0 4px 18px rgba(37, 99, 235, .35);
+      transition: all .18s;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-500);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, .5), 0 6px 26px rgba(37, 99, 235, .5);
+      transform: translateY(-1px);
+    }
+
+    .related {
+      margin-top: 20px;
+      font-size: 13.5px;
+    }
+
+    .related a {
+      color: var(--blue-400);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .related a:hover {
+      color: var(--cyan-400);
+    }
+
+    /* ── ANIMATED REQUEST/RESPONSE DEMO ── */
+    .req-demo {
+      margin: 28px auto 40px;
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 11px;
+      overflow: hidden;
+      background: var(--slate-900);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+
+    .rd-bar {
+      background: rgba(0, 0, 0, .3);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .rd-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .rd-r {
+      background: #ff5f57
+    }
+
+    .rd-y {
+      background: #febc2e
+    }
+
+    .rd-g {
+      background: #28c840
+    }
+
+    .rd-title {
+      margin-left: 6px;
+      font-size: 10px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .rd-body {
+      padding: 14px;
+      position: relative;
+      min-height: 150px;
+    }
+
+    /* ── Phase A: request (0–45%) ── */
+    .rd-request {
+      animation: rd-request-show 6s ease-in-out infinite;
+    }
+
+    @keyframes rd-request-show {
+
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      40% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      48%,
+      100% {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+    }
+
+    .rd-label {
+      font-size: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--slate-600);
+      margin-bottom: 10px;
+    }
+
+    .rd-target {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 9px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid rgba(255, 255, 255, .04);
+      margin-bottom: 10px;
+    }
+
+    .rd-method {
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: rgba(74, 222, 128, .12);
+      color: var(--green-400);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .rd-url {
+      font-size: 10.5px;
+      color: var(--slate-400);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rd-send-btn {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--blue-600);
+      color: white;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      animation: rd-btn-pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes rd-btn-pulse {
+
+      0%,
+      6% {
+        box-shadow: none;
+      }
+
+      12% {
+        box-shadow: 0 0 10px rgba(59, 130, 246, .8);
+      }
+
+      18%,
+      100% {
+        box-shadow: none;
+      }
+    }
+
+    .rd-headers {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .rd-header-row {
+      display: flex;
+      gap: 6px;
+      font-size: 10px;
+      opacity: 0;
+      animation: rd-row-show 6s ease-in-out infinite;
+    }
+
+    .rd-header-row:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .rd-header-row:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+    @keyframes rd-row-show {
+
+      0%,
+      14% {
+        opacity: 0;
+        transform: translateX(-4px);
+      }
+
+      20% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      40% {
+        opacity: 1;
+      }
+
+      48%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .rd-header-key {
+      color: var(--slate-600);
+    }
+
+    .rd-header-val {
+      color: var(--cyan-400);
+    }
+
+    /* ── Phase B: response (45–100%) ── */
+    .rd-response {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      animation: rd-response-show 6s ease-in-out infinite;
+    }
+
+    @keyframes rd-response-show {
+
+      0%,
+      44% {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      52% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      94% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .rd-response-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .rd-status {
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: rgba(74, 222, 128, .12);
+      color: var(--green-400);
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .rd-time {
+      font-size: 10px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .rd-json {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .055);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 10.5px;
+      line-height: 1.8;
+      color: var(--slate-400);
+    }
+
+    .rd-json .rd-key {
+      color: var(--cyan-400);
+    }
+
+    .rd-json .rd-str {
+      color: var(--green-400);
+    }
+
+    .rd-json .rd-num {
+      color: var(--yellow-400);
+    }
+
+    .rd-json .rd-punc {
+      color: var(--slate-600);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      padding: 28px 0;
+    }
+
+    .foot-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .foot-l {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .foot-tag {
+      font-size: 12px;
+      color: var(--slate-700);
+    }
+
+    .foot-r {
+      font-size: 12px;
+      color: var(--slate-600);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <div class="wrap nav-inner">
+      <a href="../../" class="logo">
+        <img src="../../forge.png" alt="Assertin API Testing Platform" />
+        <span class="logo-name">Assertin <span>.</span></span>
+      </a>
+      <a href="https://forge.assertin.com" class="nav-btn">Mulai Gratis</a>
+    </div>
+  </nav>
+
+  <!-- ── ARTICLE ── -->
+  <section class="article">
+    <div class="wrap-md">
+      <div class="breadcrumb"><a href="../../">Assertin</a> / Learn / API Testing</div>
+      <span class="eyebrow">Panduan</span>
+      <h1>Apa itu API Testing?</h1>
+      <p class="lead">
+        API testing adalah proses memverifikasi bahwa endpoint API mengembalikan response yang sesuai —
+        status code, body, header, dan waktu respons — sesuai ekspektasi. Berikut penjelasan lengkapnya,
+        beserta cara mulai melakukannya sendiri.
+      </p>
+
+      <div class="req-demo" aria-hidden="true">
+        <div class="rd-bar">
+          <span class="rd-dot rd-r"></span>
+          <span class="rd-dot rd-y"></span>
+          <span class="rd-dot rd-g"></span>
+          <span class="rd-title">forge assertin · request</span>
+        </div>
+        <div class="rd-body">
+          <!-- Phase A: Request -->
+          <div class="rd-request">
+            <div class="rd-label">Request</div>
+            <div class="rd-target">
+              <span class="rd-method">GET</span>
+              <span class="rd-url">https://api.example.com/users/profile</span>
+              <span class="rd-send-btn" style="margin-left:auto">Kirim</span>
+            </div>
+            <div class="rd-headers">
+              <div class="rd-header-row">
+                <span class="rd-header-key">Authorization:</span>
+                <span class="rd-header-val">Bearer {{token}}</span>
+              </div>
+              <div class="rd-header-row">
+                <span class="rd-header-key">Accept:</span>
+                <span class="rd-header-val">application/json</span>
+              </div>
+            </div>
+          </div>
+          <!-- Phase B: Response -->
+          <div class="rd-response">
+            <div class="rd-response-header">
+              <span class="rd-status">200 OK</span>
+              <span class="rd-time">128 ms · 412 B</span>
+            </div>
+            <div class="rd-json">
+              <span class="rd-punc">{</span><br>
+              &nbsp;&nbsp;<span class="rd-key">"id"</span><span class="rd-punc">:</span> <span class="rd-str">"usr_8421"</span><span class="rd-punc">,</span><br>
+              &nbsp;&nbsp;<span class="rd-key">"name"</span><span class="rd-punc">:</span> <span class="rd-str">"Dewi Lestari"</span><span class="rd-punc">,</span><br>
+              &nbsp;&nbsp;<span class="rd-key">"role"</span><span class="rd-punc">:</span> <span class="rd-str">"admin"</span><span class="rd-punc">,</span><br>
+              &nbsp;&nbsp;<span class="rd-key">"active"</span><span class="rd-punc">:</span> <span class="rd-num">true</span><br>
+              <span class="rd-punc">}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Kenapa API testing penting?</h2>
+      <p>
+        Sebagian besar aplikasi modern — web, mobile, hingga integrasi antar sistem — berkomunikasi lewat API.
+        Kalau API mengembalikan data yang salah, error yang tidak konsisten, atau response yang terlalu lambat,
+        masalah itu akan terasa di semua aplikasi yang memakainya. API testing membantu menemukan masalah ini
+        lebih awal, sebelum sampai ke pengguna.
+      </p>
+
+      <h2>Jenis-jenis API testing</h2>
+      <ul>
+        <li><strong>Functional testing</strong> — memastikan endpoint mengembalikan response yang benar untuk
+          input tertentu (status code, struktur body, nilai field).</li>
+        <li><strong>Integration testing</strong> — memastikan beberapa endpoint atau service bekerja dengan
+          benar saat digabungkan dalam satu flow.</li>
+        <li><strong>Automation testing</strong> — menjalankan kumpulan test secara otomatis dan berulang,
+          biasanya disusun sebagai skenario, agar perubahan kode tidak merusak fungsi yang sudah berjalan.</li>
+        <li><strong>Performance testing</strong> — mengukur kecepatan dan stabilitas API saat menerima banyak
+          request sekaligus. <a href="../performance-testing" style="color:var(--blue-400)">Pelajari lebih
+            lanjut →</a></li>
+      </ul>
+
+      <h2>Cara mulai API testing dengan Assertin</h2>
+      <ol>
+        <li>Buat <strong>workspace</strong> dan masukkan URL endpoint yang ingin diuji.</li>
+        <li>Pilih method (<code>GET</code>, <code>POST</code>, <code>PUT</code>, dll), atur headers dan body
+          sesuai kebutuhan, lalu kirim request.</li>
+        <li>Periksa response — status code, body, dan waktu respons — langsung dari dashboard.</li>
+        <li>Simpan request ke dalam <strong>collection</strong> agar bisa dijalankan ulang kapan saja.</li>
+        <li>Hubungkan beberapa request menjadi flow dengan <strong>Scenario Runner</strong> untuk automation
+          testing yang lebih kompleks.</li>
+      </ol>
+
+      <div class="cta-box">
+        <h2>Coba API testing langsung dari browser</h2>
+        <p>Tanpa install, tanpa kartu kredit. Buat request pertama kamu kurang dari satu menit.</p>
+        <a href="https://forge.assertin.com" class="btn-primary">Mulai Gratis <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <div class="related">
+        <a href="../../#faq">← Kembali ke FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="wrap foot-inner">
+      <div class="foot-l">
+        <a href="../../" class="logo">
+          <img src="../../forge.png" alt="Assertin" />
+          <span class="logo-name">Assertin <span>.</span></span>
+        </a>
+        <span class="foot-tag">Test with confidence. Ship with proof.</span>
+      </div>
+      <div class="foot-r">
+        <span>&copy; <span id="copyright-year"></span> Assertin.com</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

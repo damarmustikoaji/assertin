@@ -4,26 +4,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assertin — Test API, Scenario Runner & Performance Testing</title>
+  <title>Assertin — API Testing, Scenario Runner & Performance Testing Platform</title>
   <meta name="description"
-    content="Test API, jalankan skenario E2E, dan ukur performa dalam satu dashboard. Tanpa install. Gratis untuk mulai." />
+    content="Platform API testing untuk QA. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
+  <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://assertin.com/" />
+  <link rel="icon" href="favicon.ico">
   <link rel="icon" href="favicon-32.png" type="image/png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://assertin.com/" />
   <meta property="og:title" content="Assertin — Test with confidence. Ship with proof." />
   <meta property="og:description"
-    content="Test API, jalankan skenario E2E, dan ukur performa dalam satu dashboard. Tanpa install. Gratis untuk mulai." />
+    content="Platform API testing untuk QA. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
   <meta property="og:image" content="https://assertin.com/forge.png" />
-
+  <meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Assertin — Test with confidence. Ship with proof." />
   <meta name="twitter:description"
-    content="Test API, jalankan skenario E2E, dan ukur performa dalam satu dashboard. Tanpa install. Gratis untuk mulai." />
+    content="Platform API testing untuk QA. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
   <meta name="twitter:image" content="https://assertin.com/forge.png" />
-
+  <meta name="theme-color" content="#080e1a">
+  <meta property="og:site_name" content="Assertin">
+  <meta name="twitter:site" content="@assertin">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -294,6 +298,13 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    .hero-kicker {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-500);
+      margin-bottom: 14px;
     }
 
     .hero-desc {
@@ -772,10 +783,23 @@
       border-bottom: 1px solid rgba(255, 255, 255, .04);
     }
 
-    .pd-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .pd-r { background: #ff5f57 }
-    .pd-y { background: #febc2e }
-    .pd-g { background: #28c840 }
+    .pd-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .pd-r {
+      background: #ff5f57
+    }
+
+    .pd-y {
+      background: #febc2e
+    }
+
+    .pd-g {
+      background: #28c840
+    }
 
     .pd-title {
       margin-left: 6px;
@@ -784,16 +808,28 @@
       font-family: 'Inter', sans-serif;
     }
 
-    .pd-body { padding: 14px 14px 14px; }
+    .pd-body {
+      padding: 14px 14px 14px;
+    }
 
     /* ── Phase A: config (0–20%) ── */
     .pd-config {
       animation: pd-config-show 8s ease-in-out infinite;
     }
+
     @keyframes pd-config-show {
-      0%      { opacity: 1; }
-      18%     { opacity: 1; }
-      22%,100%{ opacity: 0; }
+      0% {
+        opacity: 1;
+      }
+
+      18% {
+        opacity: 1;
+      }
+
+      22%,
+      100% {
+        opacity: 0;
+      }
     }
 
     .pd-config-header {
@@ -822,11 +858,25 @@
       font-family: 'Inter', sans-serif;
       animation: pd-btn-pulse 8s ease-in-out infinite;
     }
+
     @keyframes pd-btn-pulse {
-      0%,10% { box-shadow: none; }
-      15%    { box-shadow: 0 0 10px rgba(251,146,60,.8); }
-      20%    { box-shadow: none; }
-      100%   { box-shadow: none; }
+
+      0%,
+      10% {
+        box-shadow: none;
+      }
+
+      15% {
+        box-shadow: 0 0 10px rgba(251, 146, 60, .8);
+      }
+
+      20% {
+        box-shadow: none;
+      }
+
+      100% {
+        box-shadow: none;
+      }
     }
 
     .pd-params {
@@ -837,8 +887,8 @@
     }
 
     .pd-param {
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .06);
       border-radius: 5px;
       padding: 6px 8px;
     }
@@ -862,14 +912,14 @@
       gap: 6px;
       padding: 5px 8px;
       border-radius: 5px;
-      background: rgba(255,255,255,.02);
-      border: 1px solid rgba(255,255,255,.04);
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid rgba(255, 255, 255, .04);
     }
 
     .pd-target-method {
       padding: 2px 6px;
       border-radius: 3px;
-      background: rgba(74,222,128,.12);
+      background: rgba(74, 222, 128, .12);
       color: var(--green-400);
       font-size: 9px;
       font-weight: 700;
@@ -886,14 +936,35 @@
     /* ── Phase B: running (20–65%) ── */
     .pd-running {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       animation: pd-running-show 8s ease-in-out infinite;
     }
+
     @keyframes pd-running-show {
-      0%,20%  { opacity: 0; transform: translateY(4px); }
-      25%     { opacity: 1; transform: translateY(0); }
-      60%     { opacity: 1; transform: translateY(0); }
-      66%,100%{ opacity: 0; transform: translateY(0); }
+
+      0%,
+      20% {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      25% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      60% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      66%,
+      100% {
+        opacity: 0;
+        transform: translateY(0);
+      }
     }
 
     .pd-running-header {
@@ -922,9 +993,17 @@
       background: var(--orange-400);
       animation: pd-dot-blink 1s ease-in-out infinite;
     }
+
     @keyframes pd-dot-blink {
-      0%,100% { opacity: 1; }
-      50%     { opacity: .2; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .2;
+      }
     }
 
     .pd-timer {
@@ -932,12 +1011,29 @@
       color: var(--slate-500);
       animation: pd-timer-count 8s linear infinite;
     }
+
     @keyframes pd-timer-count {
-      0%,20% { opacity: 0; }
-      22%    { opacity: 1; }
-      60%    { opacity: 1; }
-      66%    { opacity: 0; }
-      100%   { opacity: 0; }
+
+      0%,
+      20% {
+        opacity: 0;
+      }
+
+      22% {
+        opacity: 1;
+      }
+
+      60% {
+        opacity: 1;
+      }
+
+      66% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
 
     /* VU ramp bar */
@@ -959,7 +1055,7 @@
     .pd-vu-track {
       flex: 1;
       height: 5px;
-      background: rgba(255,255,255,.05);
+      background: rgba(255, 255, 255, .05);
       border-radius: 3px;
       overflow: hidden;
     }
@@ -970,12 +1066,30 @@
       background: linear-gradient(90deg, var(--orange-400), var(--yellow-400));
       animation: pd-vu-ramp 8s ease-in-out infinite;
     }
+
     @keyframes pd-vu-ramp {
-      0%,20% { width: 0%; }
-      35%    { width: 60%; }
-      55%    { width: 100%; }
-      65%    { width: 100%; }
-      66%,100%{ width: 0%; }
+
+      0%,
+      20% {
+        width: 0%;
+      }
+
+      35% {
+        width: 60%;
+      }
+
+      55% {
+        width: 100%;
+      }
+
+      65% {
+        width: 100%;
+      }
+
+      66%,
+      100% {
+        width: 0%;
+      }
     }
 
     .pd-vu-val {
@@ -985,13 +1099,31 @@
       text-align: right;
       animation: pd-vu-num 8s ease-in-out infinite;
     }
+
     /* fake counter: just show different values at keyframes */
     @keyframes pd-vu-num {
-      0%,20%  { opacity: 0; }
-      22%     { opacity: 1; }
-      60%,65% { opacity: 1; }
-      66%     { opacity: 0; }
-      100%    { opacity: 0; }
+
+      0%,
+      20% {
+        opacity: 0;
+      }
+
+      22% {
+        opacity: 1;
+      }
+
+      60%,
+      65% {
+        opacity: 1;
+      }
+
+      66% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
 
     /* live metrics row */
@@ -1003,7 +1135,7 @@
     }
 
     .pd-live-m {
-      background: rgba(255,255,255,.025);
+      background: rgba(255, 255, 255, .025);
       border-radius: 5px;
       padding: 5px 7px;
     }
@@ -1020,15 +1152,37 @@
       font-weight: 600;
     }
 
-    .pd-rps-val  { color: var(--cyan-400); animation: pd-rps 8s linear infinite; }
-    .pd-p95-val  { color: var(--blue-400); }
-    .pd-err-val  { color: var(--green-400); }
+    .pd-rps-val {
+      color: var(--cyan-400);
+      animation: pd-rps 8s linear infinite;
+    }
+
+    .pd-p95-val {
+      color: var(--blue-400);
+    }
+
+    .pd-err-val {
+      color: var(--green-400);
+    }
 
     @keyframes pd-rps {
-      0%,20%  { opacity:0; }
-      25%     { opacity:1; }
-      40%     { opacity:1; }
-      100%    { opacity:1; }
+
+      0%,
+      20% {
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 1;
+      }
+
+      40% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
 
     /* mini chart bars */
@@ -1042,39 +1196,107 @@
     .pd-bar-item {
       flex: 1;
       border-radius: 2px 2px 0 0;
-      background: rgba(6,182,212,.35);
+      background: rgba(6, 182, 212, .35);
       animation: pd-bar-grow 8s ease-in-out infinite;
     }
 
-    .pd-bar-item:nth-child(1) { animation-delay: .0s; }
-    .pd-bar-item:nth-child(2) { animation-delay: .1s; }
-    .pd-bar-item:nth-child(3) { animation-delay: .2s; }
-    .pd-bar-item:nth-child(4) { animation-delay: .3s; }
-    .pd-bar-item:nth-child(5) { animation-delay: .4s; }
-    .pd-bar-item:nth-child(6) { animation-delay: .5s; }
-    .pd-bar-item:nth-child(7) { animation-delay: .6s; }
-    .pd-bar-item:nth-child(8) { animation-delay: .7s; }
+    .pd-bar-item:nth-child(1) {
+      animation-delay: .0s;
+    }
+
+    .pd-bar-item:nth-child(2) {
+      animation-delay: .1s;
+    }
+
+    .pd-bar-item:nth-child(3) {
+      animation-delay: .2s;
+    }
+
+    .pd-bar-item:nth-child(4) {
+      animation-delay: .3s;
+    }
+
+    .pd-bar-item:nth-child(5) {
+      animation-delay: .4s;
+    }
+
+    .pd-bar-item:nth-child(6) {
+      animation-delay: .5s;
+    }
+
+    .pd-bar-item:nth-child(7) {
+      animation-delay: .6s;
+    }
+
+    .pd-bar-item:nth-child(8) {
+      animation-delay: .7s;
+    }
 
     @keyframes pd-bar-grow {
-      0%,22% { height: 4px; opacity: .3; }
-      35%    { height: 14px; opacity: .7; }
-      50%    { height: 22px; opacity: 1; }
-      60%    { height: 18px; opacity: .9; }
-      65%    { height: 18px; opacity: .9; }
-      66%,100%{ height: 4px; opacity: .3; }
+
+      0%,
+      22% {
+        height: 4px;
+        opacity: .3;
+      }
+
+      35% {
+        height: 14px;
+        opacity: .7;
+      }
+
+      50% {
+        height: 22px;
+        opacity: 1;
+      }
+
+      60% {
+        height: 18px;
+        opacity: .9;
+      }
+
+      65% {
+        height: 18px;
+        opacity: .9;
+      }
+
+      66%,
+      100% {
+        height: 4px;
+        opacity: .3;
+      }
     }
 
     /* ── Phase C: results (65–100%) ── */
     .pd-results {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       animation: pd-results-show 8s ease-in-out infinite;
     }
+
     @keyframes pd-results-show {
-      0%,64%  { opacity: 0; transform: translateY(4px); }
-      70%     { opacity: 1; transform: translateY(0); }
-      94%     { opacity: 1; transform: translateY(0); }
-      100%    { opacity: 0; }
+
+      0%,
+      64% {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      70% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      94% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
 
     .pd-results-header {
@@ -1096,7 +1318,7 @@
     .pd-done-badge {
       padding: 1px 6px;
       border-radius: 3px;
-      background: rgba(74,222,128,.12);
+      background: rgba(74, 222, 128, .12);
       color: var(--green-400);
       font-size: 9px;
       font-weight: 700;
@@ -1111,8 +1333,8 @@
     }
 
     .pd-metric {
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.055);
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .055);
       border-radius: 6px;
       padding: 7px 9px;
     }
@@ -1136,10 +1358,21 @@
       margin-left: 2px;
     }
 
-    .pdc-rps   { color: var(--cyan-400); }
-    .pdc-p95   { color: var(--blue-400); }
-    .pdc-err   { color: var(--green-400); }
-    .pdc-total { color: var(--yellow-400); }
+    .pdc-rps {
+      color: var(--cyan-400);
+    }
+
+    .pdc-p95 {
+      color: var(--blue-400);
+    }
+
+    .pdc-err {
+      color: var(--green-400);
+    }
+
+    .pdc-total {
+      color: var(--yellow-400);
+    }
 
     .pd-summary-row {
       display: flex;
@@ -1147,8 +1380,8 @@
       justify-content: space-between;
       padding: 5px 8px;
       border-radius: 5px;
-      background: rgba(74,222,128,.04);
-      border: 1px solid rgba(74,222,128,.1);
+      background: rgba(74, 222, 128, .04);
+      border: 1px solid rgba(74, 222, 128, .1);
     }
 
     .pd-summary-txt {
@@ -1206,22 +1439,218 @@
     .hero-fine {
       animation-delay: .26s;
     }
+
+    /* ── FAQ ── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 10px;
+      background: var(--slate-900);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 20px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -.15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '\f282';
+      font-family: 'bootstrap-icons';
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--slate-600);
+      flex-shrink: 0;
+      transition: transform .2s;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .faq-item p {
+      padding: 0 20px 18px;
+      font-size: 13.5px;
+      color: var(--slate-500);
+      line-height: 1.7;
+    }
+
+    .faq-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 28px;
+      margin-top: 24px;
+      padding: 0 4px;
+    }
+
+    .faq-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--blue-400);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    .faq-links a:hover {
+      color: var(--cyan-400);
+    }
+
+    .faq-links a i {
+      font-size: 12px;
+      transition: transform .15s;
+    }
+
+    .faq-links a:hover i {
+      transform: translateX(2px);
+    }
   </style>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Assertin",
+        "url": "https://assertin.com",
+        "image": "https://assertin.com/forge.png",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "description": "API testing, scenario runner and performance testing platform.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Apa itu API testing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "API testing adalah proses memverifikasi bahwa endpoint API mengembalikan response yang sesuai — status code, body, header, dan waktu respons — sesuai ekspektasi. Di Assertin, kamu bisa kirim request, lihat response, dan validasi hasilnya langsung dari browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apa perbedaan Assertin dengan tools API testing lain seperti Postman?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Konsep dasarnya mirip — kirim request, lihat response. Bedanya, Assertin fokus untuk kebutuhan QA: Scenario Runner untuk menyusun flow E2E dan Performance Testing berbasis k6, semua dalam satu dashboard berbasis browser, tanpa instal aplikasi, dan gratis untuk mulai."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Bagaimana cara belajar API testing untuk pemula?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mulai dari memahami HTTP, request, response, status code, lalu lanjut membuat test sederhana sebelum masuk ke automation dan performance testing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apa itu Scenario Runner?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Scenario Runner memungkinkan kamu menghubungkan beberapa request menjadi satu flow — misalnya login, ambil token, lalu hit endpoint lain — dan menjalankannya sebagai satu skenario E2E. Response dari request sebelumnya bisa dipakai sebagai input untuk request berikutnya."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apa itu API automation testing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "API automation testing adalah proses menjalankan pengujian API secara otomatis menggunakan skenario dan validasi agar pengujian bisa diulang dengan konsisten. Di Assertin, kamu bisa buat skenario dengan Scenario Runner, lalu jalankan kapan pun untuk memastikan API tetap bekerja sesuai ekspektasi seiring waktu."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apa itu performance testing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Performance testing digunakan untuk mengukur seberapa cepat dan stabil sistem ketika menerima beban pengguna. Dengan Assertin, kamu bisa menjalankan load test berbasis k6 untuk melihat metrik seperti RPS, latency, dan error rate, sehingga bisa memastikan API kamu tetap responsif dan handal di bawah beban."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Bagaimana cara melakukan performance test?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pilih Scenario Runner yang sudah dibuat untuk mode sequential atau parallel, atur jumlah virtual users, durasi, dan ramp up time, lalu jalankan. Assertin akan mengeksekusi load test berbasis k6 dan menampilkan hasil seperti RPS, TPS, latency p95, dan error rate."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah Assertin gratis digunakan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ya, kamu bisa mulai menggunakan Assertin secara gratis tanpa kartu kredit. Paket gratis memiliki beberapa limitasi dasar (jumlah workspace, collection, dan kapasitas performance test), dengan opsi upgrade untuk kebutuhan yang lebih besar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah data dan request saya aman?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Setiap akun memiliki workspace sendiri yang hanya bisa diakses setelah login. Data collection, environment, dan history tersimpan di database kami. Data tidak digunakan untuk tujuan selain menjalankan layanan dan tidak dijual ke pihak lain."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Perlu install aplikasi atau plugin tambahan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tidak. Assertin berjalan penuh di browser — buka halaman, login atau coba sebagai guest, dan langsung bisa mulai mengirim request tanpa instalasi apa pun."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah Assertin bisa dipakai untuk kerja tim?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Saat ini setiap akun memiliki workspace personal untuk testing individu. Untuk kebutuhan tim, kamu tetap bisa membagikan hasil performance test dan riwayat request sebagai bukti ke anggota tim lain."
+            }
+          }
+        ]
+      }
+    </script>
 </head>
 
 <body>
-
   <!-- ── NAVBAR ── -->
   <nav>
     <div class="wrap nav-inner">
       <a href="#" class="logo">
-        <img src="forge.png" alt="Assertin" />
-        <span class="logo-name">Assertin<span>.</span></span>
+        <img src="forge.png" alt="Assertin API Testing Platform" />
+        <span class="logo-name">Assertin <span>.</span>
+        </span>
       </a>
       <div class="nav-actions">
-        <a href="https://forge.assertin.com/login" class="nav-btn">
-          Masuk
-        </a>
+        <a href="https://forge.assertin.com/login" class="nav-btn"> Masuk </a>
         <button class="nav-toggle" aria-label="Menu" aria-expanded="false"
           onclick="document.getElementById('nav-mobile').classList.toggle('open')">
           <i class="bi bi-list"></i>
@@ -1230,59 +1659,57 @@
     </div>
     <div class="wrap nav-mobile" id="nav-mobile">
       <a href="#fitur" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Fitur</a>
-      <a href="#cara-kerja" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Cara Kerja</a>
+      <a href="#cara-kerja" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Cara
+        Kerja</a>
+      <a href="#faq" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">FAQ</a>
     </div>
   </nav>
-
   <!-- ── HERO ── -->
   <section class="hero">
     <div class="wrap-sm">
-
-      <h1>
-        Test API. Build scenario. Measure performance.<br />
-        <em>Semua dalam satu workspace.</em><br />
+      <h1> API Testing. Scenario Runner. Performance Testing. <br />
+        <em>Semua dalam satu workspace.</em>
+        <br />
       </h1>
-
-      <p class="hero-desc">
-        Kirim request, susun flow E2E, jalankan performance test, lalu lihat hasilnya sebagai bukti — tanpa pindah tools.<br />
+      <p class="hero-desc"> Kirim request, susun flow E2E, jalankan performance test, lalu lihat hasilnya sebagai bukti
+        — tanpa pindah tools. <br />
       </p>
-
       <div class="hero-btns">
-        <a href="https://forge.assertin.com" class="btn-primary">
-          Mulai Gratis
-        </a>
+        <a href="https://forge.assertin.com" class="btn-primary"> Mulai Gratis </a>
       </div>
-
-      <p class="hero-fine">
-        Tidak perlu akun untuk mencoba.
-      </p>
+      <p class="hero-fine"> Tidak perlu akun untuk mencoba. </p>
     </div>
   </section>
-
   <!-- ── STATS — pure typographic, no border boxes ── -->
   <div class="stats">
     <div class="stats-row">
       <div class="stat">
-        <div class="stat-num"><em>0</em> setup</div>
+        <div class="stat-num">
+          <em>0</em> setup
+        </div>
         <div class="stat-lbl">langsung dari browser, tanpa install</div>
       </div>
       <div class="stat">
-        <div class="stat-num"><em>Scenario Runner</em></div>
+        <div class="stat-num">
+          <em>Scenario Runner</em>
+        </div>
         <div class="stat-lbl">susun flow API jadi skenario E2E</div>
       </div>
       <div class="stat">
-        <div class="stat-num"><em>Performance Test</em></div>
+        <div class="stat-num">
+          <em>Performance Test</em>
+        </div>
         <div class="stat-lbl">jalankan load test berbasis k6</div>
       </div>
       <div class="stat">
-        <div class="stat-num"><em>Result &amp; Proof</em></div>
+        <div class="stat-num">
+          <em>Result &amp; Proof</em>
+        </div>
         <div class="stat-lbl">latency, error, success rate — siap dibagikan</div>
       </div>
     </div>
   </div>
-
   <div class="div-line"></div>
-
   <!-- ── FEATURES — asymmetric, list bukan grid box ── -->
   <section id="fitur">
     <div class="wrap">
@@ -1291,10 +1718,8 @@
         <h2 class="section-title">Semua kebutuhan testing kamu.</h2>
       </div>
       <div class="features-layout">
-
         <!-- kiri: animated demo -->
         <div class="features-intro">
-
           <!-- ANIMATED PERFORMANCE TEST DEMO -->
           <div class="perf-demo" aria-hidden="true">
             <div class="pd-bar">
@@ -1305,7 +1730,6 @@
             </div>
             <div class="pd-body">
               <div class="pd-phases">
-
                 <!-- Phase A: Config -->
                 <div class="pd-config">
                   <div class="pd-config-header">
@@ -1335,14 +1759,11 @@
                     <span class="pd-target-url">https://api.example.com/users/profile</span>
                   </div>
                 </div>
-
                 <!-- Phase B: Running -->
                 <div class="pd-running">
                   <div class="pd-running-header">
                     <span class="pd-running-label">
-                      <span class="pd-pulse-dot"></span>
-                      Running
-                    </span>
+                      <span class="pd-pulse-dot"></span> Running </span>
                     <span class="pd-timer">00:18 / 00:30</span>
                   </div>
                   <div class="pd-vu-row">
@@ -1377,7 +1798,6 @@
                     <div class="pd-bar-item"></div>
                   </div>
                 </div>
-
                 <!-- Phase C: Results -->
                 <div class="pd-results">
                   <div class="pd-results-header">
@@ -1387,19 +1807,23 @@
                   <div class="pd-metric-grid">
                     <div class="pd-metric">
                       <div class="pd-metric-key">Requests/sec</div>
-                      <div class="pd-metric-num pdc-rps">298<span class="pd-metric-unit">rps</span></div>
+                      <div class="pd-metric-num pdc-rps">298 <span class="pd-metric-unit">rps</span>
+                      </div>
                     </div>
                     <div class="pd-metric">
                       <div class="pd-metric-key">Latency p95</div>
-                      <div class="pd-metric-num pdc-p95">124<span class="pd-metric-unit">ms</span></div>
+                      <div class="pd-metric-num pdc-p95">124 <span class="pd-metric-unit">ms</span>
+                      </div>
                     </div>
                     <div class="pd-metric">
                       <div class="pd-metric-key">Error Rate</div>
-                      <div class="pd-metric-num pdc-err">0.3<span class="pd-metric-unit">%</span></div>
+                      <div class="pd-metric-num pdc-err">0.3 <span class="pd-metric-unit">%</span>
+                      </div>
                     </div>
                     <div class="pd-metric">
                       <div class="pd-metric-key">Total Request</div>
-                      <div class="pd-metric-num pdc-total">8.9<span class="pd-metric-unit">k</span></div>
+                      <div class="pd-metric-num pdc-total">8.9 <span class="pd-metric-unit">k</span>
+                      </div>
                     </div>
                   </div>
                   <div class="pd-summary-row">
@@ -1407,30 +1831,34 @@
                     <span class="pd-summary-pass">&#10003; Passed</span>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
-
         <!-- kanan: list fitur -->
         <div class="feat-list">
           <div class="feat-item">
-            <div class="feat-ic fi-b"><i class="bi bi-send-fill"></i></div>
+            <div class="feat-ic fi-b">
+              <i class="bi bi-send-fill"></i>
+            </div>
             <div class="feat-text">
-              <h3>Buat request lebih cepat</h3>
+              <h3>Kirim dan validasi API</h3>
               <p>Tulis URL, pilih method, set headers dan body. Kirim langsung tanpa konfigurasi tambahan.</p>
             </div>
           </div>
           <div class="feat-item">
-            <div class="feat-ic fi-c"><i class="bi bi-braces"></i></div>
+            <div class="feat-ic fi-c">
+              <i class="bi bi-braces"></i>
+            </div>
             <div class="feat-text">
               <h3>Test & Manajemen Environment</h3>
-              <p>Simpan variable seperti <code>{{base_url}}</code> dan berikan test <code>forge.test</code>.</p>
+              <p>Simpan variable seperti <code>{{base_url}}</code> dan berikan test <code>forge.test</code>. </p>
             </div>
           </div>
           <div class="feat-item">
-            <div class="feat-ic fi-v"><i class="bi bi-folder2-open"></i></div>
+            <div class="feat-ic fi-v">
+              <i class="bi bi-folder2-open"></i>
+            </div>
             <div class="feat-text">
               <h3>Testing tetap terorganisir</h3>
               <p>Kelompokkan request ke collection dan workspace.</p>
@@ -1440,18 +1868,15 @@
             <div class="feat-ic fi-p">
               <i class="bi bi-diagram-3"></i>
             </div>
-
             <div class="feat-text">
               <h3>Bangun flow E2E tanpa scripting berat</h3>
-
-              <p>
-                Hubungkan request menjadi skenario,
-                gunakan response sebelumnya sebagai input berikutnya.
-              </p>
+              <p> Hubungkan request menjadi skenario, gunakan response sebelumnya sebagai input berikutnya. </p>
             </div>
           </div>
           <div class="feat-item">
-            <div class="feat-ic fi-o"><i class="bi bi-speedometer2"></i></div>
+            <div class="feat-ic fi-o">
+              <i class="bi bi-speedometer2"></i>
+            </div>
             <div class="feat-text">
               <h3>Atur virtual users dan durasi pengujian.</h3>
               <p>Lihat latency, throughput, error rate, dan percentile.</p>
@@ -1461,17 +1886,14 @@
       </div>
     </div>
   </section>
-
   <div class="div-line"></div>
-
   <!-- ── HOW IT WORKS ── -->
   <section id="cara-kerja">
     <div class="wrap-md">
       <div class="section-head" style="text-align:center;margin-bottom:48px">
         <span class="eyebrow">Cara Kerja</span>
         <h2 class="section-title">Tiga langkah, langsung jalan.</h2>
-        <p class="section-sub" style="margin:0 auto">Tidak ada setup. Tidak ada file konfigurasi. Buka dan mulai.
-        </p>
+        <p class="section-sub" style="margin:0 auto">Tidak ada setup. Tidak ada file konfigurasi. Buka dan mulai. </p>
       </div>
       <div class="how-steps">
         <div class="hstep">
@@ -1492,43 +1914,118 @@
       </div>
     </div>
   </section>
-
   <div class="div-line"></div>
-
+  <!-- ── FAQ ── -->
+  <section id="faq">
+    <div class="wrap-md">
+      <div class="section-head" style="text-align:center;margin-bottom:48px">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="section-title">Pertanyaan yang sering ditanyakan.</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Apa itu API testing?</summary>
+          <p>API testing adalah proses memverifikasi bahwa endpoint API mengembalikan response yang sesuai —
+            status code, body, header, dan waktu respons — sesuai ekspektasi. Di Assertin, kamu bisa kirim
+            request, lihat response, dan validasi hasilnya langsung dari browser.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apa perbedaan Assertin dengan tools API testing lain seperti Postman?</summary>
+          <p>Konsep dasarnya mirip — kirim request, lihat response. Bedanya, Assertin fokus untuk kebutuhan QA:
+            Scenario Runner untuk menyusun flow E2E dan Performance Testing berbasis k6, semua dalam satu
+            dashboard berbasis browser, tanpa instal aplikasi, dan gratis untuk mulai.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Bagaimana cara belajar API testing untuk pemula?</summary>
+          <p>Mulai dari memahami HTTP, request, response, status code, lalu lanjut membuat test sederhana sebelum
+            masuk ke automation dan performance testing.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apa itu Scenario Runner?</summary>
+          <p>Scenario Runner memungkinkan kamu menghubungkan beberapa request menjadi satu flow — misalnya login,
+            ambil token, lalu hit endpoint lain — dan menjalankannya sebagai satu skenario E2E. Response dari
+            request sebelumnya bisa dipakai sebagai input untuk request berikutnya.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apa itu API automation testing?</summary>
+          <p>API automation testing adalah proses menjalankan pengujian API secara otomatis menggunakan skenario
+            dan validasi agar pengujian bisa diulang dengan konsisten. Di Assertin, kamu bisa buat skenario dengan
+            Scenario Runner, lalu jalankan kapan pun untuk memastikan API tetap bekerja sesuai ekspektasi seiring
+            waktu.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apa itu performance testing?</summary>
+          <p>Performance testing digunakan untuk mengukur seberapa cepat dan stabil sistem ketika menerima beban
+            pengguna. Dengan Assertin, kamu bisa menjalankan load test berbasis k6 untuk melihat metrik seperti
+            RPS, latency, dan error rate, sehingga bisa memastikan API kamu tetap responsif dan handal di bawah
+            beban.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Bagaimana cara melakukan performance test?</summary>
+          <p>Pilih Scenario Runner yang sudah dibuat untuk mode sequential atau parallel, atur jumlah virtual users, durasi, dan ramp up time,
+            lalu jalankan. Assertin akan mengeksekusi load test berbasis k6 dan menampilkan hasil seperti RPS, TPS,
+            latency p95, dan error rate.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah Assertin gratis digunakan?</summary>
+          <p>Ya, kamu bisa mulai menggunakan Assertin secara gratis tanpa kartu kredit. Paket gratis memiliki
+            beberapa limitasi dasar (jumlah workspace, collection, dan kapasitas performance test), dengan opsi
+            upgrade untuk kebutuhan yang lebih besar.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah data dan request saya aman?</summary>
+          <p>Setiap akun memiliki workspace sendiri yang hanya bisa diakses setelah login. Data collection,
+            environment, dan history tersimpan di database kami. Data tidak digunakan untuk tujuan selain menjalankan layanan dan tidak dijual ke pihak lain.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Perlu install aplikasi atau plugin tambahan?</summary>
+          <p>Tidak. Assertin berjalan penuh di browser — buka halaman, login atau coba sebagai guest, dan langsung
+            bisa mulai mengirim request tanpa instalasi apa pun.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah Assertin bisa dipakai untuk kerja tim?</summary>
+          <p>Saat ini setiap akun memiliki workspace personal untuk testing individu. Untuk kebutuhan tim, kamu
+            tetap bisa membagikan hasil performance test dan riwayat request sebagai bukti ke anggota tim lain.</p>
+        </details>
+      </div>
+      <div class="faq-links">
+        <a href="/learn/api-testing">Pelajari API Testing <i class="bi bi-arrow-right"></i></a>
+        <a href="/learn/performance-testing">Pelajari Performance Testing <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+  <div class="div-line"></div>
   <!-- ── FINAL CTA — no box, gradient-lit open section ── -->
   <section class="cta-section">
     <div class="wrap-sm cta-inner">
       <p class="cta-mono">// Assert. Run. Prove.</p>
-      <h2>Mulai test pertama,<br>
-        kurang dari satu menit.</h2>
+      <h2>Mulai test pertama, <br> kurang dari satu menit. </h2>
       <div class="cta-btns">
-        <a href="https://forge.assertin.com/register" class="btn-primary">
-          Daftar Gratis <i class="bi bi-arrow-right"></i>
+        <a href="https://forge.assertin.com/register" class="btn-primary"> Daftar Gratis <i
+            class="bi bi-arrow-right"></i>
         </a>
       </div>
     </div>
   </section>
-
   <!-- ── FOOTER ── -->
   <footer>
     <div class="wrap foot-inner">
       <div class="foot-l">
         <a href="#" class="logo">
           <img src="forge.png" alt="Assertin" />
-          <span class="logo-name">Assertin<span>.</span></span>
+          <span class="logo-name">Assertin <span>.</span>
+          </span>
         </a>
         <span class="foot-tag">Test with confidence. Ship with proof.</span>
       </div>
       <div class="foot-r">
-        <span>&copy; <span id="copyright-year"></span> Assertin.com</span>
+        <span>&copy; <span id="copyright-year"></span> Assertin.com </span>
       </div>
     </div>
   </footer>
-
   <script>
     document.getElementById('copyright-year').textContent = new Date().getFullYear();
   </script>
-
 </body>
 
 </html>

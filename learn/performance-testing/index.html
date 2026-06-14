@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apa itu Performance Testing? RPS, Latency, VU — Assertin</title>
+  <meta name="description"
+    content="Pelajari apa itu performance testing, metrik penting seperti RPS, latency p95, dan error rate, serta cara menjalankan load test berbasis k6 dengan Assertin." />
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://assertin.com/learn/performance-testing" />
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="icon" href="../../favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://assertin.com/learn/performance-testing" />
+  <meta property="og:title" content="Apa itu Performance Testing? RPS, Latency, VU — Assertin" />
+  <meta property="og:description"
+    content="Pelajari apa itu performance testing, metrik penting seperti RPS, latency p95, dan error rate, serta cara menjalankan load test berbasis k6 dengan Assertin." />
+  <meta property="og:image" content="https://assertin.com/forge.png" />
+  <meta property="og:site_name" content="Assertin">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Apa itu Performance Testing? RPS, Latency, VU — Assertin" />
+  <meta name="twitter:description"
+    content="Pelajari apa itu performance testing, metrik penting seperti RPS, latency p95, dan error rate, serta cara menjalankan load test berbasis k6 dengan Assertin." />
+  <meta name="twitter:image" content="https://assertin.com/forge.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Apa itu Performance Testing? RPS, Latency, VU",
+        "description": "Pelajari apa itu performance testing, metrik penting seperti RPS, latency p95, dan error rate, serta cara menjalankan load test berbasis k6 dengan Assertin.",
+        "image": "https://assertin.com/forge.png",
+        "author": { "@type": "Organization", "name": "Assertin" },
+        "publisher": { "@type": "Organization", "name": "Assertin", "logo": { "@type": "ImageObject", "url": "https://assertin.com/forge.png" } },
+        "mainEntityOfPage": "https://assertin.com/learn/performance-testing"
+      }
+    </script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --blue-400: #60a5fa;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --cyan-400: #22d3ee;
+      --green-400: #4ade80;
+      --yellow-400: #fbbf24;
+      --orange-400: #fb923c;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-900: #0f172a;
+      --slate-950: #080e1a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--slate-950);
+      color: var(--slate-400);
+      line-height: 1.7;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .wrap-md {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      padding: 15px 0;
+      background: rgba(8, 14, 26, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .logo-name {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.4px;
+    }
+
+    .logo-name span {
+      color: var(--blue-400);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      background: var(--blue-600);
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background .18s, transform .15s;
+    }
+
+    .nav-btn:hover {
+      background: var(--blue-500);
+      transform: translateY(-1px);
+    }
+
+    /* ── ARTICLE ── */
+    .article {
+      padding: 56px 0 80px;
+    }
+
+    .breadcrumb {
+      font-size: 12.5px;
+      color: var(--slate-600);
+      margin-bottom: 18px;
+    }
+
+    .breadcrumb a {
+      color: var(--slate-500);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--blue-400);
+    }
+
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      line-height: 1.18;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      font-size: 16px;
+      color: var(--slate-500);
+      max-width: 620px;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -.4px;
+      margin: 40px 0 14px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      margin: 24px 0 8px;
+      letter-spacing: -.2px;
+    }
+
+    p {
+      font-size: 14.5px;
+      color: var(--slate-500);
+      margin-bottom: 14px;
+    }
+
+    ul {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+
+    li {
+      font-size: 14.5px;
+      color: var(--slate-500);
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    li strong {
+      color: var(--slate-300);
+    }
+
+    p strong {
+      color: var(--slate-300);
+      font-weight: 600;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--cyan-400);
+      background: rgba(6, 182, 212, .08);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    ol {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+
+    ol li {
+      margin-bottom: 10px;
+    }
+
+    /* ── METRIC GRID ── */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 16px 0 24px;
+    }
+
+    .metric-card {
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 10px;
+      background: var(--slate-900);
+      padding: 14px 16px;
+    }
+
+    .metric-card .m-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--slate-600);
+      margin-bottom: 6px;
+    }
+
+    .metric-card .m-desc {
+      font-size: 13px;
+      color: var(--slate-400);
+      line-height: 1.6;
+    }
+
+    /* ── CTA ── */
+    .cta-box {
+      margin-top: 48px;
+      padding: 32px;
+      border: 1px solid rgba(59, 130, 246, .2);
+      border-radius: 14px;
+      background: rgba(59, 130, 246, .06);
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      margin-top: 0;
+    }
+
+    .cta-box p {
+      max-width: 440px;
+      margin: 0 auto 20px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 24px;
+      background: var(--blue-600);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.1px;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, .35), 0 4px 18px rgba(37, 99, 235, .35);
+      transition: all .18s;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-500);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, .5), 0 6px 26px rgba(37, 99, 235, .5);
+      transform: translateY(-1px);
+    }
+
+    .related {
+      margin-top: 20px;
+      font-size: 13.5px;
+    }
+
+    .related a {
+      color: var(--blue-400);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .related a:hover {
+      color: var(--cyan-400);
+    }
+
+    /* ── ANIMATED PERFORMANCE TEST DEMO ── */
+    .perf-demo {
+      margin: 28px auto 40px;
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 11px;
+      overflow: hidden;
+      background: var(--slate-900);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+
+    .pd-bar {
+      background: rgba(0, 0, 0, .3);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .pd-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .pd-r {
+      background: #ff5f57
+    }
+
+    .pd-y {
+      background: #febc2e
+    }
+
+    .pd-g {
+      background: #28c840
+    }
+
+    .pd-title {
+      margin-left: 6px;
+      font-size: 10px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .pd-body {
+      padding: 14px 14px 14px;
+    }
+
+    /* ── Phase A: config (0–20%) ── */
+    .pd-config {
+      animation: pd-config-show 8s ease-in-out infinite;
+    }
+
+    @keyframes pd-config-show {
+      0% {
+        opacity: 1;
+      }
+
+      18% {
+        opacity: 1;
+      }
+
+      22%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .pd-config-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .pd-config-title {
+      font-size: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--slate-600);
+    }
+
+    .pd-run-btn {
+      padding: 3px 10px;
+      background: var(--orange-400);
+      color: #0f172a;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      animation: pd-btn-pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pd-btn-pulse {
+
+      0%,
+      10% {
+        box-shadow: none;
+      }
+
+      15% {
+        box-shadow: 0 0 10px rgba(251, 146, 60, .8);
+      }
+
+      20% {
+        box-shadow: none;
+      }
+
+      100% {
+        box-shadow: none;
+      }
+    }
+
+    .pd-params {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pd-param {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 5px;
+      padding: 6px 8px;
+    }
+
+    .pd-param-label {
+      font-size: 9px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 2px;
+    }
+
+    .pd-param-val {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange-400);
+    }
+
+    .pd-target {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .pd-target-method {
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: rgba(74, 222, 128, .12);
+      color: var(--green-400);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .pd-target-url {
+      font-size: 10px;
+      color: var(--slate-500);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Phase B: running (20–65%) ── */
+    .pd-running {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      animation: pd-running-show 8s ease-in-out infinite;
+    }
+
+    @keyframes pd-running-show {
+
+      0%,
+      20% {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      25% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      60% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      66%,
+      100% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+    }
+
+    .pd-running-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .pd-running-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--orange-400);
+    }
+
+    .pd-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange-400);
+      animation: pd-dot-blink 1s ease-in-out infinite;
+    }
+
+    @keyframes pd-dot-blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .2;
+      }
+    }
+
+    .pd-timer {
+      font-size: 10px;
+      color: var(--slate-500);
+      animation: pd-timer-count 8s linear infinite;
+    }
+
+    @keyframes pd-timer-count {
+
+      0%,
+      20% {
+        opacity: 0;
+      }
+
+      22% {
+        opacity: 1;
+      }
+
+      60% {
+        opacity: 1;
+      }
+
+      66% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* VU ramp bar */
+    .pd-vu-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .pd-vu-label {
+      font-size: 9px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      width: 22px;
+      flex-shrink: 0;
+    }
+
+    .pd-vu-track {
+      flex: 1;
+      height: 5px;
+      background: rgba(255, 255, 255, .05);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .pd-vu-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--orange-400), var(--yellow-400));
+      animation: pd-vu-ramp 8s ease-in-out infinite;
+    }
+
+    @keyframes pd-vu-ramp {
+
+      0%,
+      20% {
+        width: 0%;
+      }
+
+      35% {
+        width: 60%;
+      }
+
+      55% {
+        width: 100%;
+      }
+
+      65% {
+        width: 100%;
+      }
+
+      66%,
+      100% {
+        width: 0%;
+      }
+    }
+
+    .pd-vu-val {
+      font-size: 10px;
+      color: var(--yellow-400);
+      width: 28px;
+      text-align: right;
+      animation: pd-vu-num 8s ease-in-out infinite;
+    }
+
+    @keyframes pd-vu-num {
+
+      0%,
+      20% {
+        opacity: 0;
+      }
+
+      22% {
+        opacity: 1;
+      }
+
+      60%,
+      65% {
+        opacity: 1;
+      }
+
+      66% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* live metrics row */
+    .pd-live-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin-bottom: 9px;
+    }
+
+    .pd-live-m {
+      background: rgba(255, 255, 255, .025);
+      border-radius: 5px;
+      padding: 5px 7px;
+    }
+
+    .pd-live-key {
+      font-size: 8.5px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 2px;
+    }
+
+    .pd-live-val {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .pd-rps-val {
+      color: var(--cyan-400);
+      animation: pd-rps 8s linear infinite;
+    }
+
+    .pd-p95-val {
+      color: var(--blue-400);
+    }
+
+    .pd-err-val {
+      color: var(--green-400);
+    }
+
+    @keyframes pd-rps {
+
+      0%,
+      20% {
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 1;
+      }
+
+      40% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* mini chart bars */
+    .pd-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 26px;
+    }
+
+    .pd-bar-item {
+      flex: 1;
+      border-radius: 2px 2px 0 0;
+      background: rgba(6, 182, 212, .35);
+      animation: pd-bar-grow 8s ease-in-out infinite;
+    }
+
+    .pd-bar-item:nth-child(1) {
+      animation-delay: .0s;
+    }
+
+    .pd-bar-item:nth-child(2) {
+      animation-delay: .1s;
+    }
+
+    .pd-bar-item:nth-child(3) {
+      animation-delay: .2s;
+    }
+
+    .pd-bar-item:nth-child(4) {
+      animation-delay: .3s;
+    }
+
+    .pd-bar-item:nth-child(5) {
+      animation-delay: .4s;
+    }
+
+    .pd-bar-item:nth-child(6) {
+      animation-delay: .5s;
+    }
+
+    .pd-bar-item:nth-child(7) {
+      animation-delay: .6s;
+    }
+
+    .pd-bar-item:nth-child(8) {
+      animation-delay: .7s;
+    }
+
+    @keyframes pd-bar-grow {
+
+      0%,
+      22% {
+        height: 4px;
+        opacity: .3;
+      }
+
+      35% {
+        height: 14px;
+        opacity: .7;
+      }
+
+      50% {
+        height: 22px;
+        opacity: 1;
+      }
+
+      60% {
+        height: 18px;
+        opacity: .9;
+      }
+
+      65% {
+        height: 18px;
+        opacity: .9;
+      }
+
+      66%,
+      100% {
+        height: 4px;
+        opacity: .3;
+      }
+    }
+
+    /* ── Phase C: results (65–100%) ── */
+    .pd-results {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      animation: pd-results-show 8s ease-in-out infinite;
+    }
+
+    @keyframes pd-results-show {
+
+      0%,
+      64% {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      70% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      94% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .pd-results-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pd-results-label {
+      font-size: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green-400);
+    }
+
+    .pd-done-badge {
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: rgba(74, 222, 128, .12);
+      color: var(--green-400);
+      font-size: 9px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .pd-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+
+    .pd-metric {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .055);
+      border-radius: 6px;
+      padding: 7px 9px;
+    }
+
+    .pd-metric-key {
+      font-size: 8.5px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 3px;
+    }
+
+    .pd-metric-num {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .pd-metric-unit {
+      font-size: 9px;
+      color: var(--slate-600);
+      font-family: 'Inter', sans-serif;
+      margin-left: 2px;
+    }
+
+    .pdc-rps {
+      color: var(--cyan-400);
+    }
+
+    .pdc-p95 {
+      color: var(--blue-400);
+    }
+
+    .pdc-err {
+      color: var(--green-400);
+    }
+
+    .pdc-total {
+      color: var(--yellow-400);
+    }
+
+    .pd-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 8px;
+      border-radius: 5px;
+      background: rgba(74, 222, 128, .04);
+      border: 1px solid rgba(74, 222, 128, .1);
+    }
+
+    .pd-summary-txt {
+      font-size: 10px;
+      color: var(--slate-500);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .pd-summary-pass {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--green-400);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* wrapper needs relative for phase layering */
+    .pd-phases {
+      position: relative;
+      min-height: 155px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      padding: 28px 0;
+    }
+
+    .foot-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .foot-l {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .foot-tag {
+      font-size: 12px;
+      color: var(--slate-700);
+    }
+
+    .foot-r {
+      font-size: 12px;
+      color: var(--slate-600);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <div class="wrap nav-inner">
+      <a href="../../" class="logo">
+        <img src="../../forge.png" alt="Assertin API Testing Platform" />
+        <span class="logo-name">Assertin <span>.</span></span>
+      </a>
+      <a href="https://forge.assertin.com" class="nav-btn">Mulai Gratis</a>
+    </div>
+  </nav>
+
+  <!-- ── ARTICLE ── -->
+  <section class="article">
+    <div class="wrap-md">
+      <div class="breadcrumb"><a href="../../">Assertin</a> / Learn / Performance Testing</div>
+      <span class="eyebrow">Panduan</span>
+      <h1>Apa itu Performance Testing?</h1>
+      <p class="lead">
+        Performance testing digunakan untuk mengukur seberapa cepat dan stabil sistem ketika menerima beban
+        pengguna. Dengan performance testing, kamu bisa memastikan API tetap responsif dan handal — bukan
+        hanya benar saat diuji satu per satu, tapi juga saat diakses banyak pengguna sekaligus.
+      </p>
+
+      <div class="perf-demo" aria-hidden="true">
+        <div class="pd-bar">
+          <span class="pd-dot pd-r"></span>
+          <span class="pd-dot pd-y"></span>
+          <span class="pd-dot pd-g"></span>
+          <span class="pd-title">forge assertin · performance</span>
+        </div>
+        <div class="pd-body">
+          <div class="pd-phases">
+            <!-- Phase A: Config -->
+            <div class="pd-config">
+              <div class="pd-config-header">
+                <span class="pd-config-title">Performance Test</span>
+                <span class="pd-run-btn">&#9654; Jalankan</span>
+              </div>
+              <div class="pd-params">
+                <div class="pd-param">
+                  <div class="pd-param-label">Virtual Users</div>
+                  <div class="pd-param-val">50 VU</div>
+                </div>
+                <div class="pd-param">
+                  <div class="pd-param-label">Durasi</div>
+                  <div class="pd-param-val">30s</div>
+                </div>
+                <div class="pd-param">
+                  <div class="pd-param-label">Ramp Up</div>
+                  <div class="pd-param-val">10s</div>
+                </div>
+                <div class="pd-param">
+                  <div class="pd-param-label">Collection</div>
+                  <div class="pd-param-val" style="font-size:10px;color:var(--slate-400)">User API</div>
+                </div>
+              </div>
+              <div class="pd-target">
+                <span class="pd-target-method">GET</span>
+                <span class="pd-target-url">https://api.example.com/users/profile</span>
+              </div>
+            </div>
+            <!-- Phase B: Running -->
+            <div class="pd-running">
+              <div class="pd-running-header">
+                <span class="pd-running-label">
+                  <span class="pd-pulse-dot"></span> Running </span>
+                <span class="pd-timer">00:18 / 00:30</span>
+              </div>
+              <div class="pd-vu-row">
+                <span class="pd-vu-label">VU</span>
+                <div class="pd-vu-track">
+                  <div class="pd-vu-fill"></div>
+                </div>
+                <span class="pd-vu-val">50</span>
+              </div>
+              <div class="pd-live-metrics">
+                <div class="pd-live-m">
+                  <div class="pd-live-key">RPS</div>
+                  <div class="pd-live-val pd-rps-val">312</div>
+                </div>
+                <div class="pd-live-m">
+                  <div class="pd-live-key">p95</div>
+                  <div class="pd-live-val pd-p95-val">118ms</div>
+                </div>
+                <div class="pd-live-m">
+                  <div class="pd-live-key">Error</div>
+                  <div class="pd-live-val pd-err-val">0.1%</div>
+                </div>
+              </div>
+              <div class="pd-chart">
+                <div class="pd-bar-item"></div>
+                <div class="pd-bar-item"></div>
+                <div class="pd-bar-item"></div>
+                <div class="pd-bar-item"></div>
+                <div class="pd-bar-item"></div>
+                <div class="pd-bar-item"></div>
+                <div class="pd-bar-item"></div>
+                <div class="pd-bar-item"></div>
+              </div>
+            </div>
+            <!-- Phase C: Results -->
+            <div class="pd-results">
+              <div class="pd-results-header">
+                <span class="pd-results-label">Hasil</span>
+                <span class="pd-done-badge">SELESAI</span>
+              </div>
+              <div class="pd-metric-grid">
+                <div class="pd-metric">
+                  <div class="pd-metric-key">Requests/sec</div>
+                  <div class="pd-metric-num pdc-rps">298 <span class="pd-metric-unit">rps</span>
+                  </div>
+                </div>
+                <div class="pd-metric">
+                  <div class="pd-metric-key">Latency p95</div>
+                  <div class="pd-metric-num pdc-p95">124 <span class="pd-metric-unit">ms</span>
+                  </div>
+                </div>
+                <div class="pd-metric">
+                  <div class="pd-metric-key">Error Rate</div>
+                  <div class="pd-metric-num pdc-err">0.3 <span class="pd-metric-unit">%</span>
+                  </div>
+                </div>
+                <div class="pd-metric">
+                  <div class="pd-metric-key">Total Request</div>
+                  <div class="pd-metric-num pdc-total">8.9 <span class="pd-metric-unit">k</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pd-summary-row">
+                <span class="pd-summary-txt">50 VU · 30s · User API</span>
+                <span class="pd-summary-pass">&#10003; Passed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Metrik penting dalam performance testing</h2>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="m-label">RPS</div>
+          <div class="m-desc">Requests per second — jumlah request yang berhasil diproses sistem setiap
+            detik.</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">Latency p95 / p99</div>
+          <div class="m-desc">Waktu respons yang dialami 95% / 99% request — gambaran pengalaman pengguna di
+            kondisi terburuk yang umum terjadi.</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">Error Rate</div>
+          <div class="m-desc">Persentase request yang gagal (status 4xx/5xx atau timeout) selama pengujian
+            berlangsung.</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-label">Virtual Users (VU)</div>
+          <div class="m-desc">Jumlah pengguna simulasi yang mengirim request secara bersamaan ke sistem.</div>
+        </div>
+      </div>
+
+      <h2>Jenis-jenis performance testing</h2>
+      <ul>
+        <li><strong>Load testing</strong> — menguji sistem dengan jumlah pengguna sesuai kondisi normal atau
+          target tertentu, untuk memastikan performa tetap stabil.</li>
+        <li><strong>Stress testing</strong> — menaikkan beban secara bertahap (ramp up) hingga melewati batas
+          normal, untuk melihat kapan dan bagaimana sistem mulai gagal.</li>
+        <li><strong>Soak testing</strong> — menjalankan beban dalam durasi lama untuk menemukan masalah seperti
+          memory leak atau penurunan performa seiring waktu.</li>
+      </ul>
+
+      <h2>Cara melakukan performance test dengan Assertin</h2>
+      <ol>
+        <li>Siapkan <strong>collection</strong> atau <strong>Scenario Runner</strong> yang ingin diuji — pilih
+          mode sequential atau parallel.</li>
+        <li>Atur jumlah <strong>virtual users (VU)</strong>, <strong>durasi</strong>, dan <strong>ramp up
+            time</strong> sesuai kebutuhan pengujian.</li>
+        <li>Jalankan — Assertin akan mengeksekusi load test berbasis <code>k6</code> di balik layar.</li>
+        <li>Lihat hasilnya secara langsung: RPS, TPS, latency p95, dan error rate, siap dijadikan bukti
+          performa API kamu.</li>
+      </ol>
+      <p>
+        Belum familiar dengan dasar-dasar pengujian API? Baca dulu
+        <a href="../api-testing" style="color:var(--blue-400)">apa itu API testing →</a>
+      </p>
+
+      <div class="cta-box">
+        <h2>Jalankan performance test pertama kamu</h2>
+        <p>Tanpa install, tanpa konfigurasi k6 manual. Atur VU dan durasi, lalu jalankan langsung dari browser.</p>
+        <a href="https://forge.assertin.com" class="btn-primary">Mulai Gratis <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <div class="related">
+        <a href="../../#faq">← Kembali ke FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="wrap foot-inner">
+      <div class="foot-l">
+        <a href="../../" class="logo">
+          <img src="../../forge.png" alt="Assertin" />
+          <span class="logo-name">Assertin <span>.</span></span>
+        </a>
+        <span class="foot-tag">Test with confidence. Ship with proof.</span>
+      </div>
+      <div class="foot-r">
+        <span>&copy; <span id="copyright-year"></span> Assertin.com</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

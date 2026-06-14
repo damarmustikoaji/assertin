@@ -9,4 +9,18 @@
 <priority>1.0</priority>
 </url>
 
+<url>
+<loc>https://assertin.com/learn/api-testing</loc>
+<lastmod>2026-06-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://assertin.com/learn/performance-testing</loc>
+<lastmod>2026-06-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+
 </urlset>
