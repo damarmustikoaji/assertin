@@ -4,10 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assertin.</title>
+  <title>Assertin — Test API, Scenario Runner & Performance Testing</title>
   <meta name="description"
     content="Test API, jalankan skenario E2E, dan ukur performa dalam satu dashboard. Tanpa install. Gratis untuk mulai." />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="canonical" href="https://assertin.com/" />
+  <link rel="icon" href="favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://assertin.com/" />
+  <meta property="og:title" content="Assertin — Test with confidence. Ship with proof." />
+  <meta property="og:description"
+    content="Test API, jalankan skenario E2E, dan ukur performa dalam satu dashboard. Tanpa install. Gratis untuk mulai." />
+  <meta property="og:image" content="https://assertin.com/forge.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Assertin — Test with confidence. Ship with proof." />
+  <meta name="twitter:description"
+    content="Test API, jalankan skenario E2E, dan ukur performa dalam satu dashboard. Tanpa install. Gratis untuk mulai." />
+  <meta name="twitter:image" content="https://assertin.com/forge.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -50,6 +66,8 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     body {
@@ -58,6 +76,7 @@
       color: var(--slate-400);
       line-height: 1.6;
       overflow-x: hidden;
+      width: 100%;
     }
 
     /* ── CONTAINERS ── */
@@ -96,6 +115,67 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-link {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--slate-400);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    .nav-link:hover {
+      color: white;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: var(--slate-300);
+      font-size: 22px;
+      line-height: 1;
+      padding: 2px;
+      cursor: pointer;
+    }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 12px;
+      margin-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .nav-mobile .nav-link {
+      padding: 10px 4px;
+    }
+
+    .nav-mobile.open {
+      display: flex;
+    }
+
+    @media (max-width: 720px) {
+      .nav-toggle {
+        display: inline-flex;
+      }
+    }
+
+    @media (min-width: 721px) {
+      .nav-mobile {
+        display: none !important;
+      }
     }
 
     .logo {
@@ -260,281 +340,9 @@
       transform: translateY(-1px);
     }
 
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 12px 20px;
-      border: 1px solid rgba(255, 255, 255, .09);
-      color: var(--slate-400);
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all .18s;
-    }
-
-    .btn-ghost:hover {
-      border-color: rgba(255, 255, 255, .18);
-      color: white;
-      background: rgba(255, 255, 255, .04);
-    }
-
     .hero-fine {
       font-size: 12px;
       color: var(--slate-600);
-    }
-
-    /* ── MOCKUP ── */
-    .mockup-outer {
-      margin: 52px auto 0;
-      max-width: 840px;
-      position: relative;
-    }
-
-    /* bottom fade to make mockup feel grounded, not floating */
-    .mockup-outer::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 80px;
-      background: linear-gradient(to top, var(--slate-950), transparent);
-      border-radius: 0 0 13px 13px;
-      pointer-events: none;
-    }
-
-    .mockup {
-      background: var(--slate-850);
-      border: 1px solid rgba(255, 255, 255, .065);
-      border-radius: 13px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, .03),
-        0 24px 60px rgba(0, 0, 0, .75);
-    }
-
-    .m-bar {
-      background: rgba(0, 0, 0, .3);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border-bottom: 1px solid rgba(255, 255, 255, .04);
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    .dr {
-      background: #ff5f57
-    }
-
-    .dy {
-      background: #febc2e
-    }
-
-    .dg {
-      background: #28c840
-    }
-
-    .m-url {
-      flex: 1;
-      margin-left: 8px;
-      background: rgba(255, 255, 255, .04);
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--slate-600);
-    }
-
-    .m-body {
-      display: grid;
-      grid-template-columns: 195px 1fr;
-      height: 330px;
-    }
-
-    .m-side {
-      background: rgba(0, 0, 0, .15);
-      border-right: 1px solid rgba(255, 255, 255, .04);
-      padding: 12px 10px;
-    }
-
-    .ms-label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--slate-700);
-      font-weight: 600;
-      padding: 0 4px;
-      margin-bottom: 5px;
-    }
-
-    .ms-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 7px;
-      border-radius: 5px;
-      font-size: 11px;
-      color: var(--slate-600);
-      margin-bottom: 1px;
-    }
-
-    .ms-row.on {
-      background: rgba(59, 130, 246, .12);
-      color: var(--blue-400);
-    }
-
-    .mp {
-      width: 30px;
-      height: 14px;
-      border-radius: 3px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 7.5px;
-      font-weight: 700;
-    }
-
-    .mp-get {
-      background: rgba(74, 222, 128, .13);
-      color: var(--green-400)
-    }
-
-    .mp-post {
-      background: rgba(96, 165, 250, .13);
-      color: var(--blue-400)
-    }
-
-    .mp-put {
-      background: rgba(251, 191, 36, .13);
-      color: var(--yellow-400)
-    }
-
-    .mp-del {
-      background: rgba(248, 113, 113, .13);
-      color: var(--red-400)
-    }
-
-    .ms-sep {
-      height: 1px;
-      background: rgba(255, 255, 255, .04);
-      margin: 10px 0;
-    }
-
-    .m-main {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .m-req {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 10px 13px;
-      border-bottom: 1px solid rgba(255, 255, 255, .04);
-    }
-
-    .m-method {
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      background: rgba(96, 165, 250, .13);
-      color: var(--blue-400);
-      flex-shrink: 0;
-    }
-
-    .m-url-input {
-      flex: 1;
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(255, 255, 255, .06);
-      border-radius: 4px;
-      padding: 5px 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      color: var(--slate-400);
-    }
-
-    .m-send {
-      padding: 5px 12px;
-      background: var(--blue-600);
-      color: white;
-      border-radius: 4px;
-      font-size: 10.5px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .m-res {
-      flex: 1;
-      padding: 12px 14px;
-      overflow: hidden;
-    }
-
-    .m-status {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 9px;
-    }
-
-    .s-ok {
-      padding: 2px 7px;
-      background: rgba(74, 222, 128, .1);
-      color: var(--green-400);
-      border-radius: 3px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      font-weight: 600;
-    }
-
-    .s-time {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      color: var(--slate-600);
-    }
-
-    .m-json {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      line-height: 1.8;
-      color: var(--slate-500);
-    }
-
-    .jk {
-      color: var(--blue-400)
-    }
-
-    .js {
-      color: var(--green-400)
-    }
-
-    .jb {
-      color: var(--violet-400)
-    }
-
-    .jn {
-      color: var(--cyan-400)
-    }
-
-    @media (max-width: 600px) {
-      .m-side {
-        display: none;
-      }
-
-      .m-body {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* ── STATS — NO BORDER, pure typographic ── */
@@ -594,6 +402,7 @@
     /* ── SECTION ATOMS ── */
     section {
       padding: 80px 0;
+      scroll-margin-top: 70px;
     }
 
     .eyebrow {
@@ -797,209 +606,6 @@
       }
     }
 
-    /* ── PRICING — side-by-side, NO inner boxes on free ── */
-    .pricing-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-      max-width: 720px;
-      margin: 0 auto;
-      align-items: start;
-    }
-
-    .plan-free {
-      width: 300px;
-      flex-shrink: 0;
-    }
-
-    .plan-premium {
-      width: 300px;
-      flex-shrink: 0;
-    }
-
-    /* Free: no box, just text-based list */
-    .plan-free .plan-tier {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--slate-600);
-      margin-bottom: 10px;
-    }
-
-    .plan-free .plan-price-txt {
-      font-size: 40px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: -2px;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .plan-free .plan-pitch {
-      font-size: 13px;
-      color: var(--slate-500);
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-
-    .plan-free-list {
-      list-style: none;
-      margin-bottom: 28px;
-    }
-
-    .plan-free-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      font-size: 13.5px;
-      color: var(--slate-400);
-      margin-bottom: 9px;
-      line-height: 1.45;
-    }
-
-    .plan-free-list li i {
-      color: var(--slate-600);
-      flex-shrink: 0;
-      margin-top: 2px;
-      font-size: 13px;
-    }
-
-    .plan-free-list li.has i {
-      color: var(--blue-400);
-    }
-
-    .plan-free-list li.has {
-      color: var(--slate-300);
-    }
-
-    /* Premium: one highlighted card */
-    .plan-premium {
-      background: rgba(37, 99, 235, .08);
-      border: 1px solid rgba(59, 130, 246, .25);
-      border-radius: 16px;
-      padding: 26px;
-      position: relative;
-    }
-
-    .plan-premium-label {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, var(--blue-600), var(--cyan-500));
-      color: white;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 12px;
-      border-radius: 100px;
-      letter-spacing: .3px;
-      white-space: nowrap;
-    }
-
-    .plan-premium .plan-tier {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--slate-500);
-      margin-bottom: 10px;
-    }
-
-    .plan-premium .plan-price-txt {
-      display: flex;
-      align-items: baseline;
-      gap: 3px;
-      margin-bottom: 6px;
-    }
-
-    .price-rp {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--slate-400);
-    }
-
-    .price-val {
-      font-size: 40px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: -2px;
-      line-height: 1;
-    }
-
-    .price-per {
-      font-size: 12px;
-      color: var(--slate-500);
-    }
-
-    .plan-premium .plan-pitch {
-      font-size: 13px;
-      color: var(--slate-500);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .plan-premium hr {
-      border: none;
-      border-top: 1px solid rgba(255, 255, 255, .06);
-      margin-bottom: 18px;
-    }
-
-    .prem-list {
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
-    .prem-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      font-size: 13.5px;
-      color: var(--slate-300);
-      margin-bottom: 9px;
-      line-height: 1.45;
-    }
-
-    .prem-list li i {
-      color: var(--blue-400);
-      flex-shrink: 0;
-      margin-top: 2px;
-      font-size: 13px;
-    }
-
-    .btn-plan {
-      display: block;
-      text-align: center;
-      padding: 11px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all .2s;
-    }
-
-    .btn-plan-fill {
-      background: var(--blue-600);
-      color: white;
-      box-shadow: 0 3px 12px rgba(37, 99, 235, .3);
-    }
-
-    .btn-plan-fill:hover {
-      background: var(--blue-500);
-      transform: translateY(-1px);
-    }
-
-    .btn-plan-line {
-      border: 1px solid rgba(255, 255, 255, .1);
-      color: var(--slate-400);
-    }
-
-    .btn-plan-line:hover {
-      border-color: rgba(255, 255, 255, .2);
-      color: white;
-    }
-
     /* ── FINAL CTA — no box, just vivid gradient section ── */
     .cta-section {
       padding: 0 0 96px;
@@ -1145,7 +751,10 @@
 
     /* ── ANIMATED PERFORMANCE TEST DEMO ── */
     .perf-demo {
-      margin-top: 28px;
+      margin: 28px auto 0;
+      width: calc(100% / 1.2);
+      transform: scale(1.2);
+      transform-origin: top center;
       border: 1px solid rgba(255, 255, 255, .07);
       border-radius: 11px;
       overflow: hidden;
@@ -1597,10 +1206,6 @@
     .hero-fine {
       animation-delay: .26s;
     }
-
-    .mockup-outer {
-      animation: up .6s cubic-bezier(.22, .61, .36, 1) .3s both;
-    }
   </style>
 </head>
 
@@ -1613,9 +1218,19 @@
         <img src="forge.png" alt="Assertin" />
         <span class="logo-name">Assertin<span>.</span></span>
       </a>
-      <a href="https://forge.assertin.com/login" class="nav-btn">
-        Masuk
-      </a>
+      <div class="nav-actions">
+        <a href="https://forge.assertin.com/login" class="nav-btn">
+          Masuk
+        </a>
+        <button class="nav-toggle" aria-label="Menu" aria-expanded="false"
+          onclick="document.getElementById('nav-mobile').classList.toggle('open')">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+    <div class="wrap nav-mobile" id="nav-mobile">
+      <a href="#fitur" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Fitur</a>
+      <a href="#cara-kerja" class="nav-link" onclick="this.closest('.nav-mobile').classList.remove('open')">Cara Kerja</a>
     </div>
   </nav>
 
@@ -1633,12 +1248,8 @@
       </p>
 
       <div class="hero-btns">
-        <a href="https://forge.assertin.com/login" class="btn-primary">
+        <a href="https://forge.assertin.com" class="btn-primary">
           Mulai Gratis
-        </a>
-
-        <a href="https://forge.assertin.com/demo" class="btn-ghost">
-          Lihat Demo
         </a>
       </div>
 
@@ -1661,7 +1272,7 @@
       </div>
       <div class="stat">
         <div class="stat-num"><em>Performance Test</em></div>
-        <div class="stat-lbl">gratis hingga 20 virtual users</div>
+        <div class="stat-lbl">jalankan load test berbasis k6</div>
       </div>
       <div class="stat">
         <div class="stat-num"><em>Result &amp; Proof</em></div>
@@ -1673,14 +1284,16 @@
   <div class="div-line"></div>
 
   <!-- ── FEATURES — asymmetric, list bukan grid box ── -->
-  <section>
+  <section id="fitur">
     <div class="wrap">
+      <div class="section-head" style="text-align:center;margin-bottom:48px">
+        <span class="eyebrow">Fitur</span>
+        <h2 class="section-title">Semua kebutuhan testing kamu.</h2>
+      </div>
       <div class="features-layout">
 
-        <!-- kiri: judul section + animated demo -->
+        <!-- kiri: animated demo -->
         <div class="features-intro">
-          <span class="eyebrow">Fitur</span>
-          <h2 class="section-title">Semua kebutuhan testing kamu.</h2>
 
           <!-- ANIMATED PERFORMANCE TEST DEMO -->
           <div class="perf-demo" aria-hidden="true">
@@ -1852,12 +1465,12 @@
   <div class="div-line"></div>
 
   <!-- ── HOW IT WORKS ── -->
-  <section>
+  <section id="cara-kerja">
     <div class="wrap-md">
       <div class="section-head" style="text-align:center;margin-bottom:48px">
         <span class="eyebrow">Cara Kerja</span>
         <h2 class="section-title">Tiga langkah, langsung jalan.</h2>
-        <p class="section-sub" style="margin:0 auto">Tidak ada wizard setup. Tidak ada file konfigurasi. Buka dan mulai.
+        <p class="section-sub" style="margin:0 auto">Tidak ada setup. Tidak ada file konfigurasi. Buka dan mulai.
         </p>
       </div>
       <div class="how-steps">
@@ -1882,68 +1495,12 @@
 
   <div class="div-line"></div>
 
-  <!-- ── PRICING — free as plain text, premium as card ── -->
-  <section>
-    <div class="wrap-md">
-      <div style="text-align:center;margin-bottom:52px">
-        <span class="eyebrow">Paket</span>
-        <h2 class="section-title">Mulai gratis.<br />Upgrade saat memang perlu.</h2>
-        <p class="section-sub" style="margin:0 auto">Tidak ada tagihan mengejutkan. Bayar hanya saat butuh kapasitas
-          lebih.</p>
-      </div>
-
-      <div class="pricing-wrap">
-
-        <!-- Free: no box -->
-        <!-- <div class="plan-free">
-        <div class="plan-tier">Free</div>
-        <div class="plan-price-txt">Rp 0</div>
-        <div class="plan-pitch">Untuk belajar dan eksplorasi API testing pertamamu.</div>
-        <ul class="plan-free-list">
-          <li class="has"><i class="bi bi-check2"></i> 1 Workspace</li>
-          <li class="has"><i class="bi bi-check2"></i> 1 Collection per workspace</li>
-          <li class="has"><i class="bi bi-check2"></i> 2 Request per collection</li>
-          <li class="has"><i class="bi bi-check2"></i> Kirim request bebas</li>
-          <li class="has"><i class="bi bi-check2"></i> Riwayat request</li>
-          <li><i class="bi bi-dash"></i> Performance test (maks. 5 VU)</li>
-          <li><i class="bi bi-dash"></i> Collection &amp; request unlimited</li>
-        </ul>
-        <a href="https://forge.assertin.com" class="btn-plan btn-plan-line">Mulai Gratis</a>
-      </div> -->
-
-        <!-- Premium: card -->
-        <div class="plan-premium">
-          <div class="plan-premium-label">Free</div>
-          <!-- <div class="plan-tier">Premium</div> -->
-          <div class="plan-price-txt">
-            <span class="price-rp">Rp</span>
-            <span class="price-val">0</span>
-            <span class="price-per">/ 30 hari</span>
-          </div>
-          <div class="plan-pitch">Untuk eksplorasi dan personal project</div>
-          <hr />
-          <ul class="prem-list">
-            <li><i class="bi bi-check2"></i> API Request</li>
-            <li><i class="bi bi-check2"></i> Scenario Runner</li>
-            <li><i class="bi bi-check2"></i> Performance test hingga 20 virtual users per run</li>
-            <li><i class="bi bi-check2"></i> Durasi hingga 3 menit per run</li>
-            <li><i class="bi bi-check2"></i> Result analysis</li>
-          </ul>
-          <div class="plan-pitch">Fair usage berlaku</div>
-          <!-- <a href="https://forge.assertin.com" class="btn-plan btn-plan-fill">Upgrade Premium</a> -->
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- ── FINAL CTA — no box, gradient-lit open section ── -->
   <section class="cta-section">
     <div class="wrap-sm cta-inner">
       <p class="cta-mono">// Assert. Run. Prove.</p>
       <h2>Mulai test pertama,<br>
         kurang dari satu menit.</h2>
-      <p>Tidak perlu install. Tidak perlu setup.</p>
       <div class="cta-btns">
         <a href="https://forge.assertin.com/register" class="btn-primary">
           Daftar Gratis <i class="bi bi-arrow-right"></i>
@@ -1963,10 +1520,14 @@
         <span class="foot-tag">Test with confidence. Ship with proof.</span>
       </div>
       <div class="foot-r">
-        <span>&copy; 2026 Assertin.com</span>
+        <span>&copy; <span id="copyright-year"></span> Assertin.com</span>
       </div>
     </div>
   </footer>
+
+  <script>
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 
