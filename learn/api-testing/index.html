@@ -371,7 +371,7 @@
     .rd-body {
       padding: 14px;
       position: relative;
-      min-height: 185px;
+      min-height: 205px;
     }
 
     /* ── Phase A: request (0–45%) ── */
@@ -476,33 +476,15 @@
       display: flex;
       gap: 6px;
       font-size: 10px;
-      opacity: 0;
       animation: rd-row-show 6s ease-in-out infinite;
-    }
-
-    .rd-header-row:nth-child(1) {
-      animation-delay: 0s;
-    }
-
-    .rd-header-row:nth-child(2) {
-      animation-delay: .15s;
     }
 
     @keyframes rd-row-show {
 
       0%,
-      14% {
-        opacity: 0;
-        transform: translateX(-4px);
-      }
-
-      20% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
       40% {
         opacity: 1;
+        transform: translateX(0);
       }
 
       48%,
