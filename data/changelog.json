@@ -1,0 +1,63 @@
+[
+  {
+    "version": "1.4.0",
+    "date": "2026-06-17",
+    "highlights": "Dokumentasi request & collection",
+    "items": [
+      { "type": "new",      "text": "Panel dokumentasi per request — tulis catatan Markdown langsung di samping request" },
+      { "type": "new",      "text": "Tab dokumentasi collection — overview lengkap dengan daftar semua endpoint" },
+      { "type": "new",      "text": "Ganti avatar profil — pilih icon atau upload foto (Premium)" },
+      { "type": "improved", "text": "Warna tema konsisten biru di seluruh halaman Runner dan Performance" },
+      { "type": "fixed",    "text": "Halaman Supports tidak reload setiap kali dikunjungi" },
+      { "type": "fixed",    "text": "Member workspace bisa jalankan Runner (sebelumnya muncul error 'Collection tidak ditemukan')" }
+    ]
+  },
+  {
+    "version": "1.3.0",
+    "date": "2026-06-10",
+    "highlights": "Kolaborasi workspace & undangan member",
+    "items": [
+      { "type": "new",      "text": "Undang anggota ke workspace via email dengan sistem role (Owner / Editor / Viewer)" },
+      { "type": "new",      "text": "Kelola member — lihat daftar, ubah role, atau keluarkan anggota" },
+      { "type": "new",      "text": "Halaman penerimaan undangan dengan preview workspace sebelum bergabung" },
+      { "type": "improved", "text": "Semua endpoint kini menggunakan akses berbasis workspace_members, bukan hanya owner" },
+      { "type": "fixed",    "text": "Tab request sticky (pin) saat double-klik" }
+    ]
+  },
+  {
+    "version": "1.2.0",
+    "date": "2026-06-03",
+    "highlights": "Performance test & k6 integration",
+    "items": [
+      { "type": "new",      "text": "Mode performance test dengan k6 — simulasi hingga 50 Virtual User (Premium)" },
+      { "type": "new",      "text": "Konfigurasi ramp-up, durasi, dan threshold p95/p99/error rate" },
+      { "type": "new",      "text": "Grafik timeseries RPS dan latensi real-time selama tes berjalan" },
+      { "type": "improved", "text": "Antrian job FIFO di worker — tidak ada job yang terlewat" },
+      { "type": "improved", "text": "Wording status job lebih user-friendly, tanpa terminologi teknis internal" }
+    ]
+  },
+  {
+    "version": "1.1.0",
+    "date": "2026-05-27",
+    "highlights": "Runner & skenario pengujian",
+    "items": [
+      { "type": "new",      "text": "Runner — jalankan koleksi request secara berurutan atau paralel dengan iterasi" },
+      { "type": "new",      "text": "Skenario tersimpan — buat, simpan, dan jalankan ulang skenario kapan saja" },
+      { "type": "new",      "text": "Laporan hasil runner dengan ringkasan lulus/gagal per request" },
+      { "type": "improved", "text": "Pre-script dan post-script per request untuk manipulasi data dinamis" }
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-05-20",
+    "highlights": "Launch pertama Assertin Forge",
+    "items": [
+      { "type": "new", "text": "Request builder — method, URL, headers, body JSON/form/raw" },
+      { "type": "new", "text": "Collection & folder untuk organisasi request" },
+      { "type": "new", "text": "Environment variables dengan resolver {{variable}}" },
+      { "type": "new", "text": "History request otomatis tersimpan" },
+      { "type": "new", "text": "Export cURL dari request aktif" },
+      { "type": "new", "text": "Assertion & ekstrak variabel dari response" }
+    ]
+  }
+]

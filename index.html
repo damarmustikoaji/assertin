@@ -615,6 +615,74 @@
         }
       }
 
+      /* ── CHANGELOG TEASER ── */
+      .cl-section { padding: 72px 0; }
+
+      .cl-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin-top: 40px;
+      }
+
+      .cl-card {
+        background: rgba(255,255,255,.03);
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 12px;
+        padding: 20px 20px 18px;
+        transition: border-color .2s;
+      }
+      .cl-card:first-child {
+        border-color: rgba(96,165,250,.22);
+        background: rgba(96,165,250,.04);
+      }
+
+      .cl-card-meta {
+        display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+      }
+      .cl-version {
+        font-size: 12px; font-weight: 700; color: white; letter-spacing: -.2px;
+      }
+      .cl-latest {
+        font-size: 9px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
+        background: rgba(96,165,250,.12); color: var(--blue-400);
+        border: 1px solid rgba(96,165,250,.25); border-radius: 4px;
+        padding: 1px 6px;
+      }
+      .cl-date { font-size: 11px; color: var(--slate-600); margin-left: auto; }
+
+      .cl-highlights {
+        font-size: 13px; font-weight: 600; color: var(--slate-300);
+        margin-bottom: 10px; line-height: 1.4;
+      }
+
+      .cl-items { display: flex; flex-direction: column; gap: 5px; }
+
+      .cl-item { display: flex; align-items: baseline; gap: 6px; font-size: 12px; color: var(--slate-500); }
+
+      .cl-badge {
+        flex-shrink: 0;
+        font-size: 9px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase;
+        padding: 1px 5px; border-radius: 3px; border: 1px solid;
+      }
+      .cl-badge-new      { color: var(--blue-400);  background: rgba(96,165,250,.08);  border-color: rgba(96,165,250,.2); }
+      .cl-badge-improved { color: var(--cyan-400);  background: rgba(34,211,238,.08);  border-color: rgba(34,211,238,.2); }
+      .cl-badge-fixed    { color: #4ade80;           background: rgba(74,222,128,.08);  border-color: rgba(74,222,128,.2); }
+
+      .cl-footer {
+        margin-top: 24px; text-align: center;
+      }
+      .cl-link {
+        font-size: 13px; color: var(--blue-400);
+        display: inline-flex; align-items: center; gap: 5px;
+        transition: gap .2s;
+      }
+      .cl-link:hover { gap: 8px; }
+
+      @media (max-width: 768px) {
+        .cl-grid { grid-template-columns: 1fr; }
+      }
+
       /* ── FINAL CTA — no box, just vivid gradient section ── */
       .cta-section {
         padding: 0 0 96px;
@@ -1749,7 +1817,7 @@
           <em>Dalam Satu Workspace.</em>
           <br />
         </h1>
-        <p class="hero-desc"> Assertin adalah <strong>browser-based API testing platform</strong>. Kirim request, susun scenario, jalankan performance test, dan lihat hasil tanpa pindah tools. </p>
+        <p class="hero-desc"> Assertin adalah <strong>browser-based API testing platform</strong> untuk Developer & Software Tester. Kirim request, susun scenario, jalankan performance test, dan lihat hasil tanpa pindah tools. </p>
         <div class="hero-btns">
           <a href="https://forge.assertin.com" rel="noopener" class="btn-primary"> Mulai Gratis </a>
         </div>
@@ -2096,6 +2164,25 @@
       </div>
     </section>
     <div class="div-line"></div>
+    <!-- ── CHANGELOG TEASER ── -->
+    <section class="cl-section" id="changelog">
+      <div class="wrap">
+        <div class="section-head" style="text-align:center;margin-bottom:0">
+          <span class="eyebrow">Release Notes</span>
+          <h2 class="section-title">Selalu aktif, selalu diperbarui.</h2>
+          <p class="section-sub" style="margin:0 auto">Update terbaru Assertin Forge — fitur baru, perbaikan, dan peningkatan.</p>
+        </div>
+        <div class="cl-grid" id="cl-grid">
+          <div style="text-align:center;padding:32px;color:var(--slate-700);font-size:13px;grid-column:1/-1">Memuat...</div>
+        </div>
+        <div class="cl-footer">
+          <a href="/changelog" class="cl-link">
+            Lihat semua release <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ── FINAL CTA — no box, gradient-lit open section ── -->
     <section class="cta-section">
       <div class="wrap-sm cta-inner">
@@ -2118,13 +2205,49 @@
           </a>
           <span class="foot-tag">Test with confidence. Ship with proof.</span>
         </div>
-        <div class="foot-r">
-          <span>&copy; <span id="copyright-year"></span> Assertin.com </span>
+        <div class="foot-r" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <a href="/changelog" style="font-size:12px;color:var(--slate-600);transition:color .2s" onmouseover="this.style.color='var(--slate-300)'" onmouseout="this.style.color='var(--slate-600)'">Changelog</a>
+          <span style="font-size:12px;color:var(--slate-700)">&copy; <span id="copyright-year"></span> Assertin.com</span>
         </div>
       </div>
     </footer>
     <script>
       document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+      // Changelog teaser — tampilkan 3 entry terbaru
+      (function () {
+        const BADGE = { new: 'New', improved: 'Improved', fixed: 'Fixed' };
+        function fmtDate(str) {
+          return new Date(str).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+        fetch('/data/changelog.json')
+          .then(r => r.json())
+          .then(data => {
+            const top3 = data.slice(0, 3);
+            document.getElementById('cl-grid').innerHTML = top3.map((rel, i) => `
+              <div class="cl-card">
+                <div class="cl-card-meta">
+                  <span class="cl-version">v${rel.version}</span>
+                  ${i === 0 ? '<span class="cl-latest">Latest</span>' : ''}
+                  <span class="cl-date">${fmtDate(rel.date)}</span>
+                </div>
+                <p class="cl-highlights">${rel.highlights}</p>
+                <div class="cl-items">
+                  ${rel.items.slice(0, 3).map(item => `
+                    <div class="cl-item">
+                      <span class="cl-badge cl-badge-${item.type}">${BADGE[item.type] || item.type}</span>
+                      <span>${item.text}</span>
+                    </div>
+                  `).join('')}
+                  ${rel.items.length > 3 ? `<div class="cl-item" style="color:var(--slate-700);padding-left:0">+${rel.items.length - 3} lainnya</div>` : ''}
+                </div>
+              </div>
+            `).join('');
+          })
+          .catch(() => {
+            document.getElementById('cl-grid').innerHTML = '';
+          });
+      })();
     </script>
   </body>
 </html>
