@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id-ID">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assertin — Browser-Based API Testing, Scenario Runner & Performance Testing</title>
     <meta name="description" content="Platform API testing untuk Developer dan Software Tester. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
+    <meta property="og:locale" content="id_ID" />
     <meta name="robots" content="index,follow,max-image-preview:large">
     <link rel="canonical" href="https://assertin.com/" />
     <link rel="icon" href="favicon.ico">
-    <link rel="icon" href="favicon-32.png" type="image/png" />
+    <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://assertin.com/" />
     <meta property="og:title" content="Assertin — Test with confidence. Ship with proof." />
-    <meta property="og:description" content="Platform API testing Developer dan Software Tester. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
+    <meta property="og:description" content="Platform API testing untuk Developer dan Software Tester. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
     <meta property="og:image" content="https://assertin.com/forge.png" />
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Assertin browser-based API testing platform">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Assertin — Test with confidence. Ship with proof." />
-    <meta name="twitter:description" content="Platform API testing Developer dan Software Tester. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
+    <meta name="twitter:description" content="Platform API testing untuk Developer dan Software Tester. Buat request, susun scenario runner, jalankan performance test, dan bagikan hasil tanpa install." />
     <meta name="twitter:image" content="https://assertin.com/forge.png" />
     <meta name="theme-color" content="#080e1a">
+    <meta name="color-scheme" content="dark">
     <meta property="og:site_name" content="Assertin">
     <meta name="twitter:site" content="@assertin">
-    <link rel="preload" as="image" href="/forge.png">
+    <link rel="preload" as="image" href="/forge.png" fetchpriority="high">
     <link rel="alternate" hreflang="id" href="https://assertin.com/">
     <link rel="alternate" hreflang="x-default" href="https://assertin.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" /></noscript>
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <style>
@@ -130,6 +134,18 @@
 
       .nav-link:hover {
         color: white;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      @media (max-width: 720px) {
+        .nav-links {
+          display: none;
+        }
       }
 
       .nav-actions {
@@ -296,13 +312,6 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-      }
-
-      .hero-kicker {
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--slate-500);
-        margin-bottom: 14px;
       }
 
       .hero-desc {
@@ -775,61 +784,130 @@
 
       /* ── FOOTER ── */
       footer {
-        border-top: 1px solid rgba(255, 255, 255, .05);
-        padding: 28px 0;
+        padding: 64px 0 0;
+        position: relative;
+        overflow: hidden;
       }
 
-      .foot-inner {
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+          transparent,
+          rgba(59, 130, 246, .4),
+          rgba(34, 211, 238, .3),
+          transparent);
+      }
+
+      .foot-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1.4fr;
+        gap: 48px;
+        padding-bottom: 48px;
+      }
+
+      .foot-brand {
         display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .foot-tagline {
+        font-size: 13px;
+        color: var(--slate-600);
+        line-height: 1.6;
+        max-width: 220px;
+      }
+
+      .foot-badge {
+        display: inline-flex;
         align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
+        gap: 6px;
+        padding: 4px 10px;
+        background: rgba(59, 130, 246, .08);
+        border: 1px solid rgba(59, 130, 246, .18);
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--blue-400);
+        width: fit-content;
+      }
+
+      .foot-badge-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--cyan-400);
+      }
+
+      .foot-col-title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: var(--slate-500);
+        margin-bottom: 16px;
+      }
+
+      .foot-col-links {
+        display: flex;
+        flex-direction: column;
         gap: 10px;
       }
 
-      .foot-l {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+      .foot-link {
+        font-size: 13.5px;
+        color: var(--slate-600);
+        text-decoration: none;
+        transition: color .15s;
+        width: fit-content;
       }
 
-      .foot-tag {
+      .foot-link:hover { color: white; }
+
+      .foot-bottom {
+        border-top: 1px solid rgba(255, 255, 255, .05);
+        padding: 20px 0 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .foot-copy {
         font-size: 12px;
         color: var(--slate-700);
       }
 
-      .foot-r {
-        font-size: 12px;
-        color: var(--slate-600);
+      .foot-bottom-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
       }
 
-      .foot-r a {
-        color: var(--slate-500);
+      .foot-bottom-link {
+        font-size: 12px;
+        color: var(--slate-700);
         text-decoration: none;
         transition: color .15s;
       }
 
-      .foot-r a:hover {
-        color: var(--blue-400);
+      .foot-bottom-link:hover { color: var(--slate-400); }
+
+      @media (max-width: 720px) {
+        .foot-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 36px;
+        }
+        .foot-brand { grid-column: 1 / -1; }
       }
 
-      .foot-sep {
-        margin: 0 7px;
-        color: rgba(255, 255, 255, .08);
-      }
-
-      @media (max-width: 560px) {
-        .foot-inner {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 14px;
-        }
-
-        .foot-l {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 8px;
-        }
+      @media (max-width: 480px) {
+        .foot-grid { grid-template-columns: 1fr; }
+        .foot-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
       }
 
       /* ── DIVIDER ── */
@@ -842,10 +920,8 @@
 
       /* ── ANIMATED PERFORMANCE TEST DEMO ── */
       .perf-demo {
-        margin: 28px auto 0;
-        width: calc(100% / 1.2);
-        transform: scale(1.2);
-        transform-origin: top center;
+        margin: 0 auto;
+        width: 100%;
         border: 1px solid rgba(255, 255, 255, .07);
         border-radius: 11px;
         overflow: hidden;
@@ -1668,6 +1744,83 @@
           grid-template-columns: 1fr;
         }
       }
+
+      /* ── COMPARISON ── */
+      .compare-section { padding: 80px 0; }
+
+      .compare-table {
+        margin-top: 40px;
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .compare-head {
+        display: grid;
+        grid-template-columns: 1fr 140px 140px;
+        background: rgba(255,255,255,.03);
+        border-bottom: 1px solid rgba(255,255,255,.07);
+      }
+
+      .compare-head-cell {
+        padding: 14px 20px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--slate-500);
+        letter-spacing: .5px;
+        text-transform: uppercase;
+      }
+
+      .compare-head-cell.highlight {
+        background: rgba(59,130,246,.06);
+        color: var(--blue-400);
+        border-left: 1px solid rgba(59,130,246,.15);
+        border-right: 1px solid rgba(59,130,246,.15);
+      }
+
+      .compare-row {
+        display: grid;
+        grid-template-columns: 1fr 140px 140px;
+        border-top: 1px solid rgba(255,255,255,.05);
+      }
+
+      .compare-row:first-of-type { border-top: none; }
+
+      .compare-row:hover { background: rgba(255,255,255,.015); }
+
+      .compare-cell {
+        padding: 13px 20px;
+        font-size: 13.5px;
+        color: var(--slate-400);
+        display: flex;
+        align-items: center;
+      }
+
+      .compare-cell.feat-name {
+        color: var(--slate-300);
+        font-weight: 500;
+      }
+
+      .compare-cell.highlight {
+        background: rgba(59,130,246,.04);
+        border-left: 1px solid rgba(59,130,246,.1);
+        border-right: 1px solid rgba(59,130,246,.1);
+        justify-content: center;
+      }
+
+      .compare-cell.other { justify-content: center; }
+
+      .ci-yes { color: var(--green-400); font-size: 16px; }
+      .ci-no  { color: var(--slate-700); font-size: 16px; }
+      .ci-partial { color: var(--yellow-400); font-size: 12px; font-weight: 600; }
+
+      @media (max-width: 600px) {
+        .compare-head { grid-template-columns: 1fr 90px 90px; }
+        .compare-row  { grid-template-columns: 1fr 90px 90px; }
+        .compare-cell { padding: 11px 12px; font-size: 12.5px; }
+        .compare-head-cell { padding: 12px 12px; font-size: 11px; }
+      }
+
     </style>
     <script type="application/ld+json">
       {
@@ -1684,7 +1837,10 @@
           "price": "0",
           "priceCurrency": "USD"
         }
-      }, < script type = "application/ld+json" > {
+      }
+    </script>
+    <script type="application/ld+json">
+      {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Assertin",
@@ -1700,6 +1856,22 @@
         "@type": "WebSite",
         "url": "https://assertin.com",
         "name": "Assertin"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Assertin Forge",
+        "url": "https://forge.assertin.com",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript. Works on any modern browser.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       }
     </script>
     <script type="application/ld+json">
@@ -1792,13 +1964,19 @@
     <nav>
       <div class="wrap nav-inner">
         <a href="#" class="logo">
-          <img src="forge.png" alt="Assertin API Testing Platform" />
+          <img src="forge.png" alt="Assertin logo" width="28" height="28" />
           <span class="logo-name">Assertin <span>.</span>
           </span>
         </a>
+        <div class="nav-links">
+          <a href="#fitur" class="nav-link">Fitur</a>
+          <a href="#cara-kerja" class="nav-link">Cara Kerja</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+          <a href="#belajar" class="nav-link">Belajar Testing</a>
+        </div>
         <div class="nav-actions">
           <a href="https://forge.assertin.com/login" class="nav-btn"> Masuk </a>
-          <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="document.getElementById('nav-mobile').classList.toggle('open')">
+          <button class="nav-toggle" aria-label="Menu" aria-expanded="false" id="nav-toggle-btn" onclick="var m=document.getElementById('nav-mobile');var open=m.classList.toggle('open');this.setAttribute('aria-expanded',open)">
             <i class="bi bi-list"></i>
           </button>
         </div>
@@ -1813,23 +1991,32 @@
     <!-- ── HERO ── -->
     <section class="hero">
       <div class="wrap-sm">
-        <h1> API Test. Runners. Performances. <br />
-          <em>Dalam Satu Workspace.</em>
-          <br />
+        <h1> Browser-Based API Testing Platform <br />
+          <em>Scenario Runner & Performance Testing.</em>
         </h1>
         <p class="hero-desc"> Assertin adalah <strong>browser-based API testing platform</strong> untuk Developer & Software Tester. Kirim request, susun scenario, jalankan performance test, dan lihat hasil tanpa pindah tools. </p>
         <div class="hero-btns">
-          <a href="https://forge.assertin.com" rel="noopener" class="btn-primary"> Mulai Gratis </a>
+          <a href="https://forge.assertin.com" rel="noopener" class="btn-primary"> Demo Workspace </a>
         </div>
         <p class="hero-fine"> Tidak perlu akun untuk mencoba. </p>
       </div>
+      <!--
+        Hero screenshot — uncomment setelah aset tersedia:
+        <div class="wrap" style="margin-top:48px">
+          <img src="/hero-dashboard.webp"
+               alt="Assertin Forge — tampilan dashboard API testing"
+               width="1080" height="600"
+               style="width:100%;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.07);display:block"
+               loading="eager" fetchpriority="high" />
+        </div>
+      -->
     </section>
     <!-- ── STATS — pure typographic, no border boxes ── -->
     <div class="stats">
       <div class="stats-row">
         <div class="stat">
           <div class="stat-num">
-            <em>0</em> setup
+            <em>Browser-Based</em>
           </div>
           <div class="stat-lbl">langsung dari browser, tanpa install</div>
         </div>
@@ -1986,26 +2173,26 @@
                 <i class="bi bi-send-fill"></i>
               </div>
               <div class="feat-text">
-                <h3>API Request & Validation</h3>
-                <p>Tulis URL, pilih method, set headers dan body. Kirim langsung tanpa konfigurasi tambahan.</p>
+                <h3>Kirim API Request</h3>
+                <p>Tulis URL, pilih method, set headers dan body. Kirim langsung dari browser tanpa konfigurasi tambahan.</p>
               </div>
             </div>
             <div class="feat-item">
               <div class="feat-ic fi-c">
-                <i class="bi bi-braces"></i>
+                <i class="bi bi-check2-circle"></i>
               </div>
               <div class="feat-text">
-                <h3>Test & Manajemen Environment</h3>
-                <p>Simpan variable seperti <code>{{base_url}}</code> dan berikan test <code>forge.test</code>. </p>
+                <h3>Validasi & Test Assertions</h3>
+                <p>Tulis assertion dengan <code>forge.test</code> untuk memvalidasi status code, body, dan header response secara otomatis.</p>
               </div>
             </div>
             <div class="feat-item">
               <div class="feat-ic fi-v">
-                <i class="bi bi-folder2-open"></i>
+                <i class="bi bi-braces"></i>
               </div>
               <div class="feat-text">
-                <h3>Testing tetap terorganisir</h3>
-                <p>Kelompokkan request ke collection dan workspace.</p>
+                <h3>Manajemen Environment</h3>
+                <p>Simpan variable seperti <code>{{base_url}}</code> dan <code>{{token}}</code>. Switch environment tanpa ubah satu pun request.</p>
               </div>
             </div>
             <div class="feat-item">
@@ -2014,7 +2201,7 @@
               </div>
               <div class="feat-text">
                 <h3>Scenario Runner untuk API Automation</h3>
-                <p> Hubungkan request menjadi skenario, gunakan response sebelumnya sebagai input berikutnya. </p>
+                <p>Hubungkan request menjadi skenario E2E — login, ambil token, lalu hit endpoint berikutnya secara otomatis.</p>
               </div>
             </div>
             <div class="feat-item">
@@ -2023,7 +2210,7 @@
               </div>
               <div class="feat-text">
                 <h3>Performance Testing berbasis k6</h3>
-                <p>Lihat latency, throughput, error rate, dan percentile.</p>
+                <p>Jalankan load test dengan virtual users. Lihat RPS, latency p95/p99, dan error rate secara real-time.</p>
               </div>
             </div>
           </div>
@@ -2042,8 +2229,8 @@
         <div class="how-steps">
           <div class="hstep">
             <div class="hstep-num">01</div>
-            <h3>Buat workspace</h3>
-            <p>Masuk dan buat workspace pertama.</p>
+            <h3>Buka browser</h3>
+            <p>Tidak perlu install. Daftar atau langsung coba sebagai guest.</p>
           </div>
           <div class="hstep">
             <div class="hstep-num">02</div>
@@ -2095,34 +2282,41 @@
               <p>Performance testing digunakan untuk mengukur seberapa cepat dan stabil sistem ketika menerima beban pengguna. Dengan Assertin, kamu bisa menjalankan load test berbasis k6 untuk melihat metrik seperti RPS, latency, dan error rate, sehingga bisa memastikan API kamu tetap responsif dan handal di bawah beban. <a href="/learn/performance-testing" style="color:var(--blue-400)">Pelajari lebih lanjut →</a></p>
             </details>
             <details class="faq-item">
-              <summary>Apa itu API automation testing?</summary>
-              <p>API automation testing adalah proses menjalankan pengujian API secara otomatis menggunakan skenario dan validasi agar pengujian bisa diulang dengan konsisten. Di Assertin, kamu bisa buat skenario dengan Scenario Runner, lalu jalankan kapan pun untuk memastikan API tetap bekerja sesuai ekspektasi seiring waktu. <a href="/learn/automation-testing" style="color:var(--blue-400)">Pelajari lebih lanjut →</a></p>
-            </details>
-            <details class="faq-item">
               <summary>Apa itu Scenario Runner?</summary>
               <p>Scenario Runner memungkinkan kamu menghubungkan beberapa request menjadi satu flow — misalnya login, ambil token, lalu hit endpoint lain — dan menjalankannya sebagai satu skenario E2E. Response dari request sebelumnya bisa dipakai sebagai input untuk request berikutnya.</p>
             </details>
           </div>
         </div>
-        <div class="faq-group">
-          <div class="faq-group-title">Penggunaan</div>
-          <div class="faq-list">
-            <details class="faq-item">
-              <summary>Bagaimana cara belajar API testing untuk pemula?</summary>
-              <p>Mulai dari memahami HTTP, request, response, status code, lalu lanjut membuat test sederhana sebelum masuk ke automation dan performance testing.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Bagaimana cara melakukan performance test?</summary>
-              <p>Pilih Scenario Runner yang sudah dibuat untuk mode sequential atau parallel, atur jumlah virtual users, durasi, dan ramp up time, lalu jalankan. Assertin akan mengeksekusi load test berbasis k6 dan menampilkan hasil seperti RPS, TPS, latency p95, dan error rate.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Perlu install aplikasi atau plugin tambahan?</summary>
-              <p>Tidak. Assertin berjalan penuh di browser — buka halaman, login atau coba sebagai guest, dan langsung bisa mulai mengirim request tanpa instalasi apa pun.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Apakah Assertin bisa dipakai untuk kerja tim?</summary>
-              <p>Saat ini setiap akun memiliki workspace personal untuk testing individu. Untuk kebutuhan tim, kamu tetap bisa membagikan hasil performance test dan riwayat request sebagai bukti ke anggota tim lain.</p>
-            </details>
+        <div class="faq-more" style="margin-top:20px;text-align:center">
+          <button class="faq-more-btn" onclick="document.getElementById('faq-extra').style.display='block';this.style.display='none'" style="background:none;border:1px solid rgba(255,255,255,.1);color:var(--slate-400);font-size:13px;padding:8px 20px;border-radius:7px;cursor:pointer;transition:border-color .2s">
+            Lihat lebih banyak pertanyaan <i class="bi bi-chevron-down" style="font-size:11px;margin-left:4px"></i>
+          </button>
+        </div>
+        <div id="faq-extra" style="display:none">
+          <div class="faq-group" style="margin-top:36px">
+            <div class="faq-group-title">Penggunaan</div>
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary>Bagaimana cara mulai belajar API testing?</summary>
+                <p>Mulai dari memahami HTTP, request, response, dan status code. Lanjut dengan membuat test sederhana di Assertin sebelum masuk ke automation dan performance testing. <a href="/learn/api-testing" style="color:var(--blue-400)">Baca panduannya →</a></p>
+              </details>
+              <details class="faq-item">
+                <summary>Bagaimana cara melakukan performance test?</summary>
+                <p>Pilih collection yang sudah dibuat, atur jumlah virtual users, durasi, dan ramp up time, lalu jalankan. Assertin akan mengeksekusi load test berbasis k6 dan menampilkan hasil seperti RPS, latency p95, dan error rate.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Perlu install aplikasi atau plugin tambahan?</summary>
+                <p>Tidak. Assertin berjalan penuh di browser — buka halaman, login atau coba sebagai guest, dan langsung bisa mulai mengirim request tanpa instalasi apa pun.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Apakah Assertin bisa dipakai untuk kerja tim?</summary>
+                <p>Saat ini setiap akun memiliki workspace personal. Untuk kebutuhan tim, kamu tetap bisa membagikan hasil performance test dan riwayat request sebagai bukti ke anggota tim lain.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Apa itu API automation testing?</summary>
+                <p>API automation testing adalah proses menjalankan pengujian API secara otomatis menggunakan skenario dan validasi agar pengujian bisa diulang dengan konsisten. Di Assertin, kamu bisa buat skenario dengan Scenario Runner, lalu jalankan kapan pun untuk memastikan API tetap bekerja sesuai ekspektasi. <a href="/learn/automation-testing" style="color:var(--blue-400)">Pelajari lebih lanjut →</a></p>
+              </details>
+            </div>
           </div>
         </div>
       </div>
@@ -2142,7 +2336,7 @@
             </div>
             <h3>Belajar API Testing</h3>
             <p>Apa itu API testing, kenapa penting, dan cara mulai testing API kamu langsung dari browser.</p>
-            <span class="learn-card-cta">Baca Artikel <i class="bi bi-arrow-right"></i></span>
+            <span class="learn-card-cta">Baca · 7 menit <i class="bi bi-arrow-right"></i></span>
           </a>
           <a href="/learn/performance-testing" class="learn-card">
             <div class="learn-card-ic fi-o">
@@ -2150,7 +2344,7 @@
             </div>
             <h3>Belajar Performance Testing</h3>
             <p>Pelajari metrik RPS, latency p95/p99, error rate, dan cara menjalankan load test berbasis k6.</p>
-            <span class="learn-card-cta">Baca Artikel <i class="bi bi-arrow-right"></i></span>
+            <span class="learn-card-cta">Baca · 10 menit <i class="bi bi-arrow-right"></i></span>
           </a>
           <a href="/learn/automation-testing" class="learn-card">
             <div class="learn-card-ic fi-v">
@@ -2158,7 +2352,7 @@
             </div>
             <h3>Belajar Automation Testing</h3>
             <p>Susun flow API otomatis dengan Scenario Runner — dari login, ambil token, sampai validasi data.</p>
-            <span class="learn-card-cta">Baca Artikel <i class="bi bi-arrow-right"></i></span>
+            <span class="learn-card-cta">Baca · 8 menit <i class="bi bi-arrow-right"></i></span>
           </a>
         </div>
       </div>
@@ -2168,9 +2362,9 @@
     <section class="cl-section" id="changelog">
       <div class="wrap">
         <div class="section-head" style="text-align:center;margin-bottom:0">
-          <span class="eyebrow">Release Notes</span>
+          <span class="eyebrow">Product Updates</span>
           <h2 class="section-title">Selalu aktif, selalu diperbarui.</h2>
-          <p class="section-sub" style="margin:0 auto">Update terbaru Assertin Forge — fitur baru, perbaikan, dan peningkatan.</p>
+          <p class="section-sub" style="margin:0 auto">Fitur baru, perbaikan, dan peningkatan terbaru Assertin Forge.</p>
         </div>
         <div class="cl-grid" id="cl-grid">
           <div style="text-align:center;padding:32px;color:var(--slate-700);font-size:13px;grid-column:1/-1">Memuat...</div>
@@ -2183,6 +2377,54 @@
       </div>
     </section>
 
+    <div class="div-line"></div>
+    <!-- ── COMPARISON ── -->
+    <section class="compare-section" id="comparison">
+      <div class="wrap-md">
+        <div class="section-head" style="text-align:center;margin-bottom:0">
+          <span class="eyebrow">Perbandingan</span>
+          <h2 class="section-title">Assertin vs API Client lain.</h2>
+          <p class="section-sub" style="margin:0 auto">Assertin dibangun untuk Tester — bukan hanya untuk kirim request.</p>
+        </div>
+        <div class="compare-table">
+          <div class="compare-head">
+            <div class="compare-head-cell">Fitur</div>
+            <div class="compare-head-cell highlight">Assertin</div>
+            <div class="compare-head-cell">API Client Lain</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell feat-name">Kirim API request</div>
+            <div class="compare-cell highlight"><i class="bi bi-check-circle-fill ci-yes"></i></div>
+            <div class="compare-cell other"><i class="bi bi-check-circle-fill ci-yes"></i></div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell feat-name">Tanpa install, langsung dari browser</div>
+            <div class="compare-cell highlight"><i class="bi bi-check-circle-fill ci-yes"></i></div>
+            <div class="compare-cell other"><span class="ci-partial">Terbatas</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell feat-name">Scenario Runner (E2E flow)</div>
+            <div class="compare-cell highlight"><i class="bi bi-check-circle-fill ci-yes"></i></div>
+            <div class="compare-cell other"><span class="ci-partial">Terbatas</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell feat-name">Performance / Load Testing</div>
+            <div class="compare-cell highlight"><i class="bi bi-check-circle-fill ci-yes"></i></div>
+            <div class="compare-cell other"><i class="bi bi-x-circle-fill ci-no"></i></div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell feat-name">Metrik RPS, latency p95, error rate</div>
+            <div class="compare-cell highlight"><i class="bi bi-check-circle-fill ci-yes"></i></div>
+            <div class="compare-cell other"><i class="bi bi-x-circle-fill ci-no"></i></div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell feat-name">Gratis untuk mulai</div>
+            <div class="compare-cell highlight"><i class="bi bi-check-circle-fill ci-yes"></i></div>
+            <div class="compare-cell other"><span class="ci-partial">Tergantung</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- ── FINAL CTA — no box, gradient-lit open section ── -->
     <section class="cta-section">
       <div class="wrap-sm cta-inner">
@@ -2191,62 +2433,102 @@
         <div class="cta-btns">
           <a href="https://forge.assertin.com/register" class="btn-primary"> Daftar Gratis <i class="bi bi-arrow-right"></i>
           </a>
+          <a href="#fitur" class="nav-link" style="font-size:14px;font-weight:500;padding:12px 4px"> Lihat Fitur </a>
         </div>
       </div>
     </section>
     <!-- ── FOOTER ── -->
     <footer>
-      <div class="wrap foot-inner">
-        <div class="foot-l">
-          <a href="#" class="logo">
-            <img src="forge.png" alt="Assertin" />
-            <span class="logo-name">Assertin <span>.</span>
+      <div class="wrap">
+        <div class="foot-grid">
+          <!-- Brand -->
+          <div class="foot-brand">
+            <a href="#" class="logo">
+              <img src="forge.png" alt="Assertin logo" width="28" height="28" />
+              <span class="logo-name">Assertin <span>.</span></span>
+            </a>
+            <p class="foot-tagline">Platform API testing untuk Developer &amp; Software Tester. Browser-based, tanpa install.</p>
+            <span class="foot-badge">
+              <span class="foot-badge-dot"></span>
+              Gratis untuk mulai
             </span>
-          </a>
-          <span class="foot-tag">Test with confidence. Ship with proof.</span>
+          </div>
+          <!-- Produk -->
+          <div>
+            <div class="foot-col-title">Produk</div>
+            <div class="foot-col-links">
+              <a href="https://forge.assertin.com" class="foot-link">Assertin Forge</a>
+              <a href="/changelog" class="foot-link">Changelog</a>
+            </div>
+          </div>
+          <!-- Belajar -->
+          <div>
+            <div class="foot-col-title">Belajar Testing</div>
+            <div class="foot-col-links">
+              <a href="/learn/" class="foot-link">Semua Panduan</a>
+              <a href="/learn/api-testing" class="foot-link">API Testing</a>
+              <a href="/learn/performance-testing" class="foot-link">Performance Testing</a>
+              <a href="/learn/automation-testing" class="foot-link">Automation Testing</a>
+            </div>
+          </div>
         </div>
-        <div class="foot-r" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-          <a href="/changelog" style="font-size:12px;color:var(--slate-600);transition:color .2s" onmouseover="this.style.color='var(--slate-300)'" onmouseout="this.style.color='var(--slate-600)'">Changelog</a>
-          <span style="font-size:12px;color:var(--slate-700)">&copy; <span id="copyright-year"></span> Assertin.com</span>
+        <!-- Bottom bar -->
+        <div class="foot-bottom">
+          <span class="foot-copy">&copy; <span id="copyright-year"></span> Assertin.com. All rights reserved.</span>
+          <div class="foot-bottom-links">
+            <a href="/changelog" class="foot-bottom-link">Changelog</a>
+            <a href="https://forge.assertin.com" class="foot-bottom-link">Buka Forge</a>
+          </div>
         </div>
       </div>
     </footer>
     <script>
       document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
-      // Changelog teaser — tampilkan 3 entry terbaru
+      // Changelog teaser — lazy load saat section masuk viewport
       (function () {
         const BADGE = { new: 'New', improved: 'Improved', fixed: 'Fixed' };
         function fmtDate(str) {
           return new Date(str).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
         }
-        fetch('/data/changelog.json')
-          .then(r => r.json())
-          .then(data => {
-            const top3 = data.slice(0, 3);
-            document.getElementById('cl-grid').innerHTML = top3.map((rel, i) => `
-              <div class="cl-card">
-                <div class="cl-card-meta">
-                  <span class="cl-version">v${rel.version}</span>
-                  ${i === 0 ? '<span class="cl-latest">Latest</span>' : ''}
-                  <span class="cl-date">${fmtDate(rel.date)}</span>
+        function loadChangelog() {
+          fetch('/data/changelog.json')
+            .then(r => r.json())
+            .then(data => {
+              const top3 = data.slice(0, 3);
+              document.getElementById('cl-grid').innerHTML = top3.map((rel, i) => `
+                <div class="cl-card">
+                  <div class="cl-card-meta">
+                    <span class="cl-version">v${rel.version}</span>
+                    ${i === 0 ? '<span class="cl-latest">Latest</span>' : ''}
+                    <span class="cl-date">${fmtDate(rel.date)}</span>
+                  </div>
+                  <p class="cl-highlights">${rel.highlights}</p>
+                  <div class="cl-items">
+                    ${rel.items.slice(0, 3).map(item => `
+                      <div class="cl-item">
+                        <span class="cl-badge cl-badge-${item.type}">${BADGE[item.type] || item.type}</span>
+                        <span>${item.text}</span>
+                      </div>
+                    `).join('')}
+                    ${rel.items.length > 3 ? `<div class="cl-item" style="color:var(--slate-700);padding-left:0">+${rel.items.length - 3} lainnya</div>` : ''}
+                  </div>
                 </div>
-                <p class="cl-highlights">${rel.highlights}</p>
-                <div class="cl-items">
-                  ${rel.items.slice(0, 3).map(item => `
-                    <div class="cl-item">
-                      <span class="cl-badge cl-badge-${item.type}">${BADGE[item.type] || item.type}</span>
-                      <span>${item.text}</span>
-                    </div>
-                  `).join('')}
-                  ${rel.items.length > 3 ? `<div class="cl-item" style="color:var(--slate-700);padding-left:0">+${rel.items.length - 3} lainnya</div>` : ''}
-                </div>
-              </div>
-            `).join('');
-          })
-          .catch(() => {
-            document.getElementById('cl-grid').innerHTML = '';
-          });
+              `).join('');
+            })
+            .catch(() => {
+              document.getElementById('changelog').style.display = 'none';
+            });
+        }
+        var target = document.getElementById('changelog');
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function(entries, obs) {
+            if (entries[0].isIntersecting) { loadChangelog(); obs.disconnect(); }
+          }, { rootMargin: '200px' });
+          io.observe(target);
+        } else {
+          loadChangelog();
+        }
       })();
     </script>
   </body>
