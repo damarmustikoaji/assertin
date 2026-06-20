@@ -37,6 +37,7 @@
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <style>
       /* ── Self-hosted fonts ── */
+      @font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:107.40%;ascent-override:90.20%;descent-override:22.48%;line-gap-override:0%}
       @font-face{font-family:'Inter';font-style:italic;font-weight:400;font-display:optional;src:url('/assets/fonts/inter/inter-italic-latin-ext.woff2') format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}
       @font-face{font-family:'Inter';font-style:italic;font-weight:400;font-display:optional;src:url('/assets/fonts/inter/inter-italic-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
       @font-face{font-family:'Inter';font-style:normal;font-weight:300 800;font-display:swap;src:url('/assets/fonts/inter/inter-300-latin-ext.woff2') format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}
@@ -85,7 +86,7 @@
       }
 
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         background: var(--slate-950);
         color: var(--slate-400);
         line-height: 1.6;
@@ -969,7 +970,7 @@
         margin-left: 6px;
         font-size: 10px;
         color: var(--slate-400);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
       }
 
       .pd-body {
@@ -1005,7 +1006,7 @@
 
       .pd-config-title {
         font-size: 9px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         font-weight: 600;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -1019,7 +1020,7 @@
         border-radius: 4px;
         font-size: 10px;
         font-weight: 700;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         animation: pd-btn-pulse 8s ease-in-out infinite;
       }
 
@@ -1060,7 +1061,7 @@
       .pd-param-label {
         font-size: 9px;
         color: var(--slate-600);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         margin-bottom: 2px;
       }
 
@@ -1143,7 +1144,7 @@
         align-items: center;
         gap: 6px;
         font-size: 9px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         font-weight: 600;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -1211,7 +1212,7 @@
       .pd-vu-label {
         font-size: 9px;
         color: var(--slate-400);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         width: 22px;
         flex-shrink: 0;
       }
@@ -1307,7 +1308,7 @@
       .pd-live-key {
         font-size: 8.5px;
         color: var(--slate-400);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         margin-bottom: 2px;
       }
 
@@ -1474,7 +1475,7 @@
 
       .pd-results-label {
         font-size: 9px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         font-weight: 600;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -1488,7 +1489,7 @@
         color: var(--green-400);
         font-size: 9px;
         font-weight: 700;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
       }
 
       .pd-metric-grid {
@@ -1508,7 +1509,7 @@
       .pd-metric-key {
         font-size: 8.5px;
         color: var(--slate-600);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         margin-bottom: 3px;
       }
 
@@ -1520,7 +1521,7 @@
       .pd-metric-unit {
         font-size: 9px;
         color: var(--slate-600);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
         margin-left: 2px;
       }
 
@@ -1553,14 +1554,14 @@
       .pd-summary-txt {
         font-size: 10px;
         color: var(--slate-500);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
       }
 
       .pd-summary-pass {
         font-size: 10px;
         font-weight: 600;
         color: var(--green-400);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', sans-serif;
       }
 
       /* wrapper needs relative for phase layering */
