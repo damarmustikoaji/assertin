@@ -1,4 +1,11 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "https://www.assertin.com/(.*)",
+      "destination": "https://assertin.com/$1",
+      "permanent": true
+    }
+  ]
 }
